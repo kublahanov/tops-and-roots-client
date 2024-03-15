@@ -51,6 +51,12 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
+    title: 'Alt',
+    caption: '',
+    icon: 'school',
+    link: '/alt'
+  },
+  {
     title: 'Docs',
     caption: 'quasar.dev',
     icon: 'school',
