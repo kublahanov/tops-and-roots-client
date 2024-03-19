@@ -14,6 +14,10 @@ const path = require('path');
 
 module.exports = configure(function (/* ctx */) {
   return {
+    htmlVariables: {
+      appName: 'Список книг'
+    },
+
     eslint: {
       // fix: true,
       // include: [],
