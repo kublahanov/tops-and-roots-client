@@ -10,11 +10,14 @@
 
 const { configure } = require("quasar/wrappers");
 const path = require("path");
+const appName = "Вершки и корешки";
+const appVersion = "0.1";
 
 module.exports = configure(function (/* ctx */) {
   return {
     htmlVariables: {
-      appName: "Список книг",
+      appName,
+      appVersion,
     },
 
     eslint: {
@@ -68,7 +71,10 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: {
+        appName,
+        appVersion,
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,

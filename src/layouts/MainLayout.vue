@@ -11,9 +11,11 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title>{{ appName }}</q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>
+          <strong>{{ appName }}</strong>, вер. {{ appVersion }}, {{ currentYear }} &copy;
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -38,6 +40,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
+import { date } from "quasar";
 
 const linksList = [
   {
@@ -74,6 +77,18 @@ export default defineComponent({
 
   components: {
     EssentialLink,
+  },
+
+  computed: {
+    appName() {
+      return process.env.appName;
+    },
+    appVersion() {
+      return process.env.appVersion;
+    },
+    currentYear() {
+      return (new Date()).getFullYear();
+    },
   },
 
   setup() {
