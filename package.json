@@ -1,8 +1,8 @@
 {
   "name": "quasar-project",
   "version": "0.0.1",
-  "description": "Список прочитанных книг со связями, ссылками, и дополнениями.",
-  "productName": "Список",
+  "description": "Приложение для ведения списка прочитанных книг с учётом связей, ссылок, и прочей сопутствующей фигнёй.",
+  "productName": "Вершки и корешки",
   "author": "Roman Kondrashov <nr.kondrashov@gmail.com>",
   "private": true,
   "scripts": {
