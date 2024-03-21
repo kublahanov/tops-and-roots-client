@@ -1,15 +1,25 @@
+<!--<template>-->
+<!--  <div class="bg-primary">-->
+<!--    <q-layout view="hHh lpR fFf" container class="layout-container">-->
+<!--      <h1>nandfsd ndfljsdnf dfksdk</h1>-->
+<!--      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>-->
+<!--      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>-->
+<!--      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>-->
+<!--      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>-->
+<!--      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>-->
+<!--      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>-->
+<!--    </q-layout>-->
+<!--  </div>-->
+<!--</template>-->
+
 <template>
-  <div class="bg-primary">
-    <q-layout view="hHh lpR fFf" container class="layout-container">
-      <h1>nandfsd ndfljsdnf dfksdk</h1>
-      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>
-      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>
-      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>
-      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>
-      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>
-      <p>nandfsd ndfljsdnf dfksdk aknflkasfa afdknasl</p>
-    </q-layout>
-  </div>
+  <q-layout view="hHh lpR fFf">
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+
+  </q-layout>
 </template>
 
 <style>

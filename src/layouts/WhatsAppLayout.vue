@@ -13,7 +13,7 @@
 
           <q-btn round flat>
             <q-avatar>
-              <img :src="currentConversation.avatar" alt="" />
+              <img :src="currentConversation.avatar" />
             </q-avatar>
           </q-btn>
 
@@ -120,15 +120,6 @@
 
         <q-scroll-area style="height: calc(100% - 100px)">
           <q-list>
-            <q-item-label header> Essential Links </q-item-label>
-            <EssentialLink
-              v-for="link in mainMenuLinks"
-              :key="link.title"
-              v-bind="link"
-              title=""
-            />
-          </q-list>
-          <q-list>
             <q-item
               v-for="(conversation, index) in conversations"
               :key="conversation.id"
@@ -187,11 +178,9 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { useQuasar } from "quasar";
 import { ref, computed } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
-import mainMenuLinks from "./../router/menu";
 
 const conversations = [
   {
@@ -228,28 +217,48 @@ const conversations = [
   },
 ];
 
-const $q = useQuasar();
+export default {
+  name: "WhatsappLayout",
 
-const leftDrawerOpen = ref(true);
-const search = ref("");
-const message = ref("");
-const currentConversationIndex = ref(0);
+  setup() {
+    const $q = useQuasar();
 
-const currentConversation = computed(() => {
-  return conversations[currentConversationIndex.value];
-});
+    const leftDrawerOpen = ref(false);
+    const search = ref("");
+    const message = ref("");
+    const currentConversationIndex = ref(0);
 
-const style = computed(() => ({
-  height: $q.screen.height + "px",
-}));
+    const currentConversation = computed(() => {
+      return conversations[currentConversationIndex.value];
+    });
 
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
+    const style = computed(() => ({
+      height: $q.screen.height + "px",
+    }));
 
-function setCurrentConversation(index) {
-  currentConversationIndex.value = index;
-}
+    function toggleLeftDrawer() {
+      leftDrawerOpen.value = !leftDrawerOpen.value;
+    }
+
+    function setCurrentConversation(index) {
+      currentConversationIndex.value = index;
+    }
+
+    return {
+      leftDrawerOpen,
+      search,
+      message,
+      currentConversationIndex,
+      conversations,
+
+      currentConversation,
+      setCurrentConversation,
+      style,
+
+      toggleLeftDrawer,
+    };
+  },
+};
 </script>
 
 <style lang="sass">
@@ -261,17 +270,9 @@ function setCurrentConversation(index) {
 
   &:before
     content: ''
-    height: 5em
+    height: 127px
     position: fixed
     top: 0
-    width: 100%
-    background-color: $secondary
-
-  &:after
-    content: ''
-    height: 3em
-    position: fixed
-    bottom: 0
     width: 100%
     background-color: #009688
 
