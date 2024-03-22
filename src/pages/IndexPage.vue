@@ -1,18 +1,18 @@
 <template>
-  <q-page class="flex rounded-borders q-pa-lg">
+  <q-page class="rounded-borders q-pa-lg">
     <q-table
       :rows="migrations"
       :columns="columns"
       row-key="id"
-      class="q-mb-lg"
+      class="q-mb-lg col"
     />
-    <q-card class="q-mb-lg">
+    <q-card class="q-mb-lg col">
       <q-card-section>
         {{ pretty(migrations) }}
       </q-card-section>
     </q-card>
-    <pre class="q-mb-lg">{{ pretty(migrations) }}</pre>
-    <p class="q-mb-lg">
+    <pre class="q-mb-lg q-card--bordered q-pa-md">{{ pretty(migrations) }}</pre>
+    <p class="q-mb-lg q-card--bordered q-pa-md">
       Вы можете динамически настраивать цвета бренда во время выполнения:
       primary, secondary, accent, darkpositive, negativeinfo, warning. Это
       означает, что у вас может быть одна сборка вашего приложения с цветовой

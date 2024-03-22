@@ -1,7 +1,7 @@
 const mainMenuLinks = [
   {
     title: "Home",
-    caption: "",
+    caption: "Home",
     icon: "home",
     link: "/",
     target: null,
@@ -14,13 +14,6 @@ const mainMenuLinks = [
     target: null,
   },
   {
-    title: "Alt layout",
-    caption: "Alt layout",
-    icon: "chat",
-    link: "/alt",
-    target: null,
-  },
-  {
     title: "WA layout",
     caption: "WhatsApp layout",
     icon: "chat",
@@ -29,7 +22,7 @@ const mainMenuLinks = [
   },
   {
     title: "Not found",
-    caption: "",
+    caption: "Not found",
     icon: "highlight_off",
     link: "/404",
     target: null,

@@ -10,14 +10,9 @@ const routes = [
     children: [{ path: "", component: () => import("pages/IndexPage.vue") }],
   },
   {
-    path: "/alt",
-    component: () => import("layouts/AltLayout.vue"),
-    children: [{ path: "", component: () => import("pages/IndexPage.vue") }],
-  },
-  {
     path: "/wa",
     component: () => import("layouts/WhatsAppLayout.vue"),
-    // children: [{ path: "", component: () => import("pages/IndexPage.vue") }],
+    children: [{ path: "", component: () => import("pages/IndexPage.vue") }],
   },
 
   // Always leave this as last one,
