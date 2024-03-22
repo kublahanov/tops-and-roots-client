@@ -21,7 +21,7 @@
           <q-space />
           <q-btn round flat icon="more_vert">
             <q-menu auto-close :offset="[110, 0]">
-              <q-list style="min-width: 150px">
+              <q-list dense style="min-width: 150px">
                 <q-item clickable>
                   <q-item-section>Login</q-item-section>
                 </q-item>
