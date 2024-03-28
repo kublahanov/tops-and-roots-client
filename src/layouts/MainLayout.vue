@@ -48,6 +48,8 @@ function onClick() {
 </script>
 
 <style lang="sass">
+@import "src/css/quasar.variables"
+
 .main
   padding-top: var(--layout--vertical-padding)
   padding-bottom: var(--layout--vertical-padding)
@@ -71,9 +73,9 @@ function onClick() {
   &__layout
     margin: 0 auto
     z-index: 4000
-    max-width: var(--layout-max-width)
+    max-width: $layout-max-width
     border-radius: 15px
 
-    @media (max-width: var(--layout-max-width))
+    @media (max-width: $layout-max-width)
       border-radius: 0
 </style>
