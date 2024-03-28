@@ -29,12 +29,20 @@
       вернуться к цвету по умолчанию, просто удалив свой пользовательский.
       Больше информации о пользовательских свойствах (переменных) CSS на MDN.
     </p>
+    <EssentialLink
+      v-for="link in mainMenuLinks"
+      :key="link.title"
+      v-bind="link"
+      :title="link.title"
+    />
   </q-page>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import { api } from "boot/axios";
+import mainMenuLinks from "src/router/menu";
+import EssentialLink from "components/EssentialLink.vue";
 
 const migrations = ref([]);
 const columns = [

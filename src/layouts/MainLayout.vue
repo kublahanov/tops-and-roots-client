@@ -1,81 +1,65 @@
 <template>
   <div class="main position-relative" :style="style">
     <q-layout view="lHh Lpr lFf" class="main__layout shadow-3" container>
-      <q-header elevated>
-        <q-toolbar class="bg-grey-3 text-black">
-          <q-btn
-            round
-            flat
-            icon="keyboard_arrow_left"
-            class="main__drawer-open q-mr-sm"
-            @click="toggleLeftDrawer"
-          />
-          <q-btn round flat>
-            <q-avatar>
-              <img :src="currentConversation.avatar" alt="" />
-            </q-avatar>
-          </q-btn>
-          <span class="q-subtitle-1 q-pl-md">
-            {{ currentConversation.person }}
-          </span>
-          <q-space />
-          <q-btn round flat icon="more_vert">
-            <q-menu auto-close :offset="[110, 0]">
-              <q-list dense style="min-width: 150px">
-                <q-item clickable>
-                  <q-item-section>Login</q-item-section>
-                </q-item>
-                <q-item clickable>
-                  <q-item-section>Register</q-item-section>
-                </q-item>
-                <q-item clickable>
-                  <q-item-section>Quit</q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-          </q-btn>
+      <q-header>
+        <q-toolbar>
+
+          <div class="q-pa-sm">
+            <q-btn round class="q-pa-sm">
+              <q-avatar>
+                <img style="-webkit-filter: invert(1); filter: invert(1);" src="/safari-pinned-tab.svg" alt="" />
+              </q-avatar>
+            </q-btn>
+          </div>
+
+          <q-btn-dropdown
+            no-caps
+            :label="appName"
+            @click="onMainClick"
+          >
+            <q-list>
+              <q-item clickable v-close-popup @click="onItemClick">
+                <q-item-section avatar>
+                  <q-avatar icon="folder" color="primary" text-color="white" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>Photos</q-item-label>
+                  <q-item-label caption>February 22, 2016</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-icon name="info" color="amber" />
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup @click="onItemClick">
+                <q-item-section avatar>
+                  <q-avatar icon="assignment" color="secondary" text-color="white" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>Vacation</q-item-label>
+                  <q-item-label caption>February 22, 2016</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-icon name="info" color="amber" />
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
+
         </q-toolbar>
+
+        <q-tabs align="left" dense outside-arrows inline-label no-caps>
+          <q-route-tab to="/page1" label="Книги" icon="map" alert="accent" alert-icon="alarm_on" />
+          <q-route-tab to="/page2" label="Авторы" icon="explore" />
+          <q-route-tab to="/page3" label="Цитаты" icon="public" />
+        </q-tabs>
+
       </q-header>
-
-      <q-drawer
-        v-model="leftDrawerOpen"
-        show-if-above
-        bordered
-        :breakpoint="690"
-        :width="250"
-      >
-        <q-toolbar class="bg-grey-3">
-          <q-chip size="md" class="q-pa-md">
-            <q-avatar class="cursor-pointer" size="sm">
-              <img src="/safari-pinned-tab.svg" alt="" />
-            </q-avatar>
-            <strong class="q-ml-sm">{{ appName }}</strong>
-          </q-chip>
-          <q-space />
-        </q-toolbar>
-
-        <q-scroll-area style="height: calc(100% - 100px)">
-          <q-list>
-            <!--<q-item-label header>Меню</q-item-label>-->
-            <EssentialLink
-              v-for="link in mainMenuLinks"
-              :key="link.title"
-              v-bind="link"
-              :title="link.title"
-            />
-          </q-list>
-        </q-scroll-area>
-      </q-drawer>
 
       <q-page-container class="bg-grey-2">
         <router-view />
       </q-page-container>
 
-      <q-footer>
-        <q-toolbar class="bg-grey-3 text-black row">
-          <small>{{ appName }}, Вер. {{ appVersion }}, {{ currentYear() }} &copy;</small>
-        </q-toolbar>
-      </q-footer>
     </q-layout>
   </div>
 </template>
@@ -83,8 +67,8 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { ref, computed } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
-import mainMenuLinks from "./../router/menu";
+// import EssentialLink from "components/EssentialLink.vue";
+// import mainMenuLinks from "./../router/menu";
 
 const appName = process.env.appName;
 const appVersion = process.env.appVersion;
@@ -104,8 +88,6 @@ const conversations = [
 const $q = useQuasar();
 
 const leftDrawerOpen = ref(true);
-const search = ref("");
-const message = ref("");
 const currentConversationIndex = ref(0);
 
 const currentConversation = computed(() => {
@@ -138,7 +120,7 @@ function setCurrentConversation(index) {
     position: fixed
     top: 0
     width: 100%
-    background-color: var(--layout-paddings-background-color)
+    // background-color: var(--layout-paddings-background-color)
 
   &:after
     content: ''
@@ -146,16 +128,13 @@ function setCurrentConversation(index) {
     position: fixed
     bottom: 0
     width: 100%
-    background-color: var(--layout-paddings-background-color)
+    // background-color: var(--layout-paddings-background-color)
 
   &__layout
     margin: 0 auto
     z-index: 4000
     max-width: var(--layout-max-width)
     border-radius: 5px
-
-  &__field.q-field--outlined .q-field__control:before
-    border: none
 
 @media (max-width: 850px)
   .background
