@@ -27,12 +27,6 @@ const mainMenuLinks = [
     link: "/404",
     target: null,
   },
-  {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev",
-  },
 ];
 
 export default mainMenuLinks;
