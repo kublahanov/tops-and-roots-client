@@ -155,7 +155,7 @@
 
           <q-list>
             <q-item-label header>Меню</q-item-label>
-            <EssentialLink
+            <MenuLink
               v-for="link in mainMenuLinks"
               :key="link.title"
               v-bind="link"
@@ -192,7 +192,7 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { ref, computed } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
+import MenuLink from "components/MenuLink.vue";
 import { mainMenuLinks } from "src/router/menu";
 
 const conversations = [

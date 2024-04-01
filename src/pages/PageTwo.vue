@@ -29,7 +29,7 @@
       вернуться к цвету по умолчанию, просто удалив свой пользовательский.
       Больше информации о пользовательских свойствах (переменных) CSS на MDN.
     </p>
-    <EssentialLink
+    <MenuLink
       v-for="link in mainMenuLinks"
       :key="link.title"
       v-bind="link"
@@ -42,7 +42,7 @@
 import { ref, onMounted } from "vue";
 import { api } from "boot/axios";
 import { mainMenuLinks } from "src/router/menu";
-import EssentialLink from "components/EssentialLink.vue";
+import MenuLink from "components/MenuLink.vue";
 
 const migrations = ref([]);
 const columns = [

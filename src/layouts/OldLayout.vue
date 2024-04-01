@@ -23,7 +23,7 @@
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
-        <EssentialLink
+        <MenuLink
           v-for="link in mainMenuLinks"
           :key="link.title"
           v-bind="link"
@@ -39,7 +39,7 @@
 
 <script setup>
 import { ref } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
+import MenuLink from "components/MenuLink.vue";
 import { mainMenuLinks } from "src/router/menu";
 
 const appName = process.env.appName;
