@@ -41,7 +41,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { api } from "boot/axios";
-import mainMenuLinks from "src/router/menu";
+import { mainMenuLinks } from "src/router/menu";
 import EssentialLink from "components/EssentialLink.vue";
 
 const migrations = ref([]);

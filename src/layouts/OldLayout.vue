@@ -40,7 +40,7 @@
 <script setup>
 import { ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
-import mainMenuLinks from "./../router/menu";
+import { mainMenuLinks } from "src/router/menu";
 
 const appName = process.env.appName;
 const appVersion = process.env.appVersion;

@@ -193,7 +193,7 @@
 import { useQuasar } from "quasar";
 import { ref, computed } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
-import mainMenuLinks from "./../router/menu";
+import { mainMenuLinks } from "src/router/menu";
 
 const conversations = [
   {

@@ -18,7 +18,7 @@
           <q-toolbar-title>{{ appName }}</q-toolbar-title>
         </q-toolbar>
         <EssentialLink
-          v-for="link in mainMenuLinks"
+          v-for="link in appSectionMenuLinks"
           :key="link.title"
           v-bind="link"
         />
@@ -30,7 +30,7 @@
           <q-toolbar-title>Авторизация</q-toolbar-title>
         </q-toolbar>
         <EssentialLink
-          v-for="link in mainMenuLinks"
+          v-for="link in profileMenuLinks"
           :key="link.title"
           v-bind="link"
         />
@@ -60,7 +60,7 @@
 
 <script setup>
 import { ref } from "vue";
-import mainMenuLinks from "src/router/menu";
+import { appSectionMenuLinks, profileMenuLinks, mainMenuLinks } from "src/router/menu";
 import EssentialLink from "components/EssentialLink.vue";
 
 const leftDrawerOpen = ref(false);
