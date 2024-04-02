@@ -52,6 +52,7 @@ module.exports = configure(function (/* ctx */) {
 
       "roboto-font", // optional, you are not bound to it
       "material-icons", // optional, you are not bound to it
+      "material-icons-outlined", // optional, you are not bound to it
     ],
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
@@ -75,7 +76,10 @@ module.exports = configure(function (/* ctx */) {
         appName,
         appVersion,
       },
-      // rawDefine: {}
+      rawDefine: {
+        APP_NAME: JSON.stringify(appName),
+        APP_VERSION: JSON.stringify(appVersion),
+      },
       // ignorePublicFolder: true,
       // minify: false,
       // polyfillModulePreload: true,

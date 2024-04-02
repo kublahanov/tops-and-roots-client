@@ -4,7 +4,10 @@
       <q-icon :name="icon" />
     </q-item-section>
     <q-item-section>
-      <q-item-label>{{ title }}</q-item-label>
+      <q-item-label class="menu-label">{{ title }}</q-item-label>
+    </q-item-section>
+    <q-item-section>
+      <q-badge v-if="color" rounded :color style="width: 13px;" class="q-ml-xl" />
     </q-item-section>
   </q-item>
 </template>
@@ -23,5 +26,16 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  color: {
+    type: String,
+    default: "",
+  },
 });
+
+// const style = (props.color) ? "background-color: " + props.color : "";
 </script>
+
+<style lang="sass" scoped>
+.menu-label
+  font-size: larger
+</style>

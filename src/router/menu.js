@@ -1,50 +1,55 @@
 const appSectionMenuLinks = [
   {
     title: "Библиотека",
-    icon: "library_books",
+    icon: "o_library_books",
     link: "/libs",
+    color: "blue-8",
   },
   {
     title: "Фильмотека",
-    icon: "movie",
+    icon: "o_movie",
     link: "/films",
+    color: "orange-8",
   },
   {
     title: "Картотека",
-    icon: "dashboard_customize",
+    icon: "o_dashboard_customize",
     link: "/cards",
+    color: "red-8",
   },
   {
     title: "Биография",
-    icon: "assignment_ind",
+    icon: "o_assignment_ind",
     link: "/bios",
+    color: "teal-8",
   },
   {
     title: "Планирование",
-    icon: "moving",
+    icon: "o_moving",
     link: "/plans",
+    color: "indigo-8",
   },
 ];
 
 const profileMenuLinks = [
   {
     title: "Профиль",
-    icon: "account_circle",
+    icon: "o_account_circle",
     link: "/user/profile",
   },
   {
     title: "Настройки",
-    icon: "settings",
+    icon: "o_settings",
     link: "/user/settings",
   },
   {
     title: "Клуб",
-    icon: "groups",
+    icon: "o_groups",
     link: "/user/club",
   },
   {
     title: "Выход",
-    icon: "logout",
+    icon: "o_logout",
     link: "/user/logout",
   },
 ];

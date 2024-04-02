@@ -4,19 +4,20 @@
       <q-toolbar>
         <q-btn dense icon="menu" @click="toggleLeftDrawer" />
         <q-space></q-space>
-        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
+        <q-btn dense icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
-      <q-tabs align="left" outside-arrows inline-label no-caps>
-        <q-route-tab to="/" label="Книги" icon="menu_book" />
-        <q-route-tab to="/page2" label="Авторы" icon="groups" />
-        <q-route-tab to="/page3" label="Цитаты" icon="format_quote" />
+      <q-tabs align="left" dense inline-label no-caps outside-arrows class="q-mx-sm">
+        <q-route-tab to="/" label="Книги" icon="o_auto_stories" />
+        <q-route-tab to="/page2" label="Авторы" icon="o_groups" />
+        <q-route-tab to="/page3" label="Цитаты" icon="o_format_quote" />
       </q-tabs>
     </q-header>
     <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" elevated>
+      <q-toolbar class="q-ma-sm">
+        <q-toolbar-title>{{ appName }}</q-toolbar-title>
+        <q-btn dense flat icon="close" @click="toggleLeftDrawer" class="q-mx-sm" />
+      </q-toolbar>
       <q-list>
-        <q-toolbar class="q-ma-sm">
-          <q-toolbar-title>{{ appName }}</q-toolbar-title>
-        </q-toolbar>
         <MenuLink
           v-for="link in appSectionMenuLinks"
           :key="link.title"
@@ -25,10 +26,11 @@
       </q-list>
     </q-drawer>
     <q-drawer v-model="rightDrawerOpen" side="right" behavior="mobile" elevated>
+      <q-toolbar class="q-ma-sm">
+        <q-toolbar-title>Авторизация</q-toolbar-title>
+        <q-btn dense flat icon="close" @click="toggleRightDrawer" class="q-mx-sm" />
+      </q-toolbar>
       <q-list>
-        <q-toolbar class="q-ma-sm">
-          <q-toolbar-title>Авторизация</q-toolbar-title>
-        </q-toolbar>
         <MenuLink
           v-for="link in profileMenuLinks"
           :key="link.title"
