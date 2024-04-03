@@ -45,13 +45,7 @@
       <q-toolbar class="justify-center my-layout">
         <div class="footer-logo column items-center">
           <span class="app-section-name text-primary">{{ appSectionName }}</span>
-          <q-img
-            src="safari-pinned-tab.svg"
-            width="100px"
-            height="100px"
-            :alt="appName"
-            class="q-my-md q-mx-xl flash"
-          />
+          <q-img src="safari-pinned-tab.svg" width="100px" height="100px" :alt="appName" class="q-my-md q-mx-xl flash" />
           <small class="app-name">{{ appName }}</small>
           <small class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</small>
         </div>
@@ -62,8 +56,16 @@
 
 <script setup>
 import { ref } from "vue";
-import { appSectionMenuLinks, profileMenuLinks, mainMenuLinks } from "src/router/menu";
+import {
+  appSectionMenuLinks,
+  profileMenuLinks,
+} from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
+import { useAppStore } from "stores/example-store";
+import { useMeta } from "quasar";
+
+const appStore = useAppStore();
+appStore.updateAppSectionName("Your App Section Name");
 
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
@@ -80,6 +82,11 @@ const appName = process.env.appName;
 const appSectionName = "Библиотека";
 const appVersion = process.env.appVersion;
 const currentYear = () => new Date().getFullYear();
+
+useMeta({
+  title: appName,
+  titleTemplate: (title) => `${title} - ${appSectionName}`,
+});
 </script>
 
 <style lang="sass" scoped>
