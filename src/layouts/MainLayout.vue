@@ -6,7 +6,7 @@
         <q-space></q-space>
         <q-btn dense icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
-      <q-tabs align="left" dense inline-label no-caps outside-arrows class="q-mx-sm">
+      <q-tabs align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
         <q-route-tab to="/" label="Книги" icon="o_auto_stories" />
         <q-route-tab to="/page2" label="Авторы" icon="o_groups" />
         <q-route-tab to="/page3" label="Цитаты" icon="o_format_quote" />
@@ -103,6 +103,9 @@ footer
 .my-layout
   max-width: $layout-max-width
   margin: 0 auto
+
+.tabs-margin
+  margin: auto 12px
 
 @keyframes flash
   0%
