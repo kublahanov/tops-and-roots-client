@@ -70,20 +70,17 @@ module.exports = configure(function (/* ctx */) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: '/',
+      publicPath: "/tops-and-roots/",
       // analyze: true,
       env: {
         appName,
         appVersion,
       },
-      rawDefine: {
-        APP_NAME: JSON.stringify(appName),
-        APP_VERSION: JSON.stringify(appVersion),
-      },
+      // rawDefine: {},
       // ignorePublicFolder: true,
       // minify: false,
       // polyfillModulePreload: true,
-      // distDir
+      distDir: "/docs",
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
@@ -118,7 +115,7 @@ module.exports = configure(function (/* ctx */) {
     framework: {
       config: {},
 
-      iconSet: 'material-icons', // Quasar icon set
+      iconSet: "material-icons", // Quasar icon set
       // lang: 'en-US', // Quasar language pack
       lang: "ru", // Quasar language pack
 
