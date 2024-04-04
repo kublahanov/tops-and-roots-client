@@ -1,5 +1,5 @@
 <template>
-  <q-page class="rounded-borders q-pa-lg">
+  <q-page>
     <q-table
       :rows="migrations"
       :columns="columns"

@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-lg">
+  <q-page class>
     <h1>Картотека</h1>
     <h2>Подзаголовок</h2>
     <h3>Под-подзаголовок</h3>

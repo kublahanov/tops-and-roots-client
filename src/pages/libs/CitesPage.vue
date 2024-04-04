@@ -1,5 +1,5 @@
 <template>
-  <q-page class="rounded-borders q-pa-lg">
+  <q-page>
     <h1>Цитаты</h1>
     <h2>Подзаголовок</h2>
     <h3>Под-подзаголовок</h3>
