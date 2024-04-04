@@ -70,7 +70,7 @@ module.exports = configure(function (/* ctx */) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: "/tops-and-roots/",
+      publicPath: "/tops-and-roots/",
       // analyze: true,
       env: {
         appName,
@@ -80,7 +80,7 @@ module.exports = configure(function (/* ctx */) {
       // ignorePublicFolder: true,
       // minify: false,
       // polyfillModulePreload: true,
-      // distDir: "docs",
+      distDir: "docs",
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
