@@ -7,9 +7,9 @@
         <q-btn dense icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
       <q-tabs align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
-        <q-route-tab to="/" label="Книги" icon="o_auto_stories" />
-        <q-route-tab to="/page2" label="Авторы" icon="o_groups" />
-        <q-route-tab to="/page3" label="Цитаты" icon="o_format_quote" />
+        <q-route-tab to="/libs/books" label="Книги" icon="o_auto_stories" />
+        <q-route-tab to="/libs/authors" label="Авторы" icon="o_groups" />
+        <q-route-tab to="/libs/cites" label="Цитаты" icon="o_format_quote" />
       </q-tabs>
     </q-header>
     <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" elevated>
@@ -45,7 +45,7 @@
       <q-toolbar class="justify-center my-layout">
         <div class="footer-logo column items-center">
           <span class="app-section-name text-primary">{{ appSectionName }}</span>
-          <q-img src="safari-pinned-tab.svg" width="100px" height="100px" :alt="appName" class="q-my-md q-mx-xl flash" />
+          <q-img src="/safari-pinned-tab.svg" width="100px" height="100px" :alt="appName" class="q-my-md q-mx-xl flash" />
           <small class="app-name">{{ appName }}</small>
           <small class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</small>
         </div>
@@ -56,10 +56,7 @@
 
 <script setup>
 import { ref } from "vue";
-import {
-  appSectionMenuLinks,
-  profileMenuLinks,
-} from "src/router/menu";
+import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { useAppStore } from "stores/example-store";
 import { useMeta } from "quasar";
@@ -91,6 +88,8 @@ useMeta({
 
 <style lang="sass" scoped>
 @import "src/css/quasar.variables.scss"
+main
+  font-size: 17px // vs. default body font-size: 14px
 
 footer
   background-color: #fafafa

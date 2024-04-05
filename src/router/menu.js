@@ -54,32 +54,4 @@ const profileMenuLinks = [
   },
 ];
 
-const mainMenuLinks = [
-  {
-    title: "Home",
-    icon: "home",
-    link: "/",
-  },
-  {
-    title: "From WA layout",
-    icon: "chat",
-    link: "/from-wa",
-  },
-  {
-    title: "Old layout",
-    icon: "chat",
-    link: "/old",
-  },
-  {
-    title: "WA layout",
-    icon: "chat",
-    link: "/wa",
-  },
-  {
-    title: "Not found",
-    icon: "highlight_off",
-    link: "/404",
-  },
-];
-
-export { appSectionMenuLinks, profileMenuLinks, mainMenuLinks };
+export { appSectionMenuLinks, profileMenuLinks };
