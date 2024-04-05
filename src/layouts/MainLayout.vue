@@ -45,7 +45,7 @@
       <q-toolbar class="justify-center my-layout">
         <div class="footer-logo column items-center">
           <span class="app-section-name text-primary">{{ appSectionName }}</span>
-          <q-img src="/safari-pinned-tab.svg" width="100px" height="100px" :alt="appName" class="q-my-md q-mx-xl flash" />
+          <q-img src="~/assets/tops-and-roots_logo_001.svg" width="100px" height="100px" :alt="appName" class="q-my-md q-mx-xl flash" />
           <small class="app-name">{{ appName }}</small>
           <small class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</small>
         </div>
