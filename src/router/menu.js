@@ -11,7 +11,7 @@ const appSectionMenuLinks = [
     icon: "o_movie",
     link: "/films",
     linkName: "films-index",
-    color: "orange-8",
+    color: "orange-9",
   },
   {
     title: "Картотека",
@@ -32,7 +32,7 @@ const appSectionMenuLinks = [
     icon: "o_moving",
     link: "/plans",
     linkName: "plans-index",
-    color: "indigo-8",
+    color: "indigo-7",
   },
 ];
 

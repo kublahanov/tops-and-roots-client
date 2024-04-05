@@ -1,24 +1,25 @@
 import { defineStore } from "pinia";
 
-export const useAppStore = defineStore("counter", {
+export const useAppStore = defineStore("sectionData", {
   state: () => ({
-    counter: 0,
-    appSectionName: "",
+    appSectionData: null,
   }),
   getters: {
-    doubleCount(state) {
-      return state.counter * 2;
+    getAppSectionEmpty(state) {
+      return state.appSectionData == null;
     },
     getAppSectionName(state) {
-      return state.appSectionName;
+      return state.appSectionData.title ?? "";
+    },
+    getAppSectionColor(state) {
+      return state.appSectionData.color ?? "";
     },
   },
   actions: {
-    increment() {
-      this.counter++;
-    },
-    updateAppSectionName(sectionName) {
-      this.appSectionName = sectionName;
+    updateAppSectionData(link) {
+      this.appSectionData = link;
+      console.log(link);
     },
   },
+  persist: true,
 });
