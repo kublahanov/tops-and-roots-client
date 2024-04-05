@@ -89,7 +89,7 @@ useMeta({
 <style lang="sass" scoped>
 @import "src/css/quasar.variables.scss"
 main
-  font-size: 17px // vs. body font-size: 14px
+  font-size: 17px // vs. default body font-size: 14px
 
 footer
   background-color: #fafafa
