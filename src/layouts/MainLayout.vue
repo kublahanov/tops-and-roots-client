@@ -1,8 +1,9 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated class="bg-primary text-white" height-hint="98">
+    <q-header elevated :class="appSectionBgColor">
       <q-toolbar>
         <q-btn dense icon="menu" @click="toggleLeftDrawer" />
+        <!--<q-header>Секция: {{ appSectionName }}; Цвет: {{ appSectionColor }};</q-header>-->
         <q-space></q-space>
         <q-btn dense icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
@@ -22,6 +23,7 @@
           v-for="link in appSectionMenuLinks"
           :key="link.title"
           v-bind="link"
+          @click="handleMenuClick(link)"
         />
       </q-list>
     </q-drawer>
@@ -44,7 +46,7 @@
     <footer class="q-pa-lg q-mt-lg">
       <q-toolbar class="justify-center my-layout">
         <div class="footer-logo column items-center">
-          <span class="app-section-name text-primary">{{ appSectionName }}</span>
+          <span class="app-section-name" :class="appSectionTextColor">{{ appSectionName }}</span>
           <q-img src="~/assets/tops-and-roots_logo_001.svg" width="100px" height="100px" :alt="appName" class="q-my-md q-mx-xl flash" />
           <small class="app-name">{{ appName }}</small>
           <small class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</small>
@@ -55,15 +57,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {computed, onMounted, ref} from "vue";
 import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { useAppStore } from "stores/example-store";
 import { useMeta } from "quasar";
 
-const appStore = useAppStore();
-appStore.updateAppSectionName("Your App Section Name");
-
+/**
+ * Drawers.
+ */
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
 
@@ -75,14 +77,48 @@ function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value;
 }
 
+/**
+ * Constants.
+ */
 const appName = process.env.appName;
-const appSectionName = "Библиотека";
 const appVersion = process.env.appVersion;
 const currentYear = () => new Date().getFullYear();
 
+/**
+ * App Section.
+ */
+const appStore = useAppStore();
+let appSectionName = ref(null);
+let appSectionColor = ref(null);
+
+function handleMenuClick(link) {
+  appStore.updateAppSectionData(link);
+  appSectionName.value = appStore.getAppSectionName;
+  appSectionColor.value = appStore.getAppSectionColor;
+}
+
+const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
+const appSectionTextColor = computed(() => "text-" + appSectionColor.value);
+
+onMounted(() => {
+  if (appStore.getAppSectionEmpty) {
+    appStore.updateAppSectionData(appSectionMenuLinks[0]);
+  }
+  console.log(
+    "onMounted!",
+    appStore.getAppSectionColor,
+    appStore.getAppSectionName
+  );
+  appSectionName.value = appStore.getAppSectionName;
+  appSectionColor.value = appStore.getAppSectionColor;
+});
+
+/**
+ * App Meta.
+ */
 useMeta({
   title: appName,
-  titleTemplate: (title) => `${title} - ${appSectionName}`,
+  titleTemplate: (title) => `${title} - ${appSectionName.value}`,
 });
 </script>
 

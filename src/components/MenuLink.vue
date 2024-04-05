@@ -7,13 +7,7 @@
       <q-item-label class="menu-label">{{ title }}</q-item-label>
     </q-item-section>
     <q-item-section>
-      <q-badge
-        v-if="color"
-        rounded
-        :color
-        style="width: 13px"
-        class="q-ml-xl"
-      />
+      <q-badge v-if="color" rounded :color style="width: 13px" class="q-ml-xl"/>
     </q-item-section>
   </q-item>
 </template>
