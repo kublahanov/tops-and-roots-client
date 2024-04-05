@@ -2,7 +2,7 @@ const routes = [
   {
     path: "/",
     // component: () => import("layouts/MainLayout.vue"),
-    redirect: {name: "libs-books"},
+    redirect: { name: "libs-books" },
   },
 
   // Библиотека
