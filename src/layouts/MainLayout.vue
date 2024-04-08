@@ -3,16 +3,17 @@
     <q-header elevated :class="appSectionBgColor">
       <q-toolbar>
         <q-btn dense icon="menu" @click="toggleLeftDrawer" />
-        <!--<q-header>Секция: {{ appSectionName }}; Цвет: {{ appSectionColor }};</q-header>-->
         <q-space></q-space>
         <q-btn dense icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
+      <!-- prettier-ignore -->
       <q-tabs align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
         <q-route-tab to="/libs/books" label="Книги" icon="o_auto_stories" />
         <q-route-tab to="/libs/authors" label="Авторы" icon="o_groups" />
         <q-route-tab to="/libs/cites" label="Цитаты" icon="o_format_quote" />
       </q-tabs>
     </q-header>
+    <!-- prettier-ignore -->
     <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" elevated>
       <q-toolbar class="q-ma-sm">
         <q-toolbar-title>{{ appName }}</q-toolbar-title>
@@ -23,10 +24,10 @@
           v-for="link in appSectionMenuLinks"
           :key="link.title"
           v-bind="link"
-          @click="handleMenuClick(link)"
         />
       </q-list>
     </q-drawer>
+    <!-- prettier-ignore -->
     <q-drawer v-model="rightDrawerOpen" side="right" behavior="mobile" elevated>
       <q-toolbar class="q-ma-sm">
         <q-toolbar-title>Авторизация</q-toolbar-title>
@@ -43,6 +44,7 @@
     <q-page-container class="my-layout">
       <router-view />
     </q-page-container>
+    <!-- prettier-ignore -->
     <footer class="q-pa-lg q-mt-lg">
       <q-toolbar class="justify-center my-layout">
         <div class="footer-logo column items-center">
@@ -57,11 +59,13 @@
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { useAppStore } from "stores/example-store";
 import { useMeta } from "quasar";
+import { onBeforeRouteUpdate } from "vue-router";
+// import { route } from "quasar/wrappers";
 
 /**
  * Drawers.
@@ -91,11 +95,11 @@ const appStore = useAppStore();
 let appSectionName = ref(null);
 let appSectionColor = ref(null);
 
-function handleMenuClick(link) {
-  appStore.updateAppSectionData(link);
-  appSectionName.value = appStore.getAppSectionName;
-  appSectionColor.value = appStore.getAppSectionColor;
-}
+// function handleMenuClick(link) {
+//   appStore.updateAppSectionData(link);
+//   appSectionName.value = appStore.getAppSectionName;
+//   appSectionColor.value = appStore.getAppSectionColor;
+// }
 
 const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
 const appSectionTextColor = computed(() => "text-" + appSectionColor.value);
@@ -104,14 +108,35 @@ onMounted(() => {
   if (appStore.getAppSectionEmpty) {
     appStore.updateAppSectionData(appSectionMenuLinks[0]);
   }
-  console.log(
-    "onMounted!",
-    appStore.getAppSectionColor,
-    appStore.getAppSectionName
-  );
+
   appSectionName.value = appStore.getAppSectionName;
   appSectionColor.value = appStore.getAppSectionColor;
+
+  console.log("onMounted!", appSectionName.value, appSectionColor.value);
 });
+
+// watch(
+//   () => route,
+//   (newRoute, oldRoute) => {
+//     // Здесь можно выполнить нужные действия при смене маршрута
+//     console.log("Маршрут изменился 1:", oldRoute, "=>", newRoute);
+//   }
+// );
+
+// onBeforeRouteUpdate(async (to, from) => {
+//   console.log("Маршрут изменился 1:", from.path, "=>", to.path);
+// });
+
+watch(
+  () => appStore.appSectionData,
+  (newValue, oldValue) => {
+    // Обработка изменения значения
+    appSectionName.value = newValue.title;
+    appSectionColor.value = newValue.color;
+
+    console.log("watch appStore.appSectionData:", oldValue, "=>", newValue);
+  }
+);
 
 /**
  * App Meta.
