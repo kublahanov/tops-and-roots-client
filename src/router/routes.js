@@ -1,13 +1,15 @@
 import { useAppStore } from "stores/example-store";
 import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 
+const combinedMenuLinks = [...appSectionMenuLinks, ...profileMenuLinks];
+
 function findLinkMatchingHref(links, href) {
   return links.find(link => href.startsWith(link.link));
 }
 
 function beforeEnter(to, from) {
   const appStore = useAppStore();
-  const matchedLink = findLinkMatchingHref(appSectionMenuLinks, to.href);
+  const matchedLink = findLinkMatchingHref(combinedMenuLinks, to.href);
   appStore.updateAppSectionData(matchedLink);
   console.log("beforeEnter >> ", "from: ", from.path, "to: ", to.path, "Name: ", matchedLink.link);
 }
