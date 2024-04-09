@@ -9,16 +9,16 @@ export const useAppStore = defineStore("sectionData", {
       return state.appSectionData == null;
     },
     getAppSectionName(state) {
-      return state.appSectionData.title ?? "";
+      return state.appSectionData.title ?? "Заголовок";
     },
     getAppSectionColor(state) {
-      return state.appSectionData.color ?? "";
+      return state.appSectionData.color ?? "black";
     },
   },
   actions: {
     updateAppSectionData(link) {
       this.appSectionData = link;
-      console.log(link);
+      console.log("updateAppSectionData", link, this.appSectionData);
     },
   },
   persist: true,

@@ -1,19 +1,17 @@
 import { useAppStore } from "stores/example-store";
 import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
+import { findAndGetLinkMatchingHref } from "src/boot/custom";
 
 const combinedMenuLinks = [...appSectionMenuLinks, ...profileMenuLinks];
 
-function findLinkMatchingHref(links, href) {
-  return links.find(link => href.startsWith(link.link));
-}
-
 function beforeEnter(to, from) {
   const appStore = useAppStore();
-  const matchedLink = findLinkMatchingHref(combinedMenuLinks, to.href);
+  const matchedLink = findAndGetLinkMatchingHref(combinedMenuLinks, to.href);
   appStore.updateAppSectionData(matchedLink);
-  console.log("beforeEnter >> ", "from: ", from.path, "to: ", to.path, "Name: ", matchedLink.link);
+  // console.log("beforeEnter", from.path, "=>", to.path);
 }
 
+// prettier-ignore
 const routes = [
   {
     path: "/",

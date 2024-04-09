@@ -64,11 +64,11 @@ import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { useAppStore } from "stores/example-store";
 import { useMeta } from "quasar";
-import { onBeforeRouteUpdate } from "vue-router";
-// import { route } from "quasar/wrappers";
+import { findAndGetLinkMatchingHref } from "boot/custom";
+import { useRouter } from "vue-router";
 
 /**
- * Drawers.
+ * Левая и правая панели меню.
  */
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
@@ -82,64 +82,62 @@ function toggleRightDrawer() {
 }
 
 /**
- * Constants.
+ * Константы.
  */
 const appName = process.env.appName;
 const appVersion = process.env.appVersion;
 const currentYear = () => new Date().getFullYear();
 
 /**
- * App Section.
+ * Название и цвет раздела, синхронизируемые через хранилище.
  */
 const appStore = useAppStore();
-let appSectionName = ref(null);
-let appSectionColor = ref(null);
+let appSectionName = ref("");
+let appSectionColor = ref("");
 
-// function handleMenuClick(link) {
-//   appStore.updateAppSectionData(link);
-//   appSectionName.value = appStore.getAppSectionName;
-//   appSectionColor.value = appStore.getAppSectionColor;
-// }
+/**
+ * Установка названия и цвета раздела.
+ */
+const combinedMenuLinks = [...appSectionMenuLinks, ...profileMenuLinks];
+const router = useRouter();
 
-const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
-const appSectionTextColor = computed(() => "text-" + appSectionColor.value);
-
-onMounted(() => {
+function getDataFromAppStore() {
   if (appStore.getAppSectionEmpty) {
-    appStore.updateAppSectionData(appSectionMenuLinks[0]);
+    console.log("appStore.getAppSectionEmpty");
+    const matchedLink = findAndGetLinkMatchingHref(combinedMenuLinks, router.currentRoute.value.path);
+    appStore.updateAppSectionData(matchedLink);
   }
 
   appSectionName.value = appStore.getAppSectionName;
   appSectionColor.value = appStore.getAppSectionColor;
+}
 
-  console.log("onMounted!", appSectionName.value, appSectionColor.value);
+/**
+ * Установка названия и цвета раздела при создании компонента.
+ */
+onMounted(() => {
+  getDataFromAppStore();
 });
 
-// watch(
-//   () => route,
-//   (newRoute, oldRoute) => {
-//     // Здесь можно выполнить нужные действия при смене маршрута
-//     console.log("Маршрут изменился 1:", oldRoute, "=>", newRoute);
-//   }
-// );
-
-// onBeforeRouteUpdate(async (to, from) => {
-//   console.log("Маршрут изменился 1:", from.path, "=>", to.path);
-// });
-
+/**
+ * Слежение за изменением названия и цвета раздела.
+ */
 watch(
   () => appStore.appSectionData,
   (newValue, oldValue) => {
-    // Обработка изменения значения
-    appSectionName.value = newValue.title;
-    appSectionColor.value = newValue.color;
-
-    console.log("watch appStore.appSectionData:", oldValue, "=>", newValue);
+    getDataFromAppStore();
   }
 );
 
 /**
- * App Meta.
+ * Формирование классов для фона и текста,
+ * исходя из текущего цвета раздела.
+ */
+const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
+const appSectionTextColor = computed(() => "text-" + appSectionColor.value);
+
+/**
+ * Установка заголовка страницы.
  */
 useMeta({
   title: appName,
