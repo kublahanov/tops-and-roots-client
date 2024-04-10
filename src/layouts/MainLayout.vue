@@ -44,17 +44,7 @@
     <q-page-container class="my-layout">
       <router-view />
     </q-page-container>
-    <!-- prettier-ignore -->
-    <footer class="q-pa-lg q-mt-lg">
-      <q-toolbar class="justify-center my-layout">
-        <div class="footer-logo column items-center">
-          <span class="app-section-name" :class="appSectionTextColor">{{ appSectionName }}</span>
-          <q-img src="~/assets/tops-and-roots_logo_001.svg" width="100px" height="100px" :alt="appName" class="q-my-md q-mx-xl flash" />
-          <small class="app-name">{{ appName }}</small>
-          <small class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</small>
-        </div>
-      </q-toolbar>
-    </footer>
+    <MainFooter :color="appSectionColor" :sectionName="appSectionName" />
   </q-layout>
 </template>
 
@@ -64,6 +54,7 @@ import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { useAppStore } from "stores/example-store";
 import { useMeta } from "quasar";
+import MainFooter from "components/MainFooter.vue";
 
 /**
  * Флаги состояния левой и правой панели меню.
@@ -82,8 +73,6 @@ const toggleRightDrawer = () => (rightDrawerOpen.value = !rightDrawerOpen.value)
  * Константы.
  */
 const appName = process.env.appName; // Имя приложения
-const appVersion = process.env.appVersion; // Версия приложения
-const currentYear = () => new Date().getFullYear(); // Текущий год
 
 /**
  * Название и цвет раздела, синхронизируемые через хранилище.
@@ -129,7 +118,6 @@ watch(
  * исходя из текущего цвета раздела.
  */
 const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
-const appSectionTextColor = computed(() => "text-" + appSectionColor.value);
 
 /**
  * Установка заголовка страницы.
@@ -146,20 +134,8 @@ useMeta({
 main
   font-size: 17px // vs. default body font-size: 14px
 
-footer
-  background-color: #fafafa
-  border-top: var(--normal-border)
-  .footer-logo
-    background-color: whitesmoke
-    border-radius: 100%
-    padding: 36px
-    small, span
-      display: block
-    .app-section-name, .app-name
-      font-weight: 900
-      text-transform: uppercase
-    .copyrights
-      font-weight: 400
+.q-page
+  padding-bottom: 2rem
 
 .my-layout
   max-width: $layout-max-width
@@ -167,19 +143,4 @@ footer
 
 .tabs-margin
   margin: auto 12px
-
-@keyframes flash
-  0%
-    opacity: 1
-  50%
-    opacity: 0.6
-  100%
-    opacity: 1
-
-.flash
-  cursor: pointer
-  opacity: 0.6
-
-  &:hover
-    animation: flash 0.7s ease-in-out infinite
 </style>
