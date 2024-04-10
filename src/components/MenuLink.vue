@@ -47,8 +47,6 @@ onMounted(() => {
     : props.link;
 
   calculatedBgColor.value = colors.getPaletteColor(props.color);
-
-  // console.log("onMounted", calculatedHref.value, calculatedBgColor.value);
 });
 </script>
 

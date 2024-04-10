@@ -20,12 +20,13 @@ function isLinksMatching(firstLink, secondLink) {
  */
 function getMatchingMenuElement(menuArray, targetLink) {
   let matchingMenuElement = null;
+
   if (menuArray instanceof Array) {
     for (const menuElement of menuArray) {
       if (menuElement instanceof Object) {
         if (menuElement.link !== undefined) {
           if (isLinksMatching(menuElement.link, targetLink)) {
-            matchingMenuElement = menuElement.link;
+            matchingMenuElement = menuElement;
           }
         }
       }

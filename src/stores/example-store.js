@@ -18,7 +18,6 @@ export const useAppStore = defineStore("sectionData", {
   actions: {
     updateAppSectionData(link) {
       this.appSectionData = link;
-      console.log("updateAppSectionData", link, this.appSectionData);
     },
   },
   persist: true,

@@ -7,17 +7,13 @@ const combinedMenuLinks = [...appSectionMenuLinks, ...profileMenuLinks];
 function beforeEnter(to, from) {
   const appStore = useAppStore();
   const matchedLink = getMatchingMenuElement(combinedMenuLinks, to.href);
-  console.log("beforeEnter", to.href, matchedLink);
   appStore.updateAppSectionData(matchedLink);
-  // console.log("beforeEnter", from.path, "=>", to.path);
 }
 
 // prettier-ignore
 const routes = [
   {
     path: "/",
-    // component: () => import("layouts/MainLayout.vue"),
-    // beforeEnter,
     redirect: { name: "libs-books" },
   },
 

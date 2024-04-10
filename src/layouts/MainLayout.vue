@@ -64,43 +64,37 @@ import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { useAppStore } from "stores/example-store";
 import { useMeta } from "quasar";
-import { getMatchingMenuElement } from "src/js/custom";
-import { useRouter } from "vue-router";
 
 /**
- * Левая и правая панели меню.
+ * Флаги состояния левой и правой панели меню.
  */
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
 
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
-
-function toggleRightDrawer() {
-  rightDrawerOpen.value = !rightDrawerOpen.value;
-}
+/**
+ * Переключатели состояния левой и правой панели меню.
+ * @returns {boolean}
+ */
+const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value);
+const toggleRightDrawer = () => (rightDrawerOpen.value = !rightDrawerOpen.value);
 
 /**
  * Константы.
  */
-const appName = process.env.appName;
-const appVersion = process.env.appVersion;
-const currentYear = () => new Date().getFullYear();
+const appName = process.env.appName; // Имя приложения
+const appVersion = process.env.appVersion; // Версия приложения
+const currentYear = () => new Date().getFullYear(); // Текущий год
 
 /**
  * Название и цвет раздела, синхронизируемые через хранилище.
  */
 const appStore = useAppStore();
-let appSectionName = ref("");
-let appSectionColor = ref("");
+const appSectionName = ref("");
+const appSectionColor = ref("");
 
 /**
  * Установка названия и цвета раздела.
  */
-const combinedMenuLinks = [...appSectionMenuLinks, ...profileMenuLinks];
-const router = useRouter();
-
 function getDataFromAppStore() {
   appSectionName.value = appStore.getAppSectionName;
   appSectionColor.value = appStore.getAppSectionColor;
@@ -110,14 +104,7 @@ function getDataFromAppStore() {
  * Установка названия и цвета раздела при создании компонента.
  */
 onMounted(() => {
-  // if (appStore.getAppSectionEmpty) {
-  //   const matchedLink = findAndGetLinkMatchingHref(combinedMenuLinks, router.currentRoute.value.path);
-  //   console.log("appStore.getAppSectionEmpty", combinedMenuLinks, router.currentRoute.value.path, matchedLink);
-  //   appStore.updateAppSectionData(matchedLink);
-  //   debugger;
-  // }
-
-  // getDataFromAppStore();
+  getDataFromAppStore();
 });
 
 /**
@@ -127,6 +114,11 @@ watch(
   () => appStore.appSectionData,
   (newValue, oldValue) => {
     getDataFromAppStore();
+
+    useMeta({
+      title: appName,
+      titleTemplate: (title) => `${title} - ${appSectionName.value}`,
+    });
   }
 );
 
