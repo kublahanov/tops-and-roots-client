@@ -64,7 +64,7 @@ import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { useAppStore } from "stores/example-store";
 import { useMeta } from "quasar";
-import { findAndGetLinkMatchingHref } from "boot/custom";
+import { findAndGetLinkMatchingHref } from "src/js/custom";
 import { useRouter } from "vue-router";
 
 /**

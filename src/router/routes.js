@@ -1,6 +1,6 @@
 import { useAppStore } from "stores/example-store";
 import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
-import { findAndGetLinkMatchingHref } from "src/boot/custom";
+import { findAndGetLinkMatchingHref } from "src/js/custom";
 
 const combinedMenuLinks = [...appSectionMenuLinks, ...profileMenuLinks];
 

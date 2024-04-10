@@ -17,7 +17,7 @@
 import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import { colors } from "quasar";
-import { checkLinkMatchCurrentUrl } from "src/boot/custom";
+import { checkLinkMatchCurrentUrl } from "src/js/custom";
 
 // prettier-ignore
 const props = defineProps({
