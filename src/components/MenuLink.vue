@@ -1,4 +1,3 @@
-<!-- prettier-ignore -->
 <template>
   <q-item :to="calculatedHref" active-class="active" :active="checkRoute()">
     <q-item-section v-if="icon" avatar>
@@ -8,7 +7,13 @@
       <q-item-label class="menu-label">{{ title }}</q-item-label>
     </q-item-section>
     <q-item-section>
-      <q-badge v-if="color" rounded :color style="width: 13px" class="q-ml-xl" />
+      <q-badge
+        v-if="color"
+        rounded
+        :color
+        style="width: 13px"
+        class="q-ml-xl"
+      />
     </q-item-section>
   </q-item>
 </template>
@@ -44,13 +49,22 @@ const calculatedHref = computed(() => router.resolve({ name: props.linkName }).p
  */
 const calculatedBgColor = computed(() => colors.getPaletteColor(props.color));
 
-// prettier-ignore
 /**
  * Проверяем соответствие пункта меню - текущей ссылке,
  * чтобы определить активен ли он.
  * @returns {boolean}
  */
-const checkRoute = () => isLinksMatching(router.currentRoute.value.path, calculatedHref.value);
+const checkRoute = function () {
+  const path = router.currentRoute.value.path;
+
+  /**
+   * Костыль для пользовательского раздела -
+   * в нём проверяется полное соответствие ссылки пункту меню.
+   */
+  return path.indexOf("/user/") !== -1
+    ? path === calculatedHref.value
+    : isLinksMatching(router.currentRoute.value.path, calculatedHref.value);
+};
 </script>
 
 <style lang="sass" scoped>

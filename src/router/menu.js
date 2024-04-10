@@ -1,3 +1,6 @@
+/**
+ * Меню разделов приложения.
+ */
 const appSectionMenuLinks = [
   {
     title: "Библиотека",
@@ -36,26 +39,37 @@ const appSectionMenuLinks = [
   },
 ];
 
+/**
+ * Меню пользовательского раздела.
+ */
 const profileMenuLinks = [
   {
     title: "Профиль",
     icon: "o_account_circle",
     link: "/user/profile",
+    linkName: "user-profile",
+    color: "blue-grey-7",
   },
   {
     title: "Настройки",
     icon: "o_settings",
     link: "/user/settings",
+    linkName: "user-settings",
+    color: "blue-grey-7",
   },
   {
     title: "Клуб",
     icon: "o_groups",
     link: "/user/club",
+    linkName: "user-club",
+    color: "blue-grey-7",
   },
   {
     title: "Выход",
     icon: "o_logout",
     link: "/user/logout",
+    linkName: "user-logout",
+    color: "blue-grey-7",
   },
 ];
 
