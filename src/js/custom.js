@@ -1,4 +1,15 @@
 /**
+ * Костыли для GitHub Pages.
+ * @param url
+ * @returns {*}
+ */
+function removeSubstringFromUrl(url) {
+  const substringToRemove = "/tops-and-roots";
+
+  return url.replace(substringToRemove, "");
+}
+
+/**
  * Сопоставление двух ссылок по их первым элементам
  * (от начала строки, до первого слэша).
  * @param firstLink {string}
@@ -6,8 +17,12 @@
  * @returns {boolean}
  */
 function isLinksMatching(firstLink, secondLink) {
+  firstLink = removeSubstringFromUrl(firstLink);
+  secondLink = removeSubstringFromUrl(secondLink);
+
   const firstLinkArray = firstLink.replace(/^\/+|\/+$/g, "").split("/");
   const secondLinkArray = secondLink.replace(/^\/+|\/+$/g, "").split("/");
+
   return firstLinkArray[0] === secondLinkArray[0];
 }
 
@@ -19,6 +34,8 @@ function isLinksMatching(firstLink, secondLink) {
  * @returns {null|object}
  */
 function getMatchingMenuElement(menuArray, targetLink) {
+  targetLink = removeSubstringFromUrl(targetLink);
+
   let matchingMenuElement = null;
 
   if (menuArray instanceof Array) {
