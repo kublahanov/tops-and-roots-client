@@ -12,27 +12,20 @@ function beforeEnter(to, from) {
 
 // prettier-ignore
 const routes = [
+  { path: "/", redirect: { name: "libs-books" } }, // Гостевая индексная страница
   {
-    path: "/",
-    redirect: { name: "libs-books" },
-  },
-
-  // Библиотека
-  {
-    path: "/libs",
+    path: "/libs", // Библиотека
     component: () => import("layouts/MainLayout.vue"),
     beforeEnter,
     children: [
       { path: "", redirect: { name: "libs-books" }, beforeEnter },
       { path: "books", component: () => import("pages/libs/BooksPage.vue"), name: "libs-books", beforeEnter },
-      { path: "authors", component: () => import("pages/libs/AuthorsPage.vue"), beforeEnter },
-      { path: "cites", component: () => import("pages/libs/CitesPage.vue"), beforeEnter },
+      { path: "authors", component: () => import("pages/libs/AuthorsPage.vue"), name: "libs-authors", beforeEnter },
+      { path: "cites", component: () => import("pages/libs/CitesPage.vue"), name: "libs-cites", beforeEnter },
     ],
   },
-
-  // Фильмотека
   {
-    path: "/films",
+    path: "/films", // Фильмотека
     component: () => import("layouts/MainLayout.vue"),
     beforeEnter,
     children: [
@@ -40,10 +33,8 @@ const routes = [
       { path: "index", component: () => import("pages/films/IndexPage.vue"), name: "films-index" },
     ],
   },
-
-  // Картотека
   {
-    path: "/cards",
+    path: "/cards", // Картотека
     component: () => import("layouts/MainLayout.vue"),
     beforeEnter,
     children: [
@@ -51,10 +42,8 @@ const routes = [
       { path: "index", component: () => import("pages/cards/IndexPage.vue"), name: "cards-index" },
     ],
   },
-
-  // Биография
   {
-    path: "/bios",
+    path: "/bios", // Биография
     component: () => import("layouts/MainLayout.vue"),
     beforeEnter,
     children: [
@@ -62,10 +51,8 @@ const routes = [
       { path: "index", component: () => import("pages/bios/IndexPage.vue"), name: "bios-index" },
     ],
   },
-
-  // Планирование
   {
-    path: "/plans",
+    path: "/plans", // Планирование
     component: () => import("layouts/MainLayout.vue"),
     beforeEnter,
     children: [
@@ -73,10 +60,24 @@ const routes = [
       { path: "index", component: () => import("pages/plans/IndexPage.vue"), name: "plans-index" },
     ],
   },
-
-  // 404 Not found
   {
-    path: "/:catchAll(.*)*",
+    path: "/user", // Пользователь
+    component: () => import("layouts/UserLayout.vue"),
+    children: [
+      { path: "", redirect: { name: "user-profile" } },
+      { path: "profile", component: () => import("pages/user/IndexPage.vue"), name: "user-profile" },
+      { path: "settings", component: () => import("pages/user/SettingsPage.vue"), name: "user-settings" },
+      { path: "club", component: () => import("pages/user/ClubPage.vue"), name: "user-club" },
+      {
+        path: "logout",
+        component: () => import("pages/user/LogoutPage.vue"),
+        name: "user-logout",
+        redirect: { name: "libs-books" }
+      },
+    ],
+  },
+  {
+    path: "/:catchAll(.*)*", // 404 Not found
     component: () => import("pages/ErrorNotFound.vue"),
     beforeEnter,
     name: "not-found",

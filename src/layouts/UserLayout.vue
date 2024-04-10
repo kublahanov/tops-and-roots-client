@@ -6,12 +6,6 @@
         <q-space></q-space>
         <q-btn dense icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
-      <!-- prettier-ignore -->
-      <q-tabs align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
-        <q-route-tab to="/libs/books" label="Книги" icon="o_auto_stories" />
-        <q-route-tab to="/libs/authors" label="Авторы" icon="o_groups" />
-        <q-route-tab to="/libs/cites" label="Цитаты" icon="o_format_quote" />
-      </q-tabs>
     </q-header>
     <!-- prettier-ignore -->
     <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" elevated>
@@ -48,9 +42,9 @@
     <footer class="q-pa-lg q-mt-lg">
       <q-toolbar class="justify-center my-layout">
         <div class="footer-logo column items-center">
-          <span class="app-section-name" :class="appSectionTextColor">{{ appSectionName }}</span>
+          <span class="app-section-name" :class="appSectionTextColor">{{ appName }}</span>
           <q-img src="~/assets/tops-and-roots_logo_001.svg" width="100px" height="100px" :alt="appName" class="q-my-md q-mx-xl flash" />
-          <small class="app-name">{{ appName }}</small>
+          <!--<small class="app-name">{{ appName }}</small>-->
           <small class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</small>
         </div>
       </q-toolbar>
@@ -59,10 +53,9 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
-import { useAppStore } from "stores/example-store";
 import { useMeta } from "quasar";
 
 /**
@@ -86,43 +79,10 @@ const appVersion = process.env.appVersion; // Версия приложения
 const currentYear = () => new Date().getFullYear(); // Текущий год
 
 /**
- * Название и цвет раздела, синхронизируемые через хранилище.
+ * Название и цвет раздела.
  */
-const appStore = useAppStore();
-const appSectionName = ref("");
-const appSectionColor = ref("");
-
-/**
- * Установка названия и цвета раздела.
- */
-function getDataFromAppStore() {
-  if (!appStore.getAppSectionEmpty) {
-    appSectionName.value = appStore.getAppSectionName;
-    appSectionColor.value = appStore.getAppSectionColor;
-  }
-}
-
-/**
- * Установка названия и цвета раздела при создании компонента.
- */
-onMounted(() => {
-  getDataFromAppStore();
-});
-
-/**
- * Слежение за изменением названия и цвета раздела.
- */
-watch(
-  () => appStore.appSectionData,
-  (newValue, oldValue) => {
-    getDataFromAppStore();
-
-    useMeta({
-      title: appName,
-      titleTemplate: (title) => `${title} - ${appSectionName.value}`,
-    });
-  }
-);
+const appSectionName = ref("Пользователь");
+const appSectionColor = ref("blue-grey-7");
 
 /**
  * Формирование классов для фона и текста,
