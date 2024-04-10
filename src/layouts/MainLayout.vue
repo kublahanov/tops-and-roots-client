@@ -96,8 +96,10 @@ const appSectionColor = ref("");
  * Установка названия и цвета раздела.
  */
 function getDataFromAppStore() {
-  appSectionName.value = appStore.getAppSectionName;
-  appSectionColor.value = appStore.getAppSectionColor;
+  if (!appStore.getAppSectionEmpty) {
+    appSectionName.value = appStore.getAppSectionName;
+    appSectionColor.value = appStore.getAppSectionColor;
+  }
 }
 
 /**
