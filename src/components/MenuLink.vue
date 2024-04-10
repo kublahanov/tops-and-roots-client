@@ -15,7 +15,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { colors } from "quasar";
 import { isLinksMatching } from "src/js/custom";
 
