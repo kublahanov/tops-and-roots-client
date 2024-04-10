@@ -1,5 +1,5 @@
+<!-- prettier-ignore -->
 <template>
-  <!-- prettier-ignore -->
   <q-item :to="calculatedHref" active-class="active" :active="checkRoute()">
     <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
@@ -15,7 +15,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import { computed, onMounted } from "vue";
 import { colors } from "quasar";
 import { isLinksMatching } from "src/js/custom";
 
@@ -29,25 +29,28 @@ const props = defineProps({
 });
 
 const router = useRouter();
-let calculatedHref = ref("/"); // Вычисляемый (исходя из именованного роута) путь
-let calculatedBgColor = ref("white"); // Вычисляемый (исходя из активности и цвета раздела) фон пункта меню
 
+// prettier-ignore
+/**
+ * Вычисляемый (исходя из именованного роута) путь.
+ * @type {ComputedRef<string>}
+ */
+const calculatedHref = computed(() => router.resolve({ name: props.linkName }).path);
+
+// prettier-ignore
+/**
+ * Вычисляемый (исходя из активности и цвета раздела) фон пункта меню.
+ * @type {ComputedRef<string>}
+ */
+const calculatedBgColor = computed(() => colors.getPaletteColor(props.color));
+
+// prettier-ignore
 /**
  * Проверяем соответствие пункта меню - текущей ссылке,
  * чтобы определить активен ли он.
  * @returns {boolean}
  */
-function checkRoute() {
-  return isLinksMatching(router.currentRoute.value.path, calculatedHref.value)
-}
-
-onMounted(() => {
-  calculatedHref.value = props.linkName
-    ? router.resolve({ name: props.linkName }).href
-    : props.link;
-
-  calculatedBgColor.value = colors.getPaletteColor(props.color);
-});
+const checkRoute = () => isLinksMatching(router.currentRoute.value.path, calculatedHref.value);
 </script>
 
 <style lang="sass" scoped>
@@ -55,6 +58,7 @@ onMounted(() => {
   color: white
   background-color: v-bind(calculatedBgColor)
   cursor: default !important
+
 .menu-label
   font-size: larger
 </style>
