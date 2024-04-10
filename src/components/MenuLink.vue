@@ -17,7 +17,7 @@
 import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import { colors } from "quasar";
-import { checkLinkMatchCurrentUrl } from "src/js/custom";
+import { isLinksMatching } from "src/js/custom";
 
 // prettier-ignore
 const props = defineProps({
@@ -38,7 +38,7 @@ let calculatedBgColor = ref("white"); // Вычисляемый (исходя и
  * @returns {boolean}
  */
 function checkRoute() {
-  return checkLinkMatchCurrentUrl(router.currentRoute.value.path, calculatedHref.value)
+  return isLinksMatching(router.currentRoute.value.path, calculatedHref.value)
 }
 
 onMounted(() => {

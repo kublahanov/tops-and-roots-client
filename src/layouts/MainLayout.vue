@@ -64,7 +64,7 @@ import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { useAppStore } from "stores/example-store";
 import { useMeta } from "quasar";
-import { findAndGetLinkMatchingHref } from "src/js/custom";
+import { getMatchingMenuElement } from "src/js/custom";
 import { useRouter } from "vue-router";
 
 /**
@@ -102,12 +102,6 @@ const combinedMenuLinks = [...appSectionMenuLinks, ...profileMenuLinks];
 const router = useRouter();
 
 function getDataFromAppStore() {
-  if (appStore.getAppSectionEmpty) {
-    console.log("appStore.getAppSectionEmpty");
-    const matchedLink = findAndGetLinkMatchingHref(combinedMenuLinks, router.currentRoute.value.path);
-    appStore.updateAppSectionData(matchedLink);
-  }
-
   appSectionName.value = appStore.getAppSectionName;
   appSectionColor.value = appStore.getAppSectionColor;
 }
@@ -116,7 +110,14 @@ function getDataFromAppStore() {
  * Установка названия и цвета раздела при создании компонента.
  */
 onMounted(() => {
-  getDataFromAppStore();
+  // if (appStore.getAppSectionEmpty) {
+  //   const matchedLink = findAndGetLinkMatchingHref(combinedMenuLinks, router.currentRoute.value.path);
+  //   console.log("appStore.getAppSectionEmpty", combinedMenuLinks, router.currentRoute.value.path, matchedLink);
+  //   appStore.updateAppSectionData(matchedLink);
+  //   debugger;
+  // }
+
+  // getDataFromAppStore();
 });
 
 /**
