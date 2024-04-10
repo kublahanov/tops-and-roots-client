@@ -1,7 +1,19 @@
+import { useAppStore } from "stores/example-store";
+import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
+import { getMatchingMenuElement } from "src/js/custom";
+
+const combinedMenuLinks = [...appSectionMenuLinks, ...profileMenuLinks];
+
+function beforeEnter(to, from) {
+  const appStore = useAppStore();
+  const matchedLink = getMatchingMenuElement(combinedMenuLinks, to.href);
+  appStore.updateAppSectionData(matchedLink);
+}
+
+// prettier-ignore
 const routes = [
   {
     path: "/",
-    // component: () => import("layouts/MainLayout.vue"),
     redirect: { name: "libs-books" },
   },
 
@@ -9,11 +21,12 @@ const routes = [
   {
     path: "/libs",
     component: () => import("layouts/MainLayout.vue"),
+    beforeEnter,
     children: [
-      { path: "", redirect: { name: "libs-books" } },
-      { path: "books", component: () => import("pages/libs/BooksPage.vue"), name: "libs-books" },
-      { path: "authors", component: () => import("pages/libs/AuthorsPage.vue") },
-      { path: "cites", component: () => import("pages/libs/CitesPage.vue") },
+      { path: "", redirect: { name: "libs-books" }, beforeEnter },
+      { path: "books", component: () => import("pages/libs/BooksPage.vue"), name: "libs-books", beforeEnter },
+      { path: "authors", component: () => import("pages/libs/AuthorsPage.vue"), beforeEnter },
+      { path: "cites", component: () => import("pages/libs/CitesPage.vue"), beforeEnter },
     ],
   },
 
@@ -21,6 +34,7 @@ const routes = [
   {
     path: "/films",
     component: () => import("layouts/MainLayout.vue"),
+    beforeEnter,
     children: [
       { path: "", redirect: { name: "films-index" } },
       { path: "index", component: () => import("pages/films/IndexPage.vue"), name: "films-index" },
@@ -31,6 +45,7 @@ const routes = [
   {
     path: "/cards",
     component: () => import("layouts/MainLayout.vue"),
+    beforeEnter,
     children: [
       { path: "", redirect: { name: "cards-index" } },
       { path: "index", component: () => import("pages/cards/IndexPage.vue"), name: "cards-index" },
@@ -41,6 +56,7 @@ const routes = [
   {
     path: "/bios",
     component: () => import("layouts/MainLayout.vue"),
+    beforeEnter,
     children: [
       { path: "", redirect: { name: "bios-index" } },
       { path: "index", component: () => import("pages/bios/IndexPage.vue"), name: "bios-index" },
@@ -51,16 +67,20 @@ const routes = [
   {
     path: "/plans",
     component: () => import("layouts/MainLayout.vue"),
+    beforeEnter,
     children: [
       { path: "", redirect: { name: "plans-index" } },
       { path: "index", component: () => import("pages/plans/IndexPage.vue"), name: "plans-index" },
     ],
   },
 
-  /**
-   * 404 Not found.
-   */
-  { path: "/:catchAll(.*)*", component: () => import("pages/ErrorNotFound.vue"), name: "NotFound" },
+  // 404 Not found
+  {
+    path: "/:catchAll(.*)*",
+    component: () => import("pages/ErrorNotFound.vue"),
+    beforeEnter,
+    name: "not-found",
+  },
 ];
 
 export default routes;

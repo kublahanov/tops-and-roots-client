@@ -3,16 +3,17 @@
     <q-header elevated :class="appSectionBgColor">
       <q-toolbar>
         <q-btn dense icon="menu" @click="toggleLeftDrawer" />
-        <!--<q-header>Секция: {{ appSectionName }}; Цвет: {{ appSectionColor }};</q-header>-->
         <q-space></q-space>
         <q-btn dense icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
+      <!-- prettier-ignore -->
       <q-tabs align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
         <q-route-tab to="/libs/books" label="Книги" icon="o_auto_stories" />
         <q-route-tab to="/libs/authors" label="Авторы" icon="o_groups" />
         <q-route-tab to="/libs/cites" label="Цитаты" icon="o_format_quote" />
       </q-tabs>
     </q-header>
+    <!-- prettier-ignore -->
     <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" elevated>
       <q-toolbar class="q-ma-sm">
         <q-toolbar-title>{{ appName }}</q-toolbar-title>
@@ -23,10 +24,10 @@
           v-for="link in appSectionMenuLinks"
           :key="link.title"
           v-bind="link"
-          @click="handleMenuClick(link)"
         />
       </q-list>
     </q-drawer>
+    <!-- prettier-ignore -->
     <q-drawer v-model="rightDrawerOpen" side="right" behavior="mobile" elevated>
       <q-toolbar class="q-ma-sm">
         <q-toolbar-title>Авторизация</q-toolbar-title>
@@ -43,6 +44,7 @@
     <q-page-container class="my-layout">
       <router-view />
     </q-page-container>
+    <!-- prettier-ignore -->
     <footer class="q-pa-lg q-mt-lg">
       <q-toolbar class="justify-center my-layout">
         <div class="footer-logo column items-center">
@@ -57,64 +59,78 @@
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { useAppStore } from "stores/example-store";
 import { useMeta } from "quasar";
 
 /**
- * Drawers.
+ * Флаги состояния левой и правой панели меню.
  */
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
 
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
-
-function toggleRightDrawer() {
-  rightDrawerOpen.value = !rightDrawerOpen.value;
-}
-
 /**
- * Constants.
+ * Переключатели состояния левой и правой панели меню.
+ * @returns {boolean}
  */
-const appName = process.env.appName;
-const appVersion = process.env.appVersion;
-const currentYear = () => new Date().getFullYear();
+const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value);
+const toggleRightDrawer = () => (rightDrawerOpen.value = !rightDrawerOpen.value);
 
 /**
- * App Section.
+ * Константы.
+ */
+const appName = process.env.appName; // Имя приложения
+const appVersion = process.env.appVersion; // Версия приложения
+const currentYear = () => new Date().getFullYear(); // Текущий год
+
+/**
+ * Название и цвет раздела, синхронизируемые через хранилище.
  */
 const appStore = useAppStore();
-let appSectionName = ref(null);
-let appSectionColor = ref(null);
+const appSectionName = ref("");
+const appSectionColor = ref("");
 
-function handleMenuClick(link) {
-  appStore.updateAppSectionData(link);
+/**
+ * Установка названия и цвета раздела.
+ */
+function getDataFromAppStore() {
   appSectionName.value = appStore.getAppSectionName;
   appSectionColor.value = appStore.getAppSectionColor;
 }
 
-const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
-const appSectionTextColor = computed(() => "text-" + appSectionColor.value);
-
+/**
+ * Установка названия и цвета раздела при создании компонента.
+ */
 onMounted(() => {
-  if (appStore.getAppSectionEmpty) {
-    appStore.updateAppSectionData(appSectionMenuLinks[0]);
-  }
-  console.log(
-    "onMounted!",
-    appStore.getAppSectionColor,
-    appStore.getAppSectionName
-  );
-  appSectionName.value = appStore.getAppSectionName;
-  appSectionColor.value = appStore.getAppSectionColor;
+  getDataFromAppStore();
 });
 
 /**
- * App Meta.
+ * Слежение за изменением названия и цвета раздела.
+ */
+watch(
+  () => appStore.appSectionData,
+  (newValue, oldValue) => {
+    getDataFromAppStore();
+
+    useMeta({
+      title: appName,
+      titleTemplate: (title) => `${title} - ${appSectionName.value}`,
+    });
+  }
+);
+
+/**
+ * Формирование классов для фона и текста,
+ * исходя из текущего цвета раздела.
+ */
+const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
+const appSectionTextColor = computed(() => "text-" + appSectionColor.value);
+
+/**
+ * Установка заголовка страницы.
  */
 useMeta({
   title: appName,
