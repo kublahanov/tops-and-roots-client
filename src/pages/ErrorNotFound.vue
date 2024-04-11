@@ -1,29 +1,12 @@
 <template>
-  <div
-    class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center"
-  >
+  <!-- prettier-ignore -->
+  <div class="fullscreen bg-secondary text-white text-center flex flex-center">
     <div>
-      <div style="font-size: 30vh">404</div>
-
-      <div class="text-h2" style="opacity: 0.4">Oops. Nothing here...</div>
-
-      <q-btn
-        class="q-mt-xl"
-        color="white"
-        text-color="blue"
-        unelevated
-        to="/"
-        label="Go Home"
-        no-caps
-      />
+      <h1 class="text-weight-bold">404</h1>
+      <h3>Ничего не найдено...</h3>
+      <q-btn outline to="/" round size="xl" icon="home">
+        <q-tooltip class="bg-white text-secondary" style="font-size: 120%">На главную</q-tooltip>
+      </q-btn>
     </div>
   </div>
 </template>
-
-<script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "ErrorNotFound",
-});
-</script>
