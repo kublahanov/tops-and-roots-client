@@ -128,14 +128,17 @@ useMeta({
 });
 </script>
 
-<style lang="sass" scoped>
+<!-- Стили макета не ограничены свойством "scoped" и распространяются на все его элементы -->
+<style lang="sass">
 @import "src/css/quasar.variables.scss"
 
 main
   font-size: 17px // vs. default body font-size: 14px
 
 .q-page
-  padding-bottom: 2rem
+  padding: 2rem 1rem
+  *:first-child
+    margin-top: 0 !important
 
 .my-layout
   max-width: $layout-max-width

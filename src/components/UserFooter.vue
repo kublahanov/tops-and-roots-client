@@ -3,7 +3,7 @@
     <q-toolbar class="justify-center my-layout">
       <!-- prettier-ignore -->
       <div class="footer-logo column items-center">
-        <span class="app-section-name" :class="appSectionTextColor">{{ props.sectionName }}</span>
+        <span class="app-name" :class="appSectionTextColor">{{ appName }}</span>
         <q-img
           src="~/assets/tops-and-roots_logo_001.svg"
           width="100px"
@@ -11,7 +11,6 @@
           :alt="appName"
           class="q-my-md q-mx-xl flash"
         />
-        <small class="app-name">{{ appName }}</small>
         <small class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</small>
       </div>
     </q-toolbar>
@@ -23,7 +22,6 @@ import { computed } from "vue";
 
 const props = defineProps({
   color: { type: String, required: true }, // Цвет текущей секции
-  sectionName: { type: String, required: true }, // Название текущей секции
 });
 
 /**
@@ -50,7 +48,7 @@ footer
     padding: 36px
     small, span
       display: block
-    .app-section-name, .app-name
+    .app-name
       font-weight: 900
       text-transform: uppercase
     .copyrights
