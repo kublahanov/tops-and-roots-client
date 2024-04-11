@@ -1,4 +1,4 @@
-import { useAppStore } from "stores/example-store";
+import { useAppStore } from "stores/sectionData-store";
 import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import { getMatchingMenuElement } from "src/js/custom";
 
