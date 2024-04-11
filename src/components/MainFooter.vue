@@ -3,16 +3,10 @@
     <q-toolbar class="justify-center my-layout">
       <!-- prettier-ignore -->
       <div class="footer-logo column items-center">
-        <span class="app-section-name" :class="appSectionTextColor">{{ props.sectionName }}</span>
-        <q-img
-          src="~/assets/tops-and-roots_logo_001.svg"
-          width="100px"
-          height="100px"
-          :alt="appName"
-          class="q-my-md q-mx-xl flash"
-        />
-        <small class="app-name">{{ appName }}</small>
-        <small class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</small>
+        <div class="app-section-name" :class="appSectionTextColor">{{ props.sectionName }}</div>
+        <q-img src="~/assets/tops-and-roots_logo_001.svg" width="100px" height="100px" :alt="appName" />
+        <div class="app-name">{{ appName }}</div>
+        <div class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</div>
       </div>
     </q-toolbar>
   </footer>
@@ -26,16 +20,12 @@ const props = defineProps({
   sectionName: { type: String, required: true }, // Название текущей секции
 });
 
-/**
- * Константы.
- */
 const appName = process.env.appName; // Имя приложения
 const appVersion = process.env.appVersion; // Версия приложения
 const currentYear = () => new Date().getFullYear(); // Текущий год
 
 /**
- * Формирование классов для фона и текста,
- * исходя из текущего цвета раздела.
+ * Формирование класса для текста, исходя из текущего цвета раздела.
  */
 const appSectionTextColor = computed(() => "text-" + props.color);
 </script>
@@ -47,12 +37,20 @@ footer
   .footer-logo
     background-color: whitesmoke
     border-radius: 100%
-    padding: 36px
-    small, span
-      display: block
-    .app-section-name, .app-name
-      font-weight: 900
+    width: 235px
+    height: 235px
+    padding: 23px
+    .app-section-name
+      color: v-bind(textColor)
+      font-weight: bold
       text-transform: uppercase
+      font-size: 110%
+      margin: 8px auto
+    .app-name
+      font-weight: bold
+      text-transform: uppercase
+      font-size: 90%
+      margin: 7px auto 0
     .copyrights
-      font-weight: 400
+      font-size: 85%
 </style>

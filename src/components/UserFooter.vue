@@ -3,39 +3,27 @@
     <q-toolbar class="justify-center my-layout">
       <!-- prettier-ignore -->
       <div class="footer-logo column items-center">
-        <span class="app-name" :class="appSectionTextColor">{{ appName }}</span>
-        <q-img
-          src="~/assets/tops-and-roots_logo_001.svg"
-          width="100px"
-          height="100px"
-          :alt="appName"
-          class="q-my-md q-mx-xl flash"
-        />
-        <small class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</small>
+        <div class="app-name" :class="appSectionTextColor">{{ appName }}</div>
+        <q-img src="~/assets/tops-and-roots_logo_001.svg" width="100px" height="100px" :alt="appName" />
+        <div class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</div>
       </div>
     </q-toolbar>
   </footer>
 </template>
 
 <script setup>
-import { computed } from "vue";
-
 const props = defineProps({
   color: { type: String, required: true }, // Цвет текущей секции
 });
 
-/**
- * Константы.
- */
 const appName = process.env.appName; // Имя приложения
 const appVersion = process.env.appVersion; // Версия приложения
 const currentYear = () => new Date().getFullYear(); // Текущий год
 
 /**
- * Формирование классов для фона и текста,
- * исходя из текущего цвета раздела.
+ * Формирование класса для текста, исходя из текущего цвета раздела.
  */
-const appSectionTextColor = computed(() => "text-" + props.color);
+const appSectionTextColor = "text-" + props.color;
 </script>
 
 <style scoped lang="sass">
@@ -45,12 +33,16 @@ footer
   .footer-logo
     background-color: whitesmoke
     border-radius: 100%
+    width: 235px
+    height: 235px
     padding: 36px
-    small, span
-      display: block
     .app-name
-      font-weight: 900
+      color: v-bind(textColor)
+      font-weight: bold
       text-transform: uppercase
+      font-size: 105%
+      margin: 8px auto
     .copyrights
-      font-weight: 400
+      font-size: 85%
+      margin: 7px auto 0
 </style>

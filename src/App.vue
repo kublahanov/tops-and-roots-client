@@ -15,7 +15,7 @@ main
   font-size: 17px // vs. default body font-size: 14px
 
 .q-page
-  padding: 2rem 1rem
+  padding: 2rem 0.8rem
   *:first-child
     margin-top: 0 !important
 
