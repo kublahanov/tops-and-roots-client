@@ -52,7 +52,7 @@
 import { computed, onMounted, ref, watch } from "vue";
 import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
-import { useAppStore } from "stores/example-store";
+import { useAppStore } from "stores/sectionData-store";
 import { useMeta } from "quasar";
 import MainFooter from "components/MainFooter.vue";
 
