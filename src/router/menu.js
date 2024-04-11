@@ -8,6 +8,26 @@ const appSectionMenuLinks = [
     link: "/libs",
     linkName: "libs-books",
     color: "blue-8",
+    tabs: [
+      {
+        title: "Книги",
+        icon: "o_auto_stories",
+        link: "/libs/books",
+        linkName: "libs-books",
+      },
+      {
+        title: "Авторы",
+        icon: "o_groups",
+        link: "/libs/authors",
+        linkName: "libs-authors",
+      },
+      {
+        title: "Цитаты",
+        icon: "o_format_quote",
+        link: "/libs/cites",
+        linkName: "libs-cites",
+      },
+    ],
   },
   {
     title: "Фильмотека",

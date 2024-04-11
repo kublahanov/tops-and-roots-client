@@ -7,10 +7,13 @@
         <q-btn dense icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
       <!-- prettier-ignore -->
-      <q-tabs align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
+      <q-tabs v-if="hasAppSectionTabs" align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
         <q-route-tab to="/libs/books" label="Книги" icon="o_auto_stories" />
         <q-route-tab to="/libs/authors" label="Авторы" icon="o_groups" />
         <q-route-tab to="/libs/cites" label="Цитаты" icon="o_format_quote" />
+      </q-tabs>
+      <q-tabs v-else align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
+        <q-tab icon="o_home" class="q-tab--active" />
       </q-tabs>
     </q-header>
     <!-- prettier-ignore -->
@@ -80,14 +83,16 @@ const appName = process.env.appName; // Имя приложения
 const appStore = useAppStore();
 const appSectionName = ref("");
 const appSectionColor = ref("");
+const hasAppSectionTabs = ref("");
 
 /**
  * Установка названия и цвета раздела.
  */
 function getDataFromAppStore() {
-  if (!appStore.getAppSectionEmpty) {
+  if (!appStore.isAppSectionEmpty) {
     appSectionName.value = appStore.getAppSectionName;
     appSectionColor.value = appStore.getAppSectionColor;
+    hasAppSectionTabs.value = appStore.hasAppSectionTabs;
   }
 }
 
