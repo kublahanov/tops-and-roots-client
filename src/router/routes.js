@@ -6,7 +6,7 @@ const combinedMenuLinks = [...appSectionMenuLinks, ...profileMenuLinks];
 
 function beforeEnter(to, from) {
   const appStore = useAppStore();
-  const matchedLink = getMatchingMenuElement(combinedMenuLinks, to.href);
+  const matchedLink = getMatchingMenuElement(combinedMenuLinks, to.path);
   appStore.updateAppSectionData(matchedLink);
 }
 
