@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pt-lg">
+  <q-page>
     <q-card bordered>
       <q-card-section>
         <div class="text-h6">Пользовательский клуб</div>
