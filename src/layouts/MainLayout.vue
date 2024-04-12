@@ -110,11 +110,6 @@ watch(
   () => appStore.appSectionData,
   (newValue, oldValue) => {
     getDataFromAppStore();
-
-    useMeta({
-      title: appName,
-      titleTemplate: (title) => `${title} - ${appSectionName.value}`,
-    });
   }
 );
 
@@ -127,9 +122,11 @@ const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
 /**
  * Установка заголовка страницы.
  */
-useMeta({
-  title: appName,
-  titleTemplate: (title) => `${title} - ${appSectionName.value}`,
+useMeta(() => {
+  return {
+    // title: appName + ' - ' + appSectionName.value,
+    title: 'Врш-Крш - ' + appSectionName.value,
+  };
 });
 </script>
 
