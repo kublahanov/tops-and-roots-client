@@ -12,6 +12,7 @@ const { configure } = require("quasar/wrappers");
 const path = require("path");
 const appName = "Вершки и корешки";
 const appVersion = "0.1";
+const userSectionName = "Пользователь";
 
 module.exports = configure(function (/* ctx */) {
   return {
@@ -75,6 +76,7 @@ module.exports = configure(function (/* ctx */) {
       env: {
         appName,
         appVersion,
+        userSectionName,
       },
       // rawDefine: {},
       // ignorePublicFolder: true,

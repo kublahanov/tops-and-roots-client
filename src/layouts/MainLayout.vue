@@ -1,4 +1,5 @@
 <template>
+  <!-- prettier-ignore -->
   <q-layout view="hHh lpR fFf">
     <q-header elevated :class="appSectionBgColor">
       <q-toolbar>
@@ -6,17 +7,19 @@
         <q-space></q-space>
         <q-btn dense icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
-      <!-- prettier-ignore -->
       <q-tabs v-if="hasAppSectionTabs" align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
-        <q-route-tab to="/libs/books" label="Книги" icon="o_auto_stories" />
-        <q-route-tab to="/libs/authors" label="Авторы" icon="o_groups" />
-        <q-route-tab to="/libs/cites" label="Цитаты" icon="o_format_quote" />
+        <q-route-tab
+          v-for="tab in appSectionTabs"
+          :key="tab.link"
+          :to="tab.link"
+          :label="tab.title"
+          :icon="tab.icon"
+        />
       </q-tabs>
       <q-tabs v-else align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
         <q-tab icon="o_home" class="q-tab--active" />
       </q-tabs>
     </q-header>
-    <!-- prettier-ignore -->
     <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" elevated>
       <q-toolbar class="q-ma-sm">
         <q-toolbar-title>{{ appName }}</q-toolbar-title>
@@ -30,10 +33,9 @@
         />
       </q-list>
     </q-drawer>
-    <!-- prettier-ignore -->
     <q-drawer v-model="rightDrawerOpen" side="right" behavior="mobile" elevated>
       <q-toolbar class="q-ma-sm">
-        <q-toolbar-title>Авторизация</q-toolbar-title>
+        <q-toolbar-title>{{ userSectionName }}</q-toolbar-title>
         <q-btn dense flat icon="close" @click="toggleRightDrawer" class="q-mx-sm" />
       </q-toolbar>
       <q-list>
@@ -76,14 +78,16 @@ const toggleRightDrawer = () => (rightDrawerOpen.value = !rightDrawerOpen.value)
  * Константы.
  */
 const appName = process.env.appName; // Имя приложения
+const userSectionName = process.env.userSectionName; // Название пользовательского раздела
 
 /**
- * Название и цвет раздела, синхронизируемые через хранилище.
+ * Синхронизируемые через хранилище данные.
  */
 const appStore = useAppStore();
-const appSectionName = ref("");
-const appSectionColor = ref("");
-const hasAppSectionTabs = ref("");
+const appSectionName = ref(""); // Название раздела
+const appSectionColor = ref(""); // Цвет раздела
+const hasAppSectionTabs = ref(false); // Флаг наличия табов
+const appSectionTabs = ref([]); // Массив табов
 
 /**
  * Установка названия и цвета раздела.
@@ -93,25 +97,9 @@ function getDataFromAppStore() {
     appSectionName.value = appStore.getAppSectionName;
     appSectionColor.value = appStore.getAppSectionColor;
     hasAppSectionTabs.value = appStore.hasAppSectionTabs;
+    appSectionTabs.value = appStore.getAppSectionTabs;
   }
 }
-
-/**
- * Установка названия и цвета раздела при создании компонента.
- */
-onMounted(() => {
-  getDataFromAppStore();
-});
-
-/**
- * Слежение за изменением названия и цвета раздела.
- */
-watch(
-  () => appStore.appSectionData,
-  (newValue, oldValue) => {
-    getDataFromAppStore();
-  }
-);
 
 /**
  * Формирование классов для фона и текста,
@@ -120,12 +108,26 @@ watch(
 const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
 
 /**
- * Установка заголовка страницы.
+ * Слежение за изменением параметров раздела.
  */
-useMeta(() => {
-  return {
-    title: appName + ' - ' + appSectionName.value,
-  };
+watch(
+  () => appStore.appSectionData,
+  (newValue, oldValue) => {
+    getDataFromAppStore();
+  }
+);
+
+onMounted(() => {
+  getDataFromAppStore();
+
+  /**
+   * Установка заголовка страницы.
+   */
+  useMeta(() => {
+    return {
+      title: appSectionName.value + " | " + appName,
+    };
+  });
 });
 </script>
 

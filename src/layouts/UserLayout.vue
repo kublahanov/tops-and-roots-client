@@ -1,4 +1,5 @@
 <template>
+  <!-- prettier-ignore -->
   <q-layout view="hHh lpR fFf">
     <q-header elevated :class="appSectionBgColor">
       <q-toolbar>
@@ -6,12 +7,10 @@
         <q-space></q-space>
         <q-btn dense icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
-      <!-- prettier-ignore -->
       <q-tabs align="left" dense inline-label no-caps outside-arrows class="tabs-margin">
         <q-tab icon="o_home" class="q-tab--active" />
       </q-tabs>
     </q-header>
-    <!-- prettier-ignore -->
     <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" elevated>
       <q-toolbar class="q-ma-sm">
         <q-toolbar-title>{{ appName }}</q-toolbar-title>
@@ -25,10 +24,9 @@
         />
       </q-list>
     </q-drawer>
-    <!-- prettier-ignore -->
     <q-drawer v-model="rightDrawerOpen" side="right" behavior="mobile" elevated>
       <q-toolbar class="q-ma-sm">
-        <q-toolbar-title>Авторизация</q-toolbar-title>
+        <q-toolbar-title>{{ userSectionName }}</q-toolbar-title>
         <q-btn dense flat icon="close" @click="toggleRightDrawer" class="q-mx-sm" />
       </q-toolbar>
       <q-list>
@@ -47,7 +45,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { useMeta } from "quasar";
@@ -64,32 +62,29 @@ const rightDrawerOpen = ref(false);
  * @returns {boolean}
  */
 const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value);
-const toggleRightDrawer = () =>
-  (rightDrawerOpen.value = !rightDrawerOpen.value);
+const toggleRightDrawer = () => (rightDrawerOpen.value = !rightDrawerOpen.value);
 
 /**
  * Константы.
  */
 const appName = process.env.appName; // Имя приложения
+const userSectionName = process.env.userSectionName; // Название пользовательского раздела
 
 /**
- * Название и цвет раздела.
+ * Цвет и цветовой класс раздела.
  */
-const appSectionName = ref("Пользователь");
-const appSectionColor = ref("blue-grey-7");
+const appSectionColor = "blue-grey-7";
+const appSectionBgColor = "bg-" + appSectionColor;
 
-/**
- * Формирование классов для фона и текста,
- * исходя из текущего цвета раздела.
- */
-const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
-
-/**
- * Установка заголовка страницы.
- */
-useMeta({
-  title: appName,
-  titleTemplate: (title) => `${title} - ${appSectionName.value}`,
+onMounted(() => {
+  /**
+   * Установка заголовка страницы.
+   */
+  useMeta(() => {
+    return {
+      title: userSectionName + " | " + appName,
+    };
+  });
 });
 </script>
 

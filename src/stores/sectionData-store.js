@@ -17,6 +17,9 @@ export const useAppStore = defineStore("sectionData", {
     getAppSectionColor(state) {
       return state.appSectionData.color ?? "black";
     },
+    getAppSectionTabs(state) {
+      return state.appSectionData.tabs || [];
+    },
   },
   actions: {
     updateAppSectionData(link) {
