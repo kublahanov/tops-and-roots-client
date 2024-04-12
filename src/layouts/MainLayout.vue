@@ -124,8 +124,7 @@ const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
  */
 useMeta(() => {
   return {
-    // title: appName + ' - ' + appSectionName.value,
-    title: 'Врш-Крш - ' + appSectionName.value,
+    title: appName + ' - ' + appSectionName.value,
   };
 });
 </script>
