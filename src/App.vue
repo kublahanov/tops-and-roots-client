@@ -11,8 +11,8 @@
 <style lang="sass">
 @import "src/css/quasar.variables.scss"
 
-main
-  font-size: 17px // vs. default body font-size: 14px
+// main
+  // font-size: 17px // vs. default body font-size: 14px
 
 .q-page
   padding: 2rem 0.8rem
