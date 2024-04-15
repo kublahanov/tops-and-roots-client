@@ -16,6 +16,9 @@ const props = defineProps({
   color: { type: String, required: true }, // Цвет текущей секции
 });
 
+/**
+ * Константы.
+ */
 const appName = process.env.appName; // Имя приложения
 const appVersion = process.env.appVersion; // Версия приложения
 const currentYear = () => new Date().getFullYear(); // Текущий год
