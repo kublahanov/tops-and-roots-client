@@ -12,7 +12,7 @@ export const useAppStore = defineStore("sectionData", {
       return state.appSectionData == null;
     },
     hasAppSectionTabs(state) {
-      return (state.appSectionData.tabs && state.appSectionData.tabs.length > 0);
+      return Boolean(state.appSectionData.tabs && state.appSectionData.tabs.length > 0);
     },
     getAppSectionName(state) {
       return state.appSectionData.title ?? "Заголовок";

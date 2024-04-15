@@ -6,7 +6,7 @@
         <q-space></q-space>
         <q-btn dense icon="menu" @click="toggleUserDrawer" />
       </q-toolbar>
-      <MainTabs hasTabs :tabs="appSectionTabs" />
+      <MainTabs :hasTabs="hasAppSectionTabs" :tabs="appSectionTabs" />
     </q-header>
     <AppSectionsDrawer v-model="isAppSectionDrawerOpen" />
     <UserDrawer v-model="isUserDrawerOpen" />
