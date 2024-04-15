@@ -1,5 +1,8 @@
 import { defineStore } from "pinia";
 
+/**
+ * Хранилище данных о текущей секции приложения.
+ */
 export const useAppStore = defineStore("sectionData", {
   state: () => ({
     appSectionData: null,
