@@ -11,8 +11,16 @@
 <style lang="sass">
 @import "src/css/quasar.variables.scss"
 
-// main
-  // font-size: 17px // vs. default body font-size: 14px
+// Генерация стилей для h1 ... h6
+$h1-font-size: 2.8rem
+@for $i from 1 through 6
+  h#{$i}
+    font-size: $h1-font-size - ($i - 1) * 0.3rem
+    line-height: $h1-font-size - ($i - 1) * 0.3rem
+    // background-color: #00acc1
+    font-weight: 400
+    margin-top: 0
+    margin-bottom: 1rem
 
 .q-page
   padding: 2rem 0.8rem
