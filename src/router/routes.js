@@ -14,6 +14,14 @@ function beforeEnter(to, from) {
 const routes = [
   { path: "/", redirect: { name: "libs-books" } }, // Гостевая индексная страница
   {
+    path: "/user", // Пользователь
+    component: () => import("layouts/AuthLayout.vue"),
+    children: [
+      { path: "", redirect: { name: "user-login" } },
+      { path: "login", component: () => import("pages/user/LoginPage.vue"), name: "user-login" },
+    ],
+  },
+  {
     path: "/libs", // Библиотека
     component: () => import("layouts/MainLayout.vue"),
     beforeEnter,
