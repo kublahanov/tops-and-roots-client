@@ -1,93 +1,112 @@
 <template>
-  <q-card class="text-center shadow-0">
-    <q-card-section>
-      <h1 class="q-ma-none">{{ appName }}</h1>
+  <q-card flat class="text-center q-mb-md custom-margin">
+    <q-card-section class="q-py-xs">
+      <router-link to="/" tabindex="-1">
+        <q-img
+          src="~/assets/tops-and-roots_logo_001.svg"
+          width="80px"
+          height="80px"
+          :alt="appName"
+          no-spinner
+          no-transition
+        />
+      </router-link>
     </q-card-section>
-    <q-card-section>
-      <q-img src="~/assets/tops-and-roots_logo_001.svg" width="100px" height="100px" :alt="appName" />
-    </q-card-section>
-    <q-card-section>
-      <h2 class="q-ma-none">Войти</h2>
+    <q-card-section class="q-py-xs">
+      <h1>{{ appName }}</h1>
     </q-card-section>
   </q-card>
-  <q-card>
-    <q-card-section>
-      <q-form @submit="onSubmit" @reset="onReset" class="q-pa-xl bg-white rounded-borders">
-        <q-card-section>
-          <q-input
-            filled
-            v-model="name"
-            label="Your name *"
-            hint="Name and surname"
-            lazy-rules
-            :rules="[(val) => (val && val.length > 0) || 'Please type something']"
-          />
-        </q-card-section>
-        <q-card-section>
-          <q-input
-            filled
-            type="number"
-            v-model="age"
-            label="Your age *"
-            lazy-rules
-            :rules="[
-        (val) => (val !== null && val !== '') || 'Please type your age',
-        (val) => (val > 0 && val < 100) || 'Please type a real age',
-      ]"
-          />
-        </q-card-section>
-        <q-card-actions>
-          <q-btn label="Submit" type="submit" color="primary" />
-          <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-        </q-card-actions>
-      </q-form>
-    </q-card-section>
+  <q-card :flat="isMobile" class="q-px-md q-pt-md q-pb-sm custom-width">
+    <q-form @submit="onSubmit">
+      <q-card-section class="q-pt-md q-pb-sm">
+        <q-input
+          dense
+          outlined
+          type="email"
+          v-model="email"
+          label="Электронный адрес *"
+        >
+          <template v-slot:prepend>
+            <q-icon name="email" class="q-mr-xs" />
+          </template>
+        </q-input>
+      </q-card-section>
+      <q-card-section class="q-pb-md q-pt-sm">
+        <q-input
+          dense
+          outlined
+          type="password"
+          v-model="password"
+          label="Пароль *"
+        >
+          <template v-slot:prepend>
+            <q-icon name="password" class="q-mr-xs" />
+          </template>
+        </q-input>
+      </q-card-section>
+      <q-card-section class="q-py-md text-center">
+        <q-btn
+          no-caps
+          label="Войти"
+          type="submit"
+          color="primary"
+          class="full-width q-mb-sm"
+        />
+        или
+        <q-btn
+          no-caps
+          flat
+          dense
+          label="Создать аккаунт"
+          type="a"
+          color="primary"
+          class="full-width q-mt-xs"
+        />
+      </q-card-section>
+    </q-form>
   </q-card>
 </template>
 
 <script setup>
 import { useQuasar } from "quasar";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+
+const $q = useQuasar();
 
 /**
  * Константы.
  */
 const appName = process.env.appName; // Имя приложения
 
-const $q = useQuasar();
+/**
+ * Флаг размера экрана.
+ */
+const isMobile = computed(() => $q.screen.lt.sm);
 
-const name = ref(null);
-const age = ref(null);
-const accept = ref(false);
+/**
+ * Данные формы.
+ */
+const email = ref(null);
+const password = ref(null);
 
 function onSubmit() {
-  if (accept.value !== true) {
-    $q.notify({
-      color: "red-5",
-      textColor: "white",
-      icon: "warning",
-      message: "You need to accept the license and terms first",
-    });
-  } else {
-    $q.notify({
-      color: "green-4",
-      textColor: "white",
-      icon: "cloud_done",
-      message: "Submitted",
-    });
-  }
-}
-
-function onReset() {
-  name.value = null;
-  age.value = null;
-  accept.value = false;
+  $q.notify({
+    color: "green-4",
+    textColor: "white",
+    icon: "cloud_done",
+    message: "Submitted",
+  });
 }
 </script>
 
 <style scoped lang="sass">
 h1
-  font-size: 2rem
-h2
-  font-size: 1.5rem
+  font-size: 1.2rem
+  margin: 0
+
+.custom-width
+  width: 320px
+
+.custom-margin
+  margin-top: -15%
 </style>
