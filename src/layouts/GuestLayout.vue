@@ -44,12 +44,12 @@ const toggleUserDrawer = () =>
  * Константы.
  */
 const appName = process.env.appName; // Имя приложения
-const userSectionName = process.env.userSectionName; // Название пользовательского раздела
+const userSectionName = "Главная"; // Название гостевого раздела
 
 /**
  * Цвет и цветовой класс раздела.
  */
-const appSectionColor = "secondary";
+const appSectionColor = "blue-grey-7";
 const appSectionBgColor = "bg-" + appSectionColor;
 
 onMounted(() => {

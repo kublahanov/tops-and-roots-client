@@ -12,13 +12,22 @@ function beforeEnter(to, from) {
 
 // prettier-ignore
 const routes = [
-  { path: "/", redirect: { name: "libs-books" } }, // Гостевая индексная страница
   {
-    path: "/user", // Пользователь
+    path: "/", // Гостевая индексная страница
+    component: () => import("layouts/GuestLayout.vue"),
+    beforeEnter: () => useAppStore().resetAppSectionData(),
+    children: [
+      { path: "", component: () => import("pages/main/IndexPage.vue"), name: "guest-index" },
+    ],
+  },
+  {
+    path: "/auth", // Пользователь
     component: () => import("layouts/AuthLayout.vue"),
     children: [
       { path: "", redirect: { name: "user-login" } },
       { path: "login", component: () => import("pages/auth/LoginPage.vue"), name: "user-login" },
+      { path: "register", component: () => import("pages/auth/RegisterPage.vue"), name: "user-register" },
+      { path: "logout", component: () => import("pages/user/LogoutPage.vue"), name: "user-logout" },
     ],
   },
   {
@@ -76,12 +85,6 @@ const routes = [
       { path: "profile", component: () => import("pages/user/IndexPage.vue"), name: "user-profile" },
       { path: "settings", component: () => import("pages/user/SettingsPage.vue"), name: "user-settings" },
       { path: "club", component: () => import("pages/user/ClubPage.vue"), name: "user-club" },
-      {
-        path: "logout",
-        component: () => import("pages/user/LogoutPage.vue"),
-        name: "user-logout",
-        redirect: { name: "libs-books" }
-      },
     ],
   },
   {

@@ -1,24 +1,33 @@
 import { defineStore } from "pinia";
 
 /**
+ * Основные параметры секции по-умолчанию.
+ * @type {{color: string, title: string}}
+ */
+const defaultSectionData = {
+  title: "Главная",
+  color: "secondary", // cadetblue, chocolate, cornflowerblue
+};
+
+/**
  * Хранилище данных о текущей секции приложения.
  */
 export const useAppStore = defineStore("sectionData", {
   state: () => ({
-    appSectionData: null,
+    defaultSectionData,
+    appSectionData: defaultSectionData,
   }),
   getters: {
-    isAppSectionEmpty(state) {
-      return state.appSectionData == null;
-    },
     hasAppSectionTabs(state) {
-      return Boolean(state.appSectionData.tabs && state.appSectionData.tabs.length > 0);
+      return Boolean(
+        state.appSectionData.tabs && state.appSectionData.tabs.length > 0
+      );
     },
     getAppSectionName(state) {
-      return state.appSectionData.title ?? "Заголовок";
+      return state.appSectionData.title ?? defaultSectionData.title;
     },
     getAppSectionColor(state) {
-      return state.appSectionData.color ?? "black";
+      return state.appSectionData.color ?? defaultSectionData.color;
     },
     getAppSectionTabs(state) {
       return state.appSectionData.tabs || [];
@@ -27,6 +36,9 @@ export const useAppStore = defineStore("sectionData", {
   actions: {
     updateAppSectionData(link) {
       this.appSectionData = link;
+    },
+    resetAppSectionData() {
+      this.appSectionData = defaultSectionData;
     },
   },
   persist: true,
