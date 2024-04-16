@@ -1,7 +1,7 @@
 <template>
   <q-drawer v-model="isOpen" side="left" behavior="mobile" elevated>
     <q-toolbar class="q-ma-sm">
-      <q-toolbar-title>{{ appName }}</q-toolbar-title>
+      <q-toolbar-title>{{ appName }} {{ isOpen }}</q-toolbar-title>
       <q-btn dense flat icon="close" @click="toggleDrawer" class="q-mx-sm" />
     </q-toolbar>
     <q-list>
@@ -21,7 +21,14 @@ import { ref } from "vue";
 
 const isOpen = ref(false);
 
-const toggleDrawer = () => (isOpen.value = !isOpen.value);
+/**
+ * TODO: Исправить закрытие панелей меню!
+ */
+const toggleDrawer = () => {
+  console.log(isOpen.value);
+  isOpen.value = !isOpen.value;
+  console.log(isOpen.value);
+};
 
 /**
  * Константы.
