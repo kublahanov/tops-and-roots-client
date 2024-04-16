@@ -20,7 +20,7 @@ $h1-font-size: 2.8rem
     // background-color: #00acc1
     font-weight: 400
     margin-top: 0
-    margin-bottom: 1rem
+    margin-bottom: 1.2rem
 
 .q-page
   padding: 2rem 0.8rem
