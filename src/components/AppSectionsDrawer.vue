@@ -1,8 +1,8 @@
 <template>
   <q-drawer v-model="isOpen" side="left" behavior="mobile" elevated>
-    <q-toolbar class="q-ma-sm">
+    <q-toolbar class="q-pl-md q-py-md">
       <q-toolbar-title>{{ appName }}</q-toolbar-title>
-      <q-btn dense flat icon="close" @click="toggleDrawer" class="q-mx-sm" />
+      <q-btn dense flat icon="close" @click="toggleDrawer" />
     </q-toolbar>
     <q-list>
       <MenuLink
@@ -19,7 +19,7 @@ import { appSectionMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import { ref } from "vue";
 
-const isOpen = ref(false);
+const isOpen = ref(true);
 
 /**
  * TODO: Исправить закрытие панелей меню!

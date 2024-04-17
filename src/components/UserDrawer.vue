@@ -1,8 +1,8 @@
 <template>
   <q-drawer v-model="isOpen" side="right" behavior="mobile" elevated>
-    <q-toolbar class="q-ma-sm">
+    <q-toolbar class="q-pl-md q-py-md">
       <q-toolbar-title>{{ userSectionName }}</q-toolbar-title>
-      <q-btn dense flat icon="close" @click="toggleDrawer" class="q-mx-sm" />
+      <q-btn dense flat icon="close" @click="toggleDrawer" />
     </q-toolbar>
     <q-list>
       <MenuLink
