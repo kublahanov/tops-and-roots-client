@@ -59,12 +59,10 @@ const appSectionTabs = ref([]); // Массив табов
  * Установка названия и цвета раздела.
  */
 function getDataFromAppStore() {
-  if (!appStore.isAppSectionEmpty) {
-    appSectionName.value = appStore.getAppSectionName;
-    appSectionColor.value = appStore.getAppSectionColor;
-    hasAppSectionTabs.value = appStore.hasAppSectionTabs;
-    appSectionTabs.value = appStore.getAppSectionTabs;
-  }
+  appSectionName.value = appStore.getAppSectionName;
+  appSectionColor.value = appStore.getAppSectionColor;
+  hasAppSectionTabs.value = appStore.hasAppSectionTabs;
+  appSectionTabs.value = appStore.getAppSectionTabs;
 }
 
 /**
