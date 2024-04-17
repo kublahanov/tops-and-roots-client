@@ -1,5 +1,4 @@
 <template>
-  <!-- prettier-ignore -->
   <q-item :to="calculatedHref" active-class="active" :active="checkRoute()">
     <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
@@ -8,7 +7,13 @@
       <q-item-label class="menu-label">{{ title }}</q-item-label>
     </q-item-section>
     <q-item-section>
-      <q-badge v-if="color" rounded :color style="width: 13px" class="q-ml-xl" />
+      <q-badge
+        v-if="color"
+        rounded
+        :color
+        style="width: 13px"
+        class="q-ml-xl"
+      />
     </q-item-section>
   </q-item>
 </template>
@@ -30,17 +35,15 @@ const props = defineProps({
 
 const router = useRouter();
 
-// prettier-ignore
 /**
  * Вычисляемый (исходя из именованного роута) путь.
- * @type {ComputedRef<string>}
  */
-const calculatedHref = computed(() => router.resolve({ name: props.linkName }).path);
+const calculatedHref = computed(
+  () => router.resolve({ name: props.linkName }).path
+);
 
-// prettier-ignore
 /**
  * Вычисляемый (исходя из активности и цвета раздела) фон пункта меню.
- * @type {ComputedRef<string>}
  */
 const calculatedBgColor = computed(() => colors.getPaletteColor(props.color));
 
