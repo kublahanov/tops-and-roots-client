@@ -17,10 +17,8 @@
 <script setup>
 import { profileMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
-import { ref } from "vue";
 
-const isOpen = ref(false);
-
+const isOpen = defineModel();
 const toggleDrawer = () => (isOpen.value = !isOpen.value);
 
 /**

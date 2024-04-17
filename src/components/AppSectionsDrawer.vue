@@ -17,17 +17,9 @@
 <script setup>
 import { appSectionMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
-import { ref } from "vue";
 
-const isOpen = ref(true);
-
-/**
- * TODO: Исправить закрытие панелей меню!
- */
-const toggleDrawer = () => {
-  isOpen.value = !isOpen.value;
-  console.log("Child component", isOpen.value);
-};
+const isOpen = defineModel();
+const toggleDrawer = () => (isOpen.value = !isOpen.value);
 
 /**
  * Константы.
