@@ -13,7 +13,7 @@
       </router-link>
     </q-card-section>
     <q-card-section class="q-py-xs">
-      <h1>{{ appName }}</h1>
+      <h1 class="text-primary">{{ appName }} &nbsp;&bull;&nbsp; Вход</h1>
     </q-card-section>
   </q-card>
   <q-card :flat="isMobile" class="q-px-md q-pt-md q-pb-sm custom-width">
@@ -59,6 +59,7 @@
           dense
           label="Создать аккаунт"
           type="a"
+          :to="linkToRegisterPage"
           color="primary"
           class="full-width q-mt-xs"
         />
@@ -70,8 +71,10 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 
 const $q = useQuasar();
+const router = useRouter();
 
 /**
  * Константы.
@@ -89,19 +92,24 @@ const isMobile = computed(() => $q.screen.lt.sm);
 const email = ref(null);
 const password = ref(null);
 
+/**
+ * Ссылка на страницу регистрации.
+ */
+const linkToRegisterPage = router.resolve({ name: "user-register" }).path;
+
 function onSubmit() {
   $q.notify({
     color: "green-4",
     textColor: "white",
     icon: "cloud_done",
-    message: "Submitted",
+    message: "Успешно",
   });
 }
 </script>
 
 <style scoped lang="sass">
 h1
-  font-size: 1.2rem
+  font-size: 1.3rem
   margin: 0
 
 .custom-width
