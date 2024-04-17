@@ -35,10 +35,8 @@ const isUserDrawerOpen = ref(false);
  * Переключатели состояния левой и правой панели меню.
  * @returns {boolean}
  */
-const toggleAppSectionDrawer = () =>
-  (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
-const toggleUserDrawer = () =>
-  (isUserDrawerOpen.value = !isUserDrawerOpen.value);
+const toggleAppSectionDrawer = () => (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
+const toggleUserDrawer = () => (isUserDrawerOpen.value = !isUserDrawerOpen.value);
 
 /**
  * Константы.
