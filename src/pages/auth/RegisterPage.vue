@@ -59,12 +59,17 @@
       </q-card-section>
       <q-card-section class="q-py-md text-center">
         <q-btn
+          disable
           no-caps
           label="Создать аккаунт"
           type="submit"
           color="primary"
           class="full-width q-mb-sm"
-        />
+        >
+          <q-tooltip class="bg-negative"
+            >Регистрация временно не работает</q-tooltip
+          >
+        </q-btn>
         или
         <q-btn
           no-caps
@@ -124,6 +129,7 @@ function onSubmit() {
 <style scoped lang="sass">
 h1
   font-size: 1.3rem
+  font-weight: bold
   margin: 0
 
 .custom-width

@@ -110,6 +110,7 @@ function onSubmit() {
 <style scoped lang="sass">
 h1
   font-size: 1.3rem
+  font-weight: bold
   margin: 0
 
 .custom-width
