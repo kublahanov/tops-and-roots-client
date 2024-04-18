@@ -19,6 +19,28 @@
   <q-card :flat="isMobile" class="q-px-md q-pt-md q-pb-sm custom-width">
     <q-form @submit="onSubmit">
       <q-card-section class="q-pt-md q-pb-sm">
+        <div
+          id="g_id_onload"
+          :data-client_id="myGoogleClientId"
+          data-login_uri="https://your.domain/your_login_endpoint"
+          data-auto_prompt="false"
+        ></div>
+        <div
+          class="g_id_signin"
+          data-type="standard"
+          data-size="large"
+          data-theme="outline"
+          data-text="signin_with"
+          data-shape="rectangular"
+          data-logo_alignment="left"
+          data-width="255"
+          :data-click_listener="onClickHandler()"
+        ></div>
+      </q-card-section>
+      <q-card-section class="q-pa-none text-center">
+        или
+      </q-card-section>
+      <q-card-section class="q-pt-sm q-pb-sm">
         <q-input
           dense
           outlined
@@ -31,7 +53,7 @@
           </template>
         </q-input>
       </q-card-section>
-      <q-card-section class="q-pb-md q-pt-sm">
+      <q-card-section class="q-pb-sm q-pt-sm">
         <q-input
           dense
           outlined
@@ -70,8 +92,24 @@
 
 <script setup>
 import { useQuasar } from "quasar";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+
+/**
+ * Манипуляции с Google.
+ */
+const myGoogleClientId = "178464542195-gqrnk9eqe3sncd59is6eb0h5pp5f0p3f.apps.googleusercontent.com";
+
+onMounted(() => {
+  const script = document.createElement("script");
+  script.src = "https://accounts.google.com/gsi/client";
+  script.async = true;
+  document.body.appendChild(script);
+});
+
+function onClickHandler() {
+  return console.log("Вход через Google!");
+}
 
 const $q = useQuasar();
 const router = useRouter();
