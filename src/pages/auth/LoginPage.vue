@@ -103,7 +103,7 @@ const myGoogleClientId = "178464542195-gqrnk9eqe3sncd59is6eb0h5pp5f0p3f.apps.goo
 onMounted(() => {
   const script = document.createElement("script");
   script.src = "https://accounts.google.com/gsi/client";
-  script.async = true;
+  script.async = false;
   document.body.appendChild(script);
 });
 
@@ -156,4 +156,8 @@ h1
 
 .custom-margin
   margin-top: -15%
+
+.g_id_signin
+  width: 256px
+  height: 44px
 </style>

@@ -47,7 +47,7 @@ const userSectionName = "Главная"; // Название гостевого
 /**
  * Цвет и цветовой класс раздела.
  */
-const appSectionColor = "blue-grey-7";
+const appSectionColor = "secondary";
 const appSectionBgColor = "bg-" + appSectionColor;
 
 onMounted(() => {

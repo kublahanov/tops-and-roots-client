@@ -47,7 +47,7 @@ const userSectionName = process.env.userSectionName; // Название пол�
 /**
  * Цвет и цветовой класс раздела.
  */
-const appSectionColor = "secondary";
+const appSectionColor = "accent";
 const appSectionBgColor = "bg-" + appSectionColor;
 
 onMounted(() => {
