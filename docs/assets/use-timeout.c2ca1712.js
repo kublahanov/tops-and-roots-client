@@ -1,0 +1,1 @@
+import{E as r,z as i,at as s,g as m}from"./index.d61041dd.js";function l(){let e=null;const n=m();function t(){e!==null&&(clearTimeout(e),e=null)}return r(t),i(t),{removeTimeout:t,registerTimeout(o,u){t(),s(n)===!1&&(e=setTimeout(()=>{e=null,o()},u))}}}export{l as u};
