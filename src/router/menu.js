@@ -13,19 +13,16 @@ const appSectionMenuLinks = [
         title: "Книги",
         icon: "o_auto_stories",
         link: "/libs/books",
-        linkName: "libs-books",
       },
       {
         title: "Авторы",
         icon: "o_groups",
         link: "/libs/authors",
-        linkName: "libs-authors",
       },
       {
         title: "Цитаты",
         icon: "o_format_quote",
         link: "/libs/cites",
-        linkName: "libs-cites",
       },
     ],
   },
@@ -64,33 +61,60 @@ const appSectionMenuLinks = [
  */
 const profileMenuLinks = [
   {
+    title: "Логин",
+    icon: "o_login",
+    link: "/user/login",
+    linkName: "user-login",
+    color: "secondary",
+  },
+  {
     title: "Профиль",
     icon: "o_account_circle",
     link: "/user/profile",
     linkName: "user-profile",
-    color: "blue-grey-7",
+    color: "secondary",
   },
   {
     title: "Настройки",
     icon: "o_settings",
     link: "/user/settings",
     linkName: "user-settings",
-    color: "blue-grey-7",
+    color: "secondary",
   },
   {
     title: "Клуб",
     icon: "o_groups",
     link: "/user/club",
     linkName: "user-club",
-    color: "blue-grey-7",
+    color: "secondary",
   },
   {
     title: "Выход",
     icon: "o_logout",
     link: "/user/logout",
     linkName: "user-logout",
-    color: "blue-grey-7",
+    color: "secondary",
   },
 ];
 
-export { appSectionMenuLinks, profileMenuLinks };
+/**
+ * Меню гостевого раздела.
+ */
+const guestMenuLinks = [
+  {
+    title: "Войти",
+    icon: "o_login",
+    link: "/user/login",
+    linkName: "user-login",
+    color: "secondary",
+  },
+  {
+    title: "Создать аккаунт",
+    icon: "o_how_to_reg",
+    link: "/user/register",
+    linkName: "user-register",
+    color: "secondary",
+  },
+];
+
+export { appSectionMenuLinks, profileMenuLinks, guestMenuLinks };

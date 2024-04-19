@@ -1,12 +1,22 @@
 <template>
   <footer class="q-pa-lg">
     <q-toolbar class="justify-center my-layout">
-      <!-- prettier-ignore -->
       <div class="footer-logo column items-center">
-        <div class="app-section-name" :class="appSectionTextColor">{{ props.sectionName }}</div>
-        <q-img src="~/assets/tops-and-roots_logo_001.svg" width="100px" height="100px" :alt="appName" />
-        <div class="app-name">{{ appName }}</div>
-        <div class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</div>
+        <div class="app-section-name" :class="appSectionTextColor">
+          {{ props.sectionName }}
+        </div>
+        <q-img
+          src="~/assets/tops-and-roots_logo_001.svg"
+          width="100px"
+          height="100px"
+          :alt="appName"
+        />
+        <div class="app-name">
+          {{ appName }}
+        </div>
+        <div class="copyrights">
+          Версия {{ appVersion }}, {{ currentYear() }} &copy;
+        </div>
       </div>
     </q-toolbar>
   </footer>
@@ -20,6 +30,9 @@ const props = defineProps({
   sectionName: { type: String, required: true }, // Название текущей секции
 });
 
+/**
+ * Константы.
+ */
 const appName = process.env.appName; // Имя приложения
 const appVersion = process.env.appVersion; // Версия приложения
 const currentYear = () => new Date().getFullYear(); // Текущий год
