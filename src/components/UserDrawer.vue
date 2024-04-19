@@ -6,20 +6,27 @@
     </q-toolbar>
     <q-list>
       <MenuLink
-        v-for="link in profileMenuLinks"
+        v-for="link in menuLinks"
         :key="link.title"
         v-bind="link"
+        :disable="props.disabled"
       />
     </q-list>
   </q-drawer>
 </template>
 
 <script setup>
-import { profileMenuLinks } from "src/router/menu";
+import { profileMenuLinks, guestMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
+
+const props = defineProps({
+  disabled: { type: Boolean, default: false },
+  guest: { type: Boolean, default: false },
+});
 
 const isOpen = defineModel();
 const toggleDrawer = () => (isOpen.value = !isOpen.value);
+const menuLinks = props.guest ? guestMenuLinks : profileMenuLinks;
 
 /**
  * Константы.

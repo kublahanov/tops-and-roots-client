@@ -9,6 +9,7 @@
         v-for="link in appSectionMenuLinks"
         :key="link.title"
         v-bind="link"
+        :disable="props.disabled"
       />
     </q-list>
   </q-drawer>
@@ -17,6 +18,10 @@
 <script setup>
 import { appSectionMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
+
+const props = defineProps({
+  disabled: { type: Boolean, default: false },
+});
 
 const isOpen = defineModel();
 const toggleDrawer = () => (isOpen.value = !isOpen.value);

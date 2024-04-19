@@ -97,4 +97,24 @@ const profileMenuLinks = [
   },
 ];
 
-export { appSectionMenuLinks, profileMenuLinks };
+/**
+ * Меню гостевого раздела.
+ */
+const guestMenuLinks = [
+  {
+    title: "Войти",
+    icon: "o_login",
+    link: "/user/login",
+    linkName: "user-login",
+    color: "secondary",
+  },
+  {
+    title: "Создать аккаунт",
+    icon: "o_how_to_reg",
+    link: "/user/register",
+    linkName: "user-register",
+    color: "secondary",
+  },
+];
+
+export { appSectionMenuLinks, profileMenuLinks, guestMenuLinks };

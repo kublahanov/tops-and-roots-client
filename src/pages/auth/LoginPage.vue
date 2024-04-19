@@ -37,9 +37,7 @@
           :data-click_listener="onClickHandler()"
         ></div>
       </q-card-section>
-      <q-card-section class="q-pa-none text-center">
-        или
-      </q-card-section>
+      <q-card-section class="q-pa-none text-center"> или </q-card-section>
       <q-card-section class="q-pt-sm q-pb-sm">
         <q-input
           dense
@@ -98,7 +96,8 @@ import { useRouter } from "vue-router";
 /**
  * Манипуляции с Google.
  */
-const myGoogleClientId = "178464542195-gqrnk9eqe3sncd59is6eb0h5pp5f0p3f.apps.googleusercontent.com";
+const myGoogleClientId =
+  "178464542195-gqrnk9eqe3sncd59is6eb0h5pp5f0p3f.apps.googleusercontent.com";
 
 onMounted(() => {
   const script = document.createElement("script");
@@ -111,9 +110,6 @@ function onClickHandler() {
   return console.log("Вход через Google!");
 }
 
-const $q = useQuasar();
-const router = useRouter();
-
 /**
  * Константы.
  */
@@ -122,6 +118,7 @@ const appName = process.env.appName; // Имя приложения
 /**
  * Флаг размера экрана.
  */
+const $q = useQuasar();
 const isMobile = computed(() => $q.screen.lt.sm);
 
 /**
@@ -133,6 +130,7 @@ const password = ref(null);
 /**
  * Ссылка на страницу регистрации.
  */
+const router = useRouter();
 const linkToRegisterPage = router.resolve({ name: "user-register" }).path;
 
 function onSubmit() {

@@ -1,11 +1,17 @@
 <template>
-  <!-- prettier-ignore -->
   <footer class="q-pa-lg">
     <q-toolbar class="justify-center my-layout">
       <div class="footer-logo column items-center">
         <div class="app-name" :class="appSectionTextColor">{{ appName }}</div>
-        <q-img src="~/assets/tops-and-roots_logo_001.svg" width="100px" height="100px" :alt="appName" />
-        <div class="copyrights">Версия {{ appVersion }}, {{ currentYear() }} &copy;</div>
+        <q-img
+          src="~/assets/tops-and-roots_logo_001.svg"
+          width="100px"
+          height="100px"
+          :alt="appName"
+        />
+        <div class="copyrights">
+          Версия {{ appVersion }}, {{ currentYear() }} &copy;
+        </div>
       </div>
     </q-toolbar>
   </footer>

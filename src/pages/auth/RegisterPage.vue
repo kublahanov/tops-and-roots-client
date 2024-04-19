@@ -37,9 +37,7 @@
           :data-click_listener="onClickHandler()"
         ></div>
       </q-card-section>
-      <q-card-section class="q-pa-none text-center">
-        или
-      </q-card-section>
+      <q-card-section class="q-pa-none text-center"> или </q-card-section>
       <q-card-section class="q-pt-sm q-pb-sm">
         <q-input
           dense
@@ -88,9 +86,9 @@
           color="primary"
           class="full-width q-mb-sm"
         >
-          <q-tooltip class="bg-negative"
-            >Регистрация временно не работает</q-tooltip
-          >
+          <q-tooltip class="bg-negative">
+            Регистрация временно не работает
+          </q-tooltip>
         </q-btn>
         или
         <q-btn
@@ -116,7 +114,8 @@ import { useRouter } from "vue-router";
 /**
  * Манипуляции с Google.
  */
-const myGoogleClientId = "178464542195-gqrnk9eqe3sncd59is6eb0h5pp5f0p3f.apps.googleusercontent.com";
+const myGoogleClientId =
+  "178464542195-gqrnk9eqe3sncd59is6eb0h5pp5f0p3f.apps.googleusercontent.com";
 
 onMounted(() => {
   const script = document.createElement("script");
@@ -129,9 +128,6 @@ function onClickHandler() {
   return console.log("Регистрация через Google!");
 }
 
-const $q = useQuasar();
-const router = useRouter();
-
 /**
  * Константы.
  */
@@ -140,6 +136,7 @@ const appName = process.env.appName; // Имя приложения
 /**
  * Флаг размера экрана.
  */
+const $q = useQuasar();
 const isMobile = computed(() => $q.screen.lt.sm);
 
 /**
@@ -152,6 +149,7 @@ const password_re = ref(null);
 /**
  * Ссылка на страницу логина.
  */
+const router = useRouter();
 const linkToLoginPage = router.resolve({ name: "user-login" }).path;
 
 function onSubmit() {

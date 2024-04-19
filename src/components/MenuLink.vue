@@ -1,10 +1,17 @@
 <template>
-  <q-item :to="calculatedHref" active-class="active" :active="checkRoute()">
+  <q-item
+    :to="calculatedHref"
+    active-class="active"
+    :active="checkRoute()"
+    :disable
+  >
     <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
-    <q-item-section>
-      <q-item-label class="menu-label">{{ title }}</q-item-label>
+    <q-item-section style="min-width: 185px">
+      <q-item-label class="menu-label">
+        {{ title }}
+      </q-item-label>
     </q-item-section>
     <q-item-section>
       <q-badge
@@ -12,7 +19,7 @@
         rounded
         :color
         style="width: 13px"
-        class="q-ml-xl"
+        class="float-right"
       />
     </q-item-section>
   </q-item>
@@ -24,13 +31,13 @@ import { computed } from "vue";
 import { colors } from "quasar";
 import { isLinksMatching } from "src/js/custom";
 
-// prettier-ignore
 const props = defineProps({
-  title: { type: String, required: true },  // Название пункта меню
-  link: { type: String, default: "#" },     // Путь
-  linkName: { type: String, default: "" },  // Имя для именованного роута
-  icon: { type: String, default: "" },      // Иконка
-  color: { type: String, default: "" },     // Цвет раздела
+  title: { type: String, required: true }, // Название пункта меню
+  link: { type: String, default: "#" }, // Путь
+  linkName: { type: String, default: "" }, // Имя для именованного роута
+  icon: { type: String, default: "" }, // Иконка
+  color: { type: String, default: "" }, // Цвет раздела
+  disable: { type: Boolean, default: false }, // Цвет раздела
 });
 
 const router = useRouter();
@@ -38,9 +45,8 @@ const router = useRouter();
 /**
  * Вычисляемый (исходя из именованного роута) путь.
  */
-const calculatedHref = computed(
-  () => router.resolve({ name: props.linkName }).path
-);
+// prettier-ignore
+const calculatedHref = computed(() => router.resolve({ name: props.linkName }).path);
 
 /**
  * Вычисляемый (исходя из активности и цвета раздела) фон пункта меню.
@@ -65,7 +71,7 @@ const checkRoute = function () {
 };
 </script>
 
-<style lang="sass" scoped>
+<style scoped lang="sass">
 .active
   color: white
   background-color: v-bind(calculatedBgColor)

@@ -1,70 +1,230 @@
 <template>
   <q-page>
-    <q-table
-      :rows="migrations"
-      :columns="columns"
-      row-key="id"
-      class="q-mb-lg col"
-    />
-    <q-card class="q-mb-lg col">
-      <q-card-section>
-        {{ pretty(migrations) }}
+    <q-card flat :class="{ 'big-margin': isDesktop }" class="first-card">
+      <q-card-section class="text-center">
+        <MainLogo />
+        <h1 class="text-primary text-weight-bold">{{ appName }}</h1>
+        Приложение позволяет расширить возможности каталогизации, планирования и
+        целеполагания в некоторых сферах жизни.
+        <br />
+        Например: список прочитанных книг, просмотренных фильмов, целей и задач
+        на будущее, и так далее.
+        <br />
+        С его помощью можно структурировать, систематизировать, выстраивать
+        связи для большого количества сущностей в рамках выбранной сферы.
+        <br />
+        Планировать развитие, следить за собственным прогрессом, и даже - при
+        желании - делиться им с другими участниками!
+      </q-card-section>
+      <q-card-section class="text-center">
+        <LinkToLoginPage class="q-mb-sm" />
+        <LinkToRegisterPage class="q-ml-sm q-mb-sm" />
       </q-card-section>
     </q-card>
-    <pre class="q-mb-lg q-card--bordered q-pa-md">{{ pretty(migrations) }}</pre>
-    <p class="q-mb-lg q-card--bordered q-pa-md">
-      Вы можете динамически настраивать цвета бренда во время выполнения:
-      primary, secondary, accent, darkpositive, negativeinfo, warning. Это
-      означает, что у вас может быть одна сборка вашего приложения с цветовой
-      темой по умолчанию, но показывать ее с выбранной во время выполнения.
-      Основная цветовая конфигурация выполняется с использованием
-      пользовательских свойств CSS, хранящихся в корневом элементе (:root).
-      Каждое свойство имеет имя --q-${name} (пример: --q-primary, --q-secondary)
-      и должно иметь допустимый цвет CSS в качестве значения. Пользовательские
-      свойства CSS используют те же правила наследования, что и обычный CSS,
-      поэтому вы можете переопределить только желаемые цвета, а остальные будут
-      унаследованы от родительских элементов. Рекомендуемый рабочий процесс -
-      установить индивидуальные свойства цвета для элементов html
-      (document.documentElement) или body (document.body). Это позволит вам
-      вернуться к цвету по умолчанию, просто удалив свой пользовательский.
-      Больше информации о пользовательских свойствах (переменных) CSS на MDN.
-    </p>
+
+    <q-card flat class="q-mb-xl">
+      <q-card-section horizontal>
+        <q-card-section>
+          <strong class="text-primary">Библиотека</strong> - это раздел для
+          хранения списка прочитанных книг.
+          <br />
+          Список ранжируется по годам прочтения, структурируется по авторам,
+          тематикам, актуальности и значимости для Вас лично, а также по многим
+          другим параметрам.
+          <div class="row">
+            <q-btn
+              type="a"
+              outline
+              no-caps
+              size="md"
+              icon-right="chevron_right"
+              to=""
+              class="q-pr-sm q-mt-sm text-primary"
+            >
+              Узнать больше
+            </q-btn>
+          </div>
+        </q-card-section>
+        <q-card-section class="q-px-lg">
+          <q-avatar
+            size="125px"
+            font-size="70px"
+            color="primary"
+            text-color="white"
+            icon="o_library_books"
+          />
+        </q-card-section>
+      </q-card-section>
+    </q-card>
+
+    <q-card flat class="q-mb-xl">
+      <q-card-section horizontal>
+        <q-card-section class="q-px-lg">
+          <q-avatar
+            size="125px"
+            font-size="70px"
+            color="orange-9"
+            text-color="white"
+            icon="o_movie"
+          />
+        </q-card-section>
+        <q-card-section>
+          <strong class="text-orange-9">Фильмотека</strong> - это раздел для
+          хранения списка просмотренных фильмов, и других видеоматериалов.
+          <br />
+          Список ранжируется по годам просмотра, структурируется по авторам,
+          жанрам, актуальности и значимости для Вас лично, а также по многим
+          другим параметрам.
+          <div class="row">
+            <q-btn
+              type="a"
+              outline
+              no-caps
+              size="md"
+              icon-right="chevron_right"
+              to=""
+              class="q-pr-sm q-mt-sm text-orange-9"
+            >
+              Узнать больше
+            </q-btn>
+          </div>
+        </q-card-section>
+      </q-card-section>
+    </q-card>
+
+    <q-card flat class="q-mb-xl">
+      <q-card-section horizontal>
+        <q-card-section>
+          <strong class="text-red-8">Картотека</strong> - это раздел для
+          хранения списка прочитанных книг.
+          <br />
+          Список ранжируется по годам прочтения, структурируется по авторам,
+          тематикам, актуальности и значимости для Вас лично, а также по многим
+          другим параметрам.
+          <div class="row">
+            <q-btn
+              type="a"
+              outline
+              no-caps
+              size="md"
+              icon-right="chevron_right"
+              to=""
+              class="q-pr-sm q-mt-sm text-red-8"
+            >
+              Узнать больше
+            </q-btn>
+          </div>
+        </q-card-section>
+        <q-card-section class="q-px-lg">
+          <q-avatar
+            size="125px"
+            font-size="70px"
+            color="red-8"
+            text-color="white"
+            icon="o_dashboard_customize"
+          />
+        </q-card-section>
+      </q-card-section>
+    </q-card>
+
+    <q-card flat class="q-mb-xl">
+      <q-card-section horizontal>
+        <q-card-section class="q-px-lg">
+          <q-avatar
+            size="125px"
+            font-size="70px"
+            color="teal-8"
+            text-color="white"
+            icon="o_assignment_ind"
+          />
+        </q-card-section>
+        <q-card-section>
+          <strong class="text-teal-8">Биография</strong> - это раздел для
+          хранения списка просмотренных фильмов, и других видеоматериалов.
+          <br />
+          Список ранжируется по годам просмотра, структурируется по авторам,
+          жанрам, актуальности и значимости для Вас лично, а также по многим
+          другим параметрам.
+          <div class="row">
+            <q-btn
+              type="a"
+              outline
+              no-caps
+              size="md"
+              icon-right="chevron_right"
+              to=""
+              class="q-pr-sm q-mt-sm text-teal-8"
+            >
+              Узнать больше
+            </q-btn>
+          </div>
+        </q-card-section>
+      </q-card-section>
+    </q-card>
+
+    <q-card flat class="q-mb-xl">
+      <q-card-section horizontal>
+        <q-card-section>
+          <strong class="text-indigo-7">Планирование</strong> - это раздел для
+          хранения списка прочитанных книг.
+          <br />
+          Список ранжируется по годам прочтения, структурируется по авторам,
+          тематикам, актуальности и значимости для Вас лично, а также по многим
+          другим параметрам.
+          <div class="row">
+            <q-btn
+              type="a"
+              outline
+              no-caps
+              size="md"
+              icon-right="chevron_right"
+              to=""
+              class="q-pr-sm q-mt-sm text-indigo-7"
+            >
+              Узнать больше
+            </q-btn>
+          </div>
+        </q-card-section>
+        <q-card-section class="q-px-lg">
+          <q-avatar
+            size="125px"
+            font-size="70px"
+            color="indigo-7"
+            text-color="white"
+            icon="o_moving"
+          />
+        </q-card-section>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { api } from "boot/axios";
+import LinkToLoginPage from "components/LinkToLoginPage.vue";
+import LinkToRegisterPage from "components/LinkToRegisterPage.vue";
+import MainLogo from "components/MainLogo.vue";
+import { computed } from "vue";
+import { useQuasar } from "quasar";
 
-const migrations = ref([]);
-const columns = [
-  {
-    name: "id",
-    label: "ID",
-    align: "left",
-    field: "id",
-    sortable: true,
-  },
-  {
-    name: "migration",
-    label: "Name",
-    align: "left",
-    field: "migration",
-    sortable: true,
-  },
-  // Добавьте дополнительные колонки в зависимости от структуры данных
-];
+/**
+ * Константы.
+ */
+const appName = process.env.appName; // Имя приложения
 
-const pretty = (val, indent = 2) => {
-  return JSON.stringify(val, null, indent);
-};
-
-onMounted(async () => {
-  try {
-    const response = await api.get("/migrations");
-    migrations.value = response.data;
-  } catch (error) {
-    console.error("Failed to fetch migrations:", error);
-  }
-});
+/**
+ * Флаг размера экрана.
+ */
+const $q = useQuasar();
+const isDesktop = computed(() => $q.screen.gt.sm);
 </script>
+
+<style scoped lang="sass">
+.q-card
+  font-size: 17px
+  &.first-card
+    margin-bottom: 24px !important
+    .q-card__section
+      font-size: 18px
+.big-margin
+  margin: auto 150px
+</style>

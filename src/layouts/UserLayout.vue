@@ -35,7 +35,9 @@ const isUserDrawerOpen = ref(false);
  * Переключатели состояния левой и правой панели меню.
  * @returns {boolean}
  */
+// prettier-ignore
 const toggleAppSectionDrawer = () => (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
+// prettier-ignore
 const toggleUserDrawer = () => (isUserDrawerOpen.value = !isUserDrawerOpen.value);
 
 /**
@@ -62,4 +64,4 @@ onMounted(() => {
 });
 </script>
 
-<style lang="sass" scoped></style>
+<style scoped lang="sass"></style>
