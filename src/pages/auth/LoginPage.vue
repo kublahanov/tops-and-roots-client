@@ -34,8 +34,8 @@
           data-shape="rectangular"
           data-logo_alignment="left"
           data-width="255"
-          :data-click_listener="onClickHandler()"
         ></div>
+        <!--:data-click_listener="onClickHandler()"-->
       </q-card-section>
       <q-card-section class="q-pa-none text-center"> или </q-card-section>
       <q-card-section class="q-pt-sm q-pb-sm">
