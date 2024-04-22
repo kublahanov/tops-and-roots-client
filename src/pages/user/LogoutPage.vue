@@ -9,4 +9,8 @@
   </q-page>
 </template>
 
-<script setup></script>
+<script setup>
+import AuthService from "src/services/auth.service";
+
+AuthService.logout();
+</script>

@@ -29,7 +29,7 @@
 import { useRouter } from "vue-router";
 import { computed } from "vue";
 import { colors } from "quasar";
-import { isLinksMatching } from "src/js/custom";
+import { isLinksMatching } from "src/utils/custom";
 
 const props = defineProps({
   title: { type: String, required: true }, // Название пункта меню

@@ -92,6 +92,7 @@
 import { useQuasar } from "quasar";
 import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import AuthService from "src/services/auth.service";
 
 /**
  * Манипуляции с Google.
@@ -134,6 +135,13 @@ const router = useRouter();
 const linkToRegisterPage = router.resolve({ name: "user-register" }).path;
 
 function onSubmit() {
+  const user = {
+    login: email,
+    password,
+  };
+
+  AuthService.login(user);
+
   $q.notify({
     color: "green-4",
     textColor: "white",

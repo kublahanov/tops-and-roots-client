@@ -12,7 +12,7 @@ const defaultSectionData = {
 /**
  * Хранилище данных о текущей секции приложения.
  */
-export const useAppStore = defineStore("sectionData", {
+export const useSectionDataStore = defineStore("sectionData", {
   state: () => ({
     defaultSectionData,
     appSectionData: defaultSectionData,
