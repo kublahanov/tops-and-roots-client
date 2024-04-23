@@ -41,16 +41,13 @@ export default route(function (/* { store, ssrContext } */) {
       console.log("requiresAuth");
 
       if (userStore.isAuthenticated) {
-        // User is authenticated, proceed to the route
         next();
       } else {
-        // User is not authenticated, redirect to login
         next("/auth/login");
       }
 
       next();
     } else {
-      // Non-protected route, allow access
       console.log("don't requiresAuth");
       next();
     }
@@ -59,10 +56,8 @@ export default route(function (/* { store, ssrContext } */) {
       console.log("requiresGuest");
 
       if (userStore.isGuest) {
-        // User is authenticated, proceed to the route
         next();
       } else {
-        // User is not authenticated, redirect to login
         next("/libs/books");
       }
 
