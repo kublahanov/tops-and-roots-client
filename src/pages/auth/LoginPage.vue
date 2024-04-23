@@ -140,14 +140,23 @@ function onSubmit() {
     password,
   };
 
-  AuthService.login(user);
+  const authResult = AuthService.login(user);
 
-  $q.notify({
-    color: "green-4",
-    textColor: "white",
-    icon: "cloud_done",
-    message: "Успешно",
-  });
+  if (authResult !== null) {
+    $q.notify({
+      type: "positive",
+      position: "top",
+      message: "Вы успешно авторизовались",
+    });
+
+    router.push({ name: "guest-index" });
+  } else {
+    $q.notify({
+      type: "negative",
+      position: "top",
+      message: "Ошибка авторизации",
+    });
+  }
 }
 </script>
 

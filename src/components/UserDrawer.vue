@@ -18,6 +18,7 @@
 <script setup>
 import { profileMenuLinks, guestMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
+import AuthService from "src/services/auth.service";
 
 const props = defineProps({
   disabled: { type: Boolean, default: false },
@@ -31,7 +32,10 @@ const menuLinks = props.guest ? guestMenuLinks : profileMenuLinks;
 /**
  * Константы.
  */
-const userSectionName = process.env.userSectionName; // Название пользовательского раздела
+// Название пользовательского раздела
+const userSectionName = AuthService.isAuthenticated()
+  ? AuthService.getUserName().name + " " + AuthService.getUserName().surname
+  : process.env.userSectionName;
 </script>
 
 <style scoped lang="sass"></style>

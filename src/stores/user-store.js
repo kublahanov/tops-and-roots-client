@@ -27,7 +27,7 @@ export const useUserStore = defineStore("user", {
       return state.user === null;
     },
     getGetUserData(state) {
-      return this.isAuthenticated() ? state.user : null;
+      return this.isAuthenticated ? state.user : null;
     },
   },
   actions: {

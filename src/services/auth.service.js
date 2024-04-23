@@ -1,18 +1,18 @@
 import { useUserStore } from "stores/user-store";
 
-const userStore = useUserStore();
-
 class AuthService {
   login(user) {
-    console.log("user", user);
-    if (user.login.value === "admin@localhost") {
-      if (user.password.value === "1234567") {
-        // localStorage.setItem("user", JSON.stringify(user));
-        userStore.login();
-        console.log("User is logged in!", user);
+    const userStore = useUserStore();
 
-        return user;
-      }
+    if (
+      user.login.value === "admin@localhost" &&
+      user.password.value === "1234567"
+    ) {
+      // localStorage.setItem("user", JSON.stringify(user));
+      userStore.login();
+      console.log("User is logged in!");
+
+      return user;
     }
 
     console.error("User is NOT logged in!");
@@ -34,9 +34,35 @@ class AuthService {
   }
 
   logout() {
+    const userStore = useUserStore();
+
     userStore.logout();
 
     // localStorage.removeItem("user");
+  }
+
+  isAuthenticated() {
+    const userStore = useUserStore();
+
+    return userStore.isAuthenticated;
+  }
+
+  isGuest() {
+    const userStore = useUserStore();
+
+    return userStore.isGuest;
+  }
+
+  getUserName() {
+    const userStore = useUserStore();
+
+    if (userStore.isGuest) {
+      return null;
+    }
+
+    const user = userStore.getGetUserData;
+
+    return { name: user.name, surname: user.surname };
   }
 
   register(user) {

@@ -6,7 +6,7 @@ import {
   createWebHashHistory,
 } from "vue-router";
 import routes from "./routes";
-import { useUserStore } from "stores/user-store";
+import AuthService from "src/services/auth.service";
 
 /*
  * If not building with SSR mode, you can
@@ -34,53 +34,34 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  const userStore = useUserStore();
+  const linkToLoginPage = Router.resolve({ name: "user-login" }).path;
+  const linkToGuestPage = Router.resolve({ name: "guest-index" }).path;
 
-  Router.beforeEach((to, from, next) => {
+  Router.beforeEach((to, from) => {
     if (to.meta["requiresAuth"]) {
       console.log("requiresAuth");
 
-      if (userStore.isAuthenticated) {
-        next();
-      } else {
-        next("/auth/login");
+      if (AuthService.isGuest()) {
+        return {
+          path: linkToLoginPage,
+        };
       }
-
-      next();
     } else {
       console.log("don't requiresAuth");
-      next();
     }
 
     if (to.meta["requiresGuest"]) {
       console.log("requiresGuest");
 
-      if (userStore.isGuest) {
-        next();
-      } else {
-        next("/libs/books");
+      if (AuthService.isAuthenticated()) {
+        return {
+          path: linkToGuestPage,
+        };
       }
-
-      next();
     } else {
-      // Non-protected route, allow access
       console.log("don't requiresGuest");
-      next();
     }
-
   });
 
   return Router;
 });
-
-import { useSectionDataStore } from "stores/sectionData-store";
-import { appSectionMenuLinks, profileMenuLinks } from "src/router/menu";
-import { getMatchingMenuElement } from "src/utils/custom";
-
-const combinedMenuLinks = [...appSectionMenuLinks, ...profileMenuLinks];
-
-function beforeEnter(to, from) {
-  const appStore = useSectionDataStore();
-  const matchedLink = getMatchingMenuElement(combinedMenuLinks, to.path);
-  appStore.updateAppSectionData(matchedLink);
-}

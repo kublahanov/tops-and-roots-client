@@ -61,13 +61,6 @@ const appSectionMenuLinks = [
  */
 const profileMenuLinks = [
   {
-    title: "Логин",
-    icon: "o_login",
-    link: "/user/login",
-    linkName: "user-login",
-    color: "secondary",
-  },
-  {
     title: "Профиль",
     icon: "o_account_circle",
     link: "/user/profile",

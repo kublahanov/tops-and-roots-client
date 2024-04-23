@@ -9,7 +9,7 @@
         v-for="link in appSectionMenuLinks"
         :key="link.title"
         v-bind="link"
-        :disable="props.disabled"
+        :disable="props.guest"
       />
     </q-list>
   </q-drawer>
@@ -20,7 +20,7 @@ import { appSectionMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 
 const props = defineProps({
-  disabled: { type: Boolean, default: false },
+  guest: { type: Boolean, default: false },
 });
 
 const isOpen = defineModel();
