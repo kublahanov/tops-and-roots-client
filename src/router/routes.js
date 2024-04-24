@@ -15,7 +15,7 @@ const routes = [
   {
     path: "/", // Гостевая индексная страница
     component: () => import("layouts/GuestLayout.vue"),
-    beforeEnter: () => useSectionDataStore().resetAppSectionData(),
+    // beforeEnter: () => useSectionDataStore().resetAppSectionData(),
     children: [
       { path: "", component: () => import("pages/main/IndexPage.vue"), name: "guest-index" },
     ],
@@ -110,6 +110,18 @@ const routes = [
       { path: "profile", component: () => import("pages/user/IndexPage.vue"), name: "user-profile" },
       { path: "settings", component: () => import("pages/user/SettingsPage.vue"), name: "user-settings" },
       { path: "club", component: () => import("pages/user/ClubPage.vue"), name: "user-club" },
+    ],
+  },
+  {
+    path: "/help", // Помощь
+    component: () => import("layouts/GuestLayout.vue"),
+    children: [
+      { path: "", redirect: { name: "libs-help" } },
+      { path: "libs", component: () => import("pages/help/HelpLibs.vue"), name: "help-libs" },
+      { path: "films", component: () => import("pages/help/HelpFilms.vue"), name: "help-films" },
+      { path: "cards", component: () => import("pages/help/HelpCards.vue"), name: "help-cards" },
+      { path: "bios", component: () => import("pages/help/HelpBios.vue"), name: "help-bios" },
+      { path: "plans", component: () => import("pages/help/HelpPlans.vue"), name: "help-plans" },
     ],
   },
   {
