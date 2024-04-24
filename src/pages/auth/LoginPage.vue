@@ -34,8 +34,8 @@
           data-shape="rectangular"
           data-logo_alignment="left"
           data-width="255"
-          :data-click_listener="onClickHandler()"
         ></div>
+        <!--:data-click_listener="onClickHandler()"-->
       </q-card-section>
       <q-card-section class="q-pa-none text-center"> или </q-card-section>
       <q-card-section class="q-pt-sm q-pb-sm">
@@ -92,6 +92,7 @@
 import { useQuasar } from "quasar";
 import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import AuthService from "src/services/auth.service";
 
 /**
  * Манипуляции с Google.
@@ -134,12 +135,28 @@ const router = useRouter();
 const linkToRegisterPage = router.resolve({ name: "user-register" }).path;
 
 function onSubmit() {
-  $q.notify({
-    color: "green-4",
-    textColor: "white",
-    icon: "cloud_done",
-    message: "Успешно",
-  });
+  const user = {
+    login: email,
+    password,
+  };
+
+  const authResult = AuthService.login(user);
+
+  if (authResult !== null) {
+    $q.notify({
+      type: "positive",
+      position: "top",
+      message: "Вы успешно авторизовались",
+    });
+
+    router.push({ name: "guest-index" });
+  } else {
+    $q.notify({
+      type: "negative",
+      position: "top",
+      message: "Ошибка авторизации",
+    });
+  }
 }
 </script>
 

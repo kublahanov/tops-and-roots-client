@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 /**
  * Хранилище данных о текущем пользователе.
  */
-export const useAppStore = defineStore("user", {
+export const useUserStore = defineStore("user", {
   state: () => ({
     user: null,
     users: [
@@ -21,10 +21,13 @@ export const useAppStore = defineStore("user", {
   }),
   getters: {
     isAuthenticated(state) {
-      return state.user.id !== undefined;
+      return state.user !== null;
+    },
+    isGuest(state) {
+      return state.user === null;
     },
     getGetUserData(state) {
-      return this.isAuthenticated() ? state.user : null;
+      return this.isAuthenticated ? state.user : null;
     },
   },
   actions: {

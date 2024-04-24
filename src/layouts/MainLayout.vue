@@ -19,7 +19,7 @@
 
 <script setup>
 import { computed, onMounted, ref, watch } from "vue";
-import { useAppStore } from "stores/sectionData-store";
+import { useSectionDataStore } from "stores/sectionData-store";
 import { useMeta } from "quasar";
 import AppSectionsDrawer from "components/AppSectionsDrawer.vue";
 import UserDrawer from "components/UserDrawer.vue";
@@ -49,7 +49,7 @@ const appName = process.env.appName; // Имя приложения
 /**
  * Данные из хранилища sectionData.
  */
-const appStore = useAppStore();
+const appStore = useSectionDataStore();
 const appSectionName = ref(""); // Название раздела
 const appSectionColor = ref(""); // Цвет раздела
 const hasAppSectionTabs = ref(false); // Флаг наличия табов

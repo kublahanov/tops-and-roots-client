@@ -6,6 +6,7 @@ import {
   createWebHashHistory,
 } from "vue-router";
 import routes from "./routes";
+import AuthService from "src/services/auth.service";
 
 /*
  * If not building with SSR mode, you can
@@ -31,6 +32,35 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE),
+  });
+
+  const linkToLoginPage = Router.resolve({ name: "user-login" }).path;
+  const linkToGuestPage = Router.resolve({ name: "guest-index" }).path;
+
+  Router.beforeEach((to, from) => {
+    if (to.meta["requiresAuth"]) {
+      console.log("requiresAuth");
+
+      if (AuthService.isGuest()) {
+        return {
+          path: linkToLoginPage,
+        };
+      }
+    } else {
+      console.log("don't requiresAuth");
+    }
+
+    if (to.meta["requiresGuest"]) {
+      console.log("requiresGuest");
+
+      if (AuthService.isAuthenticated()) {
+        return {
+          path: linkToGuestPage,
+        };
+      }
+    } else {
+      console.log("don't requiresGuest");
+    }
   });
 
   return Router;

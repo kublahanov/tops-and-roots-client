@@ -1,12 +1,22 @@
 <template>
-  <q-page>
-    <q-card bordered>
-      <q-card-section>
-        <div class="text-h6">Выход</div>
-        <div class="text-subtitle2">Здесь вы можете выйти...</div>
-      </q-card-section>
-    </q-card>
-  </q-page>
+  <q-space></q-space>
 </template>
 
-<script setup></script>
+<script setup>
+import AuthService from "src/services/auth.service";
+import { useRouter } from "vue-router";
+import { useQuasar } from "quasar";
+
+const router = useRouter();
+const $q = useQuasar();
+
+AuthService.logout();
+
+$q.notify({
+  type: "positive",
+  position: "top",
+  message: "Вы успешно вышли",
+});
+
+router.push({ name: "guest-index" });
+</script>
