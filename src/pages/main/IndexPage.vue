@@ -18,8 +18,8 @@
         Не переключайтесь, просто попробуйте!
       </q-card-section>
       <q-card-section class="text-center">
-        <LinkToLoginPage class="q-mb-sm" />
-        <LinkToRegisterPage class="q-ml-sm q-mb-sm" />
+        <LinkToLoginPage class="q-mb-sm" :is-show-always="false" />
+        <LinkToRegisterPage class="q-ml-sm q-mb-sm" :is-show-always="false" />
       </q-card-section>
     </q-card>
 
