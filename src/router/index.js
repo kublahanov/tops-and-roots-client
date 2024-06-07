@@ -7,6 +7,21 @@ import {
 } from "vue-router";
 import routes from "./routes";
 import AuthService from "src/services/auth.service";
+import { useSectionDataStore } from "stores/sectionData-store";
+import { getMatchingMenuElement } from "src/utils/custom";
+import {
+  appSectionMenuLinks,
+  guestMenuLinks,
+  helpMenuLinks,
+  profileMenuLinks,
+} from "src/router/menu";
+
+const combinedMenuLinks = [
+  ...appSectionMenuLinks,
+  ...profileMenuLinks,
+  ...guestMenuLinks,
+  ...helpMenuLinks,
+];
 
 /*
  * If not building with SSR mode, you can
@@ -37,10 +52,17 @@ export default route(function (/* { store, ssrContext } */) {
   const linkToLoginPage = Router.resolve({ name: "user-login" }).path;
   const linkToGuestPage = Router.resolve({ name: "guest-index" }).path;
 
+  /**
+   * Проверка на необходимость ИМЕТЬ или НЕ ИМЕТЬ состояние аутентификации.
+   */
   Router.beforeEach((to, from) => {
     if (to.meta["requiresAuth"]) {
       console.log("requiresAuth");
 
+      /**
+       * Если на странице, где необходимо ИМЕТЬ состояние аутентификации, её нет
+       * - выполняется редирект на страницу Логина.
+       */
       if (AuthService.isGuest()) {
         return {
           path: linkToLoginPage,
@@ -53,6 +75,10 @@ export default route(function (/* { store, ssrContext } */) {
     if (to.meta["requiresGuest"]) {
       console.log("requiresGuest");
 
+      /**
+       * Если на странице, где необходимо НЕ ИМЕТЬ состояние аутентификации, она есть
+       * - выполняется редирект на индексную гостевую страницу.
+       */
       if (AuthService.isAuthenticated()) {
         return {
           path: linkToGuestPage,
@@ -61,6 +87,12 @@ export default route(function (/* { store, ssrContext } */) {
     } else {
       console.log("don't requiresGuest");
     }
+  });
+
+  Router.afterEach((to, from) => {
+    const appStore = useSectionDataStore();
+    const matchedLink = getMatchingMenuElement(combinedMenuLinks, to.path);
+    appStore.updateAppSectionData(matchedLink);
   });
 
   return Router;

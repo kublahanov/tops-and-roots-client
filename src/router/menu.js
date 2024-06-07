@@ -110,4 +110,29 @@ const guestMenuLinks = [
   },
 ];
 
-export { appSectionMenuLinks, profileMenuLinks, guestMenuLinks };
+/**
+ * Меню раздела помощи.
+ */
+const helpMenuLinks = [
+  {
+    title: "О приложении",
+    icon: "o_help",
+    link: "/help",
+    linkName: "help-index",
+    color: "blue-8",
+    tabs: [
+      {
+        title: "Библиотека - О разделе",
+        icon: "o_library_books",
+        link: "/help/libs",
+      },
+      {
+        title: "Фильмотека - О разделе",
+        icon: "o_movie",
+        link: "/help/films",
+      },
+    ],
+  },
+];
+
+export { appSectionMenuLinks, profileMenuLinks, guestMenuLinks, helpMenuLinks };

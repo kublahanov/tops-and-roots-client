@@ -9,7 +9,6 @@
         v-for="link in menuLinks"
         :key="link.title"
         v-bind="link"
-        :disable="props.disabled"
       />
     </q-list>
   </q-drawer>
@@ -20,20 +19,16 @@ import { profileMenuLinks, guestMenuLinks } from "src/router/menu";
 import MenuLink from "components/MenuLink.vue";
 import AuthService from "src/services/auth.service";
 
-const props = defineProps({
-  disabled: { type: Boolean, default: false },
-  guest: { type: Boolean, default: false },
-});
-
+const isAuthenticated = AuthService.isAuthenticated();
 const isOpen = defineModel();
 const toggleDrawer = () => (isOpen.value = !isOpen.value);
-const menuLinks = props.guest ? guestMenuLinks : profileMenuLinks;
+const menuLinks = isAuthenticated ? profileMenuLinks : guestMenuLinks;
 
 /**
  * Константы.
  */
 // Название пользовательского раздела
-const userSectionName = AuthService.isAuthenticated()
+const userSectionName = isAuthenticated
   ? AuthService.getUserName().name + " " + AuthService.getUserName().surname
   : process.env.userSectionName;
 </script>

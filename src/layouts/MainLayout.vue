@@ -82,6 +82,8 @@ watch(
 );
 
 onMounted(() => {
+  console.info("MainLayout");
+
   getDataFromAppStore();
 
   /**

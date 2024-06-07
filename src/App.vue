@@ -22,7 +22,7 @@ $h1-font-size: 2.8rem
     margin-top: 0
     margin-bottom: 1.2rem
 
-.q-layout
+//.q-layout
   // background-color: aliceblue // TODO: Убрать! Нужно только для настройки макета.
 
 .q-page

@@ -45,8 +45,15 @@ const router = useRouter();
 /**
  * Вычисляемый (исходя из именованного роута) путь.
  */
-// prettier-ignore
-const calculatedHref = computed(() => router.resolve({ name: props.linkName }).path);
+const calculatedHref = computed(() => {
+  try {
+    const resolvedRoute = router.resolve({ name: props.linkName });
+    return resolvedRoute ? resolvedRoute.path : "#";
+  } catch (error) {
+    console.error("Failed to resolve route: ", error);
+    return "#";
+  }
+});
 
 /**
  * Вычисляемый (исходя из активности и цвета раздела) фон пункта меню.

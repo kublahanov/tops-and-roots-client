@@ -7,7 +7,7 @@
           <router-link :to="helpLibsLink" class="text-primary">
             Библиотека
           </router-link>
-          - это раздел для хранения списка прочитанных книг.
+          - раздел для хранения списка прочитанных книг.
         </q-item-section>
       </q-item>
       <q-item>
@@ -15,33 +15,33 @@
           <router-link :to="helpFilmsLink" class="text-orange-9">
             Фильмотека
           </router-link>
-          - это раздел для хранения списка просмотренных фильмов, и других
+          - раздел для хранения списка просмотренных фильмов, и других
           видеоматериалов.
         </q-item-section>
       </q-item>
-      <q-item clickable v-ripple>
+      <q-item>
         <q-item-section>
           <router-link :to="helpCardsLink" class="text-red-8">
             Картотека
           </router-link>
-          - это раздел для хранения ваших личных данных.
+          - раздел для хранения ваших личных данных.
         </q-item-section>
       </q-item>
-      <q-item clickable v-ripple>
+      <q-item>
         <q-item-section>
-          <router-link :to="helpBiosLink" class="text-red-8">
+          <router-link :to="helpBiosLink" class="text-teal-8">
             Биография
           </router-link>
-          - это раздел для записи и хранения структуры и, при необходимости,
-          деталей Вашей биографии.
+          - раздел для записи и хранения структуры и, при необходимости, деталей
+          Вашей биографии.
         </q-item-section>
       </q-item>
-      <q-item clickable v-ripple>
+      <q-item>
         <q-item-section>
-          <router-link :to="helpPlansLink" class="text-red-8">
+          <router-link :to="helpPlansLink" class="text-indigo-7">
             Планирование
           </router-link>
-          - это раздел для составления списка планов на жизнь.
+          - раздел для составления списка планов на жизнь.
         </q-item-section>
       </q-item>
     </q-list>
@@ -63,12 +63,8 @@ const helpPlansLink = router.resolve({ name: "help-plans" }).path;
 </script>
 
 <style scoped lang="sass">
-.q-card
-  font-size: 17px
-  &.first-card
-    margin-bottom: 24px !important
-    .q-card__section
-      font-size: 18px
-.big-margin
-  margin: auto 150px
+a
+  display: contents
+.q-item
+  padding-left: 0
 </style>

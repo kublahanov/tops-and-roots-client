@@ -7,23 +7,13 @@
           {{ appName }} - {{ guestSectionName }}
         </q-toolbar-title>
         <q-space></q-space>
-        <q-avatar
-          size="md"
-          font-size="2rem"
-          color="white"
-          text-color="secondary"
-          icon="account_circle"
-          class="q-mx-md"
-        />
+        <UserHeaderAvatar></UserHeaderAvatar>
         <q-btn dense icon="menu" @click="toggleUserDrawer" />
       </q-toolbar>
-      <MainTabs :hasTabs="false" :tabs="[]" />
+      <MainTabs :hasTabs="hasAppSectionTabs" :tabs="appSectionTabs" />
     </q-header>
-    <AppSectionsDrawer
-      v-model="isAppSectionDrawerOpen"
-      :guest="userStore.isGuest"
-    />
-    <UserDrawer v-model="isUserDrawerOpen" :guest="userStore.isGuest" />
+    <AppSectionsDrawer v-model="isAppSectionDrawerOpen" />
+    <UserDrawer v-model="isUserDrawerOpen" />
     <q-page-container class="my-layout">
       <router-view />
     </q-page-container>
@@ -32,15 +22,14 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useMeta } from "quasar";
 import UserFooter from "components/UserFooter.vue";
 import MainTabs from "components/MainTabs.vue";
 import UserDrawer from "components/UserDrawer.vue";
 import AppSectionsDrawer from "components/AppSectionsDrawer.vue";
-import { useUserStore } from "stores/user-store";
-
-const userStore = useUserStore();
+import { useSectionDataStore } from "stores/sectionData-store";
+import UserHeaderAvatar from "components/UserHeaderAvatar.vue";
 
 /**
  * Флаги состояния левой и правой панели меню.
@@ -69,7 +58,34 @@ const guestSectionName = "О приложении"; // Название гост
 const appSectionColor = "secondary";
 const appSectionBgColor = "bg-" + appSectionColor;
 
+/**
+ * Данные из хранилища sectionData.
+ */
+const appStore = useSectionDataStore();
+const hasAppSectionTabs = ref(false); // Флаг наличия табов
+const appSectionTabs = ref([]); // Массив табов
+
+/**
+ * Установка табов для раздела.
+ */
+function getDataFromAppStore() {
+  hasAppSectionTabs.value = appStore.hasAppSectionTabs;
+  appSectionTabs.value = appStore.getAppSectionTabs;
+}
+
+/**
+ * Слежение за изменением параметров раздела.
+ */
+watch(
+  () => appStore.appSectionData,
+  (newValue, oldValue) => {
+    getDataFromAppStore();
+  }
+);
+
 onMounted(() => {
+  console.info("GuestLayout");
+
   /**
    * Установка заголовка страницы.
    */
