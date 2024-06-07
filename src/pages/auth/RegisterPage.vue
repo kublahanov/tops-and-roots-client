@@ -18,7 +18,7 @@
   </q-card>
   <q-card :flat="isMobile" class="q-px-md q-pt-md q-pb-sm custom-width">
     <q-form @submit="onSubmit">
-      <q-card-section class="q-pt-md q-pb-sm">
+      <q-card-section class="q-pt-md q-pb-sm" v-if="hasSocialAuth">
         <div
           id="g_id_onload"
           :data-client_id="myGoogleClientId"
@@ -37,7 +37,9 @@
         ></div>
         <!--:data-click_listener="onClickHandler()"-->
       </q-card-section>
-      <q-card-section class="q-pa-none text-center"> или </q-card-section>
+      <q-card-section class="q-pa-none text-center" v-if="hasSocialAuth">
+        или
+      </q-card-section>
       <q-card-section class="q-pt-sm q-pb-sm">
         <q-input
           dense
@@ -124,14 +126,15 @@ onMounted(() => {
   document.body.appendChild(script);
 });
 
-function onClickHandler() {
-  return console.log("Регистрация через Google!");
-}
+// function onClickHandler() {
+//   return console.log("Регистрация через Google!");
+// }
 
 /**
  * Константы.
  */
 const appName = process.env.appName; // Имя приложения
+const hasSocialAuth = process.env.hasSocialAuth; // Опция наличия авторизации через соц-сети
 
 /**
  * Флаг размера экрана.
