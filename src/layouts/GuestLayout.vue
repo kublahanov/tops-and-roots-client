@@ -3,10 +3,10 @@
     <q-header elevated :class="appSectionBgColor">
       <q-toolbar>
         <q-btn dense icon="menu" @click="toggleAppSectionDrawer" />
-        <q-toolbar-title class="q-mt-xs q-mx-sm q-px-sm">
+        <q-toolbar-title class="q-mt-xs q-mx-sm q-px-sm text-center">
           {{ appName }} - {{ guestSectionName }}
         </q-toolbar-title>
-        <q-space></q-space>
+        <!--<q-space></q-space>-->
         <UserHeaderAvatar></UserHeaderAvatar>
         <q-btn dense icon="menu" @click="toggleUserDrawer" />
       </q-toolbar>
