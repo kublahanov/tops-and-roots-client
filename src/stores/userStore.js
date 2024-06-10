@@ -26,8 +26,22 @@ export const useUserStore = defineStore("user", {
     isGuest(state) {
       return state.user === null;
     },
-    getGetUserData(state) {
+    getUserData(state) {
       return this.isAuthenticated ? state.user : null;
+    },
+    getUserFriends(state) {
+      return [
+        {
+          id: 5463,
+          name: "Пётр",
+          surname: "Иванов",
+        },
+        {
+          id: 89098,
+          name: "Иван",
+          surname: "Петров",
+        },
+      ];
     },
   },
   actions: {

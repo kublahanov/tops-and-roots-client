@@ -53,7 +53,7 @@ const appSectionColor = "accent";
 const appSectionBgColor = "bg-" + appSectionColor;
 
 onMounted(() => {
-  console.info("UserLayout");
+  // console.info("UserLayout");
 
   /**
    * Установка заголовка страницы.

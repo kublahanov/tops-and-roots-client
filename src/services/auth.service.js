@@ -60,7 +60,7 @@ class AuthService {
       return null;
     }
 
-    const user = userStore.getGetUserData;
+    const user = userStore.getUserData;
 
     return { name: user.name, surname: user.surname };
   }
@@ -72,6 +72,28 @@ class AuthService {
     //   email: user.email,
     //   password: user.password
     // });
+  }
+
+  getUserData() {
+    const userStore = useUserStore();
+
+    if (userStore.isGuest) {
+      return null;
+    }
+
+    const user = userStore.getUserData;
+
+    return { id: user.id, name: user.name, surname: user.surname };
+  }
+
+  getUserFriends() {
+    const userStore = useUserStore();
+
+    if (userStore.isGuest) {
+      return null;
+    }
+
+    return userStore.getUserFriends;
   }
 }
 
