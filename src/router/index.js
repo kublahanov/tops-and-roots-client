@@ -50,7 +50,7 @@ export default route(function (/* { store, ssrContext } */) {
   });
 
   const linkToLoginPage = Router.resolve({ name: "user-login" }).path;
-  const linkToGuestPage = Router.resolve({ name: "guest-index" }).path;
+  const linkToGuestPage = Router.resolve({ name: "home" }).path;
 
   /**
    * Проверка на необходимость ИМЕТЬ или НЕ ИМЕТЬ состояние аутентификации.

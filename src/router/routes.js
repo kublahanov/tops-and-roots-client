@@ -1,12 +1,14 @@
 const routes = [
   {
     path: "/", // Гостевая индексная страница
+    name: "home",
     component: () => import("layouts/GuestLayout.vue"),
     children: [
       {
         path: "",
-        component: () => import("pages/main/IndexPage.vue"),
-        name: "guest-index",
+        redirect: { name: "help-index" },
+        // component: () => import("pages/main/IndexPage.vue"),
+        // name: "guest-index",
       },
     ],
   },

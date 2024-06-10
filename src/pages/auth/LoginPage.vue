@@ -152,7 +152,7 @@ function onSubmit() {
       message: "Вы успешно авторизовались",
     });
 
-    router.push({ name: "guest-index" });
+    router.push({ name: "home" });
   } else {
     $q.notify({
       type: "negative",
