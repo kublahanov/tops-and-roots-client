@@ -7,21 +7,13 @@ import {
 } from "vue-router";
 import routes from "./routes";
 import AuthService from "src/services/auth.service";
-import { useSectionDataStore } from "stores/sectionData-store";
+import { useSectionDataStore } from "stores/sectionDataStore";
 import { getMatchingMenuElement } from "src/utils/custom";
-import {
-  appSectionMenuLinks,
-  guestMenuLinks,
-  helpMenuLinks,
-  profileMenuLinks,
-} from "src/router/menu";
+import appSectionsMenu from "src/router/menus/appSectionsMenu";
+import guestMenu from "src/router/menus/guestMenu";
+import profileMenu from "src/router/menus/profileMenu";
 
-const combinedMenuLinks = [
-  ...appSectionMenuLinks,
-  ...profileMenuLinks,
-  ...guestMenuLinks,
-  ...helpMenuLinks,
-];
+const combinedMenuLinks = [...appSectionsMenu, ...guestMenu, ...profileMenu];
 
 /*
  * If not building with SSR mode, you can
@@ -57,7 +49,7 @@ export default route(function (/* { store, ssrContext } */) {
    */
   Router.beforeEach((to, from) => {
     if (to.meta["requiresAuth"]) {
-      console.log("requiresAuth");
+      // console.log("requiresAuth");
 
       /**
        * Если на странице, где необходимо ИМЕТЬ состояние аутентификации, её нет
@@ -69,11 +61,11 @@ export default route(function (/* { store, ssrContext } */) {
         };
       }
     } else {
-      console.log("don't requiresAuth");
+      // console.log("don't requiresAuth");
     }
 
     if (to.meta["requiresGuest"]) {
-      console.log("requiresGuest");
+      // console.log("requiresGuest");
 
       /**
        * Если на странице, где необходимо НЕ ИМЕТЬ состояние аутентификации, она есть
@@ -85,7 +77,7 @@ export default route(function (/* { store, ssrContext } */) {
         };
       }
     } else {
-      console.log("don't requiresGuest");
+      // console.log("don't requiresGuest");
     }
   });
 

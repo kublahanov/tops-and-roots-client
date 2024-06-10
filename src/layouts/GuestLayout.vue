@@ -10,7 +10,7 @@
         <UserHeaderAvatar></UserHeaderAvatar>
         <q-btn dense icon="menu" @click="toggleUserDrawer" />
       </q-toolbar>
-      <MainTabs :hasTabs="hasAppSectionTabs" :tabs="appSectionTabs" />
+      <HelpSectionTab />
     </q-header>
     <AppSectionsDrawer v-model="isAppSectionDrawerOpen" />
     <UserDrawer v-model="isUserDrawerOpen" />
@@ -25,11 +25,11 @@
 import { onMounted, ref, watch } from "vue";
 import { useMeta } from "quasar";
 import UserFooter from "components/UserFooter.vue";
-import MainTabs from "components/MainTabs.vue";
 import UserDrawer from "components/UserDrawer.vue";
 import AppSectionsDrawer from "components/AppSectionsDrawer.vue";
-import { useSectionDataStore } from "stores/sectionData-store";
+import { useSectionDataStore } from "stores/sectionDataStore";
 import UserHeaderAvatar from "components/UserHeaderAvatar.vue";
+import HelpSectionTab from "components/HelpSectionTab.vue";
 
 /**
  * Флаги состояния левой и правой панели меню.
@@ -39,12 +39,11 @@ const isUserDrawerOpen = ref(false);
 
 /**
  * Переключатели состояния левой и правой панели меню.
- * @returns {boolean}
  */
-// prettier-ignore
-const toggleAppSectionDrawer = () => (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
-// prettier-ignore
-const toggleUserDrawer = () => (isUserDrawerOpen.value = !isUserDrawerOpen.value);
+const toggleAppSectionDrawer = () =>
+  (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
+const toggleUserDrawer = () =>
+  (isUserDrawerOpen.value = !isUserDrawerOpen.value);
 
 /**
  * Константы.
@@ -84,7 +83,7 @@ watch(
 );
 
 onMounted(() => {
-  console.info("GuestLayout");
+  // console.info("GuestLayout");
 
   /**
    * Установка заголовка страницы.

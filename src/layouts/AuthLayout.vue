@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-console.info("AuthLayout");
+// console.info("AuthLayout");
 </script>
 
 <style scoped lang="sass"></style>

@@ -19,7 +19,7 @@
 
 <script setup>
 import { computed, onMounted, ref, watch } from "vue";
-import { useSectionDataStore } from "stores/sectionData-store";
+import { useSectionDataStore } from "stores/sectionDataStore";
 import { useMeta } from "quasar";
 import AppSectionsDrawer from "components/AppSectionsDrawer.vue";
 import UserDrawer from "components/UserDrawer.vue";
@@ -36,10 +36,10 @@ const isUserDrawerOpen = ref(false);
  * Переключатели состояния левой и правой панели меню.
  * @returns {boolean}
  */
-// prettier-ignore
-const toggleAppSectionDrawer = () => (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
-// prettier-ignore
-const toggleUserDrawer = () => (isUserDrawerOpen.value = !isUserDrawerOpen.value);
+const toggleAppSectionDrawer = () =>
+  (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
+const toggleUserDrawer = () =>
+  (isUserDrawerOpen.value = !isUserDrawerOpen.value);
 
 /**
  * Константы.
@@ -82,7 +82,7 @@ watch(
 );
 
 onMounted(() => {
-  console.info("MainLayout");
+  // console.info("MainLayout");
 
   getDataFromAppStore();
 

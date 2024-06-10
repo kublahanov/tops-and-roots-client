@@ -6,13 +6,13 @@
     </q-toolbar>
     <q-list>
       <MenuLink
-        v-for="link in appSectionMenuLinks"
+        v-for="link in appSectionsMenu"
         :key="link.title"
         v-bind="link"
         :disable="!isAuthenticated"
       />
       <q-separator inset spaced></q-separator>
-      <q-item :to="calculatedHref" active-class="active" :active="checkRoute()">
+      <q-item :to="indexHref" active-class="active" :active="isIndexChecked()">
         <q-item-section avatar>
           <q-icon name="o_help" />
         </q-item-section>
@@ -33,31 +33,25 @@
 </template>
 
 <script setup>
-import { appSectionMenuLinks } from "src/router/menu";
+import appSectionsMenu from "src/router/menus/appSectionsMenu";
 import MenuLink from "components/MenuLink.vue";
 import AuthService from "src/services/auth.service";
 import { computed } from "vue";
 import { useRouter } from "vue-router";
-import { isLinksMatching } from "src/utils/custom";
+import { isLinksSectionsMatching } from "src/utils/custom";
 import { colors } from "quasar";
 
 const isAuthenticated = AuthService.isAuthenticated();
 const isOpen = defineModel();
 const toggleDrawer = () => (isOpen.value = !isOpen.value);
 
-const router = useRouter();
-
-const calculatedHref = computed(() => {
-  return router.resolve({ name: "help-index" });
-});
-
-const checkRoute = function () {
-  return isLinksMatching(router.currentRoute.value.path, calculatedHref.value.path);
-};
-
 /**
- * Вычисляемый (исходя из активности и цвета раздела) фон пункта меню.
+ * Дополнительный пункт со ссылкой на индексную страницу.
  */
+const router = useRouter();
+const indexHref = computed(() => router.resolve({ name: "help-index" }));
+const isIndexChecked = () =>
+  isLinksSectionsMatching(router.currentRoute.value.path, indexHref.value.path);
 const calculatedBgColor = computed(() => colors.getPaletteColor("secondary"));
 
 /**

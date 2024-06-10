@@ -29,11 +29,10 @@
 import { useRouter } from "vue-router";
 import { computed } from "vue";
 import { colors } from "quasar";
-import { isLinksMatching } from "src/utils/custom";
+import { calculateHref, isLinksSectionsMatching } from "src/utils/custom";
 
 const props = defineProps({
   title: { type: String, required: true }, // Название пункта меню
-  link: { type: String, default: "#" }, // Путь
   linkName: { type: String, default: "" }, // Имя для именованного роута
   icon: { type: String, default: "" }, // Иконка
   color: { type: String, default: "" }, // Цвет раздела
@@ -46,13 +45,7 @@ const router = useRouter();
  * Вычисляемый (исходя из именованного роута) путь.
  */
 const calculatedHref = computed(() => {
-  try {
-    const resolvedRoute = router.resolve({ name: props.linkName });
-    return resolvedRoute ? resolvedRoute.path : "#";
-  } catch (error) {
-    console.error("Failed to resolve route: ", error);
-    return "#";
-  }
+  return calculateHref(props.linkName);
 });
 
 /**
@@ -74,7 +67,7 @@ const checkRoute = function () {
    */
   return path.indexOf("/user/") !== -1
     ? path === calculatedHref.value
-    : isLinksMatching(router.currentRoute.value.path, calculatedHref.value);
+    : isLinksSectionsMatching(router.currentRoute.value.path, calculatedHref.value);
 };
 </script>
 

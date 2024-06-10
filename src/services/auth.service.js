@@ -1,4 +1,4 @@
-import { useUserStore } from "stores/user-store";
+import { useUserStore } from "stores/userStore";
 
 class AuthService {
   login(user) {
