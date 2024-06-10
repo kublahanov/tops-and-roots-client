@@ -1,0 +1,1 @@
+import{Q as a,a as r}from"./QLayout.a62f4acb.js";import{k as n,l as s,m as c,n as e,f as t}from"./index.8c1f32a5.js";import"./scroll.8554acd5.js";const i={__name:"AuthLayout",setup(l){return(u,_)=>{const o=n("router-view");return s(),c(a,null,{default:e(()=>[t(r,{class:"fullscreen flex column flex-center"},{default:e(()=>[t(o)]),_:1})]),_:1})}}};export{i as default};
