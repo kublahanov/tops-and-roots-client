@@ -20,22 +20,23 @@ export const useSectionDataStore = defineStore("sectionData", {
   getters: {
     hasAppSectionTabs(state) {
       return Boolean(
-        state.appSectionData.tabs && state.appSectionData.tabs.length > 0
+        state.appSectionData?.tabs && state.appSectionData?.tabs.length > 0
       );
     },
     getAppSectionName(state) {
-      return state.appSectionData.title ?? defaultSectionData.title;
+      return state.appSectionData?.title ?? state.defaultSectionData.title;
     },
     getAppSectionColor(state) {
-      return state.appSectionData.color ?? defaultSectionData.color;
+      return state.appSectionData?.color ?? state.defaultSectionData.color;
     },
     getAppSectionTabs(state) {
-      return state.appSectionData.tabs || [];
+      return state.appSectionData?.tabs || [];
     },
   },
   actions: {
     updateAppSectionData(link) {
       this.appSectionData = link;
+      // console.log("this.appSectionData => ", this.appSectionData);
     },
     resetAppSectionData() {
       this.appSectionData = defaultSectionData;

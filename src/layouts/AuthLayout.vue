@@ -6,6 +6,8 @@
   </q-layout>
 </template>
 
-<script setup></script>
+<script setup>
+// console.info("AuthLayout");
+</script>
 
 <style scoped lang="sass"></style>

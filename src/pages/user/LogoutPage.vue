@@ -18,5 +18,5 @@ $q.notify({
   message: "Вы успешно вышли",
 });
 
-router.push({ name: "guest-index" });
+router.push({ name: "home" });
 </script>

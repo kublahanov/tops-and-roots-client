@@ -10,8 +10,8 @@
   >
     <q-route-tab
       v-for="tab in tabs"
-      :key="tab.link"
-      :to="tab.link"
+      :key="tab.linkName"
+      :to="calculateHref(tab.linkName)"
       :label="tab.title"
       :icon="tab.icon"
     />
@@ -30,6 +30,8 @@
 </template>
 
 <script setup>
+import { calculateHref } from "src/utils/custom";
+
 const props = defineProps({
   hasTabs: { type: Boolean, required: true }, // Флаг наличия табов
   tabs: { type: Array, default: () => [] }, // Массив табов
