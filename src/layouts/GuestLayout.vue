@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-btn dense icon="menu" @click="toggleAppSectionDrawer" />
         <q-toolbar-title class="q-mt-xs q-mx-sm q-px-sm text-center">
-          {{ appName }} - {{ guestSectionName }}
+          {{ appName }} - {{ appSectionName }}
         </q-toolbar-title>
         <!--<q-space></q-space>-->
         <UserHeaderAvatar></UserHeaderAvatar>
@@ -22,24 +22,20 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useMeta } from "quasar";
-import UserFooter from "components/UserFooter.vue";
-import UserDrawer from "components/UserDrawer.vue";
-import AppSectionsDrawer from "components/AppSectionsDrawer.vue";
 import { useSectionDataStore } from "stores/sectionDataStore";
+import AppSectionsDrawer from "components/AppSectionsDrawer.vue";
+import UserDrawer from "components/UserDrawer.vue";
 import UserHeaderAvatar from "components/UserHeaderAvatar.vue";
 import HelpSectionTab from "components/HelpSectionTab.vue";
+import UserFooter from "components/UserFooter.vue";
 
 /**
- * Флаги состояния левой и правой панели меню.
+ * Флаги и переключатели состояния левой и правой панели меню.
  */
 const isAppSectionDrawerOpen = ref(false);
 const isUserDrawerOpen = ref(false);
-
-/**
- * Переключатели состояния левой и правой панели меню.
- */
 const toggleAppSectionDrawer = () =>
   (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
 const toggleUserDrawer = () =>
@@ -49,28 +45,28 @@ const toggleUserDrawer = () =>
  * Константы.
  */
 const appName = process.env.appName; // Имя приложения
-const guestSectionName = "О приложении"; // Название гостевого раздела
-
-/**
- * Цвет и цветовой класс раздела.
- */
-const appSectionColor = "secondary";
-const appSectionBgColor = "bg-" + appSectionColor;
 
 /**
  * Данные из хранилища sectionData.
  */
 const appStore = useSectionDataStore();
+const appSectionName = ref(""); // Название раздела
+const appSectionColor = ref(""); // Цвет раздела
 const hasAppSectionTabs = ref(false); // Флаг наличия табов
 const appSectionTabs = ref([]); // Массив табов
 
-/**
- * Установка табов для раздела.
- */
 function getDataFromAppStore() {
+  appSectionName.value = process.env.helpSectionName;
+  appSectionColor.value = "secondary";
   hasAppSectionTabs.value = appStore.hasAppSectionTabs;
   appSectionTabs.value = appStore.getAppSectionTabs;
 }
+
+/**
+ * Формирование классов для фона и текста,
+ * исходя из текущего цвета раздела.
+ */
+const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
 
 /**
  * Слежение за изменением параметров раздела.
@@ -82,21 +78,22 @@ watch(
   }
 );
 
+onBeforeMount(() => {
+  appStore.updateLayoutName("GuestLayout");
+});
+
 onMounted(() => {
-  // console.info("GuestLayout");
+  getDataFromAppStore();
 
   /**
    * Установка заголовка страницы.
    */
   useMeta(() => {
     return {
-      title: guestSectionName + " | " + appName,
+      title: appSectionName.value + " | " + appName,
     };
   });
 });
 </script>
 
-<style scoped lang="sass">
-.user-avatar-top-margin
-  margin-top: 2px
-</style>
+<style scoped lang="sass"></style>

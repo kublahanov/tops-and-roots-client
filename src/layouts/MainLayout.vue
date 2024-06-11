@@ -22,25 +22,20 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from "vue";
-import { useSectionDataStore } from "stores/sectionDataStore";
+import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useMeta } from "quasar";
+import { useSectionDataStore } from "stores/sectionDataStore";
 import AppSectionsDrawer from "components/AppSectionsDrawer.vue";
 import UserDrawer from "components/UserDrawer.vue";
-import MainFooter from "components/MainFooter.vue";
-import MainTabs from "components/MainTabs.vue";
 import UserHeaderAvatar from "components/UserHeaderAvatar.vue";
+import MainTabs from "components/MainTabs.vue";
+import MainFooter from "components/MainFooter.vue";
 
 /**
- * Флаги состояния левой и правой панели меню.
+ * Флаги и переключатели состояния левой и правой панели меню.
  */
 const isAppSectionDrawerOpen = ref(false);
 const isUserDrawerOpen = ref(false);
-
-/**
- * Переключатели состояния левой и правой панели меню.
- * @returns {boolean}
- */
 const toggleAppSectionDrawer = () =>
   (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
 const toggleUserDrawer = () =>
@@ -60,9 +55,6 @@ const appSectionColor = ref(""); // Цвет раздела
 const hasAppSectionTabs = ref(false); // Флаг наличия табов
 const appSectionTabs = ref([]); // Массив табов
 
-/**
- * Установка названия и цвета раздела.
- */
 function getDataFromAppStore() {
   appSectionName.value = appStore.getAppSectionName;
   appSectionColor.value = appStore.getAppSectionColor;
@@ -86,9 +78,11 @@ watch(
   }
 );
 
-onMounted(() => {
-  // console.info("MainLayout");
+onBeforeMount(() => {
+  appStore.updateLayoutName("MainLayout");
+});
 
+onMounted(() => {
   getDataFromAppStore();
 
   /**

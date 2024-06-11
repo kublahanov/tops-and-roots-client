@@ -7,7 +7,13 @@
 </template>
 
 <script setup>
-// console.info("AuthLayout");
+import { onBeforeMount } from "vue";
+import { useSectionDataStore } from "stores/sectionDataStore";
+
+const appStore = useSectionDataStore();
+onBeforeMount(() => {
+  appStore.updateLayoutName("AuthLayout");
+});
 </script>
 
 <style scoped lang="sass"></style>

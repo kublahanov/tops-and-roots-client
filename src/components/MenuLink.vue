@@ -67,7 +67,7 @@ const checkRoute = function () {
    */
   return path.indexOf("/user/") !== -1
     ? path === calculatedHref.value
-    : isLinksSectionsMatching(router.currentRoute.value.path, calculatedHref.value);
+    : isLinksSectionsMatching(path, calculatedHref.value);
 };
 </script>
 

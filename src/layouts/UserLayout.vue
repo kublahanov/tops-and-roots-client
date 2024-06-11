@@ -4,13 +4,13 @@
       <q-toolbar>
         <q-btn dense icon="menu" @click="toggleAppSectionDrawer" />
         <q-toolbar-title class="q-mt-xs q-mx-sm q-px-sm text-center">
-          {{ appName }} - {{ userSectionName }}
+          {{ appName }} - {{ appSectionName }}
         </q-toolbar-title>
         <!--<q-space></q-space>-->
         <UserHeaderAvatar></UserHeaderAvatar>
         <q-btn dense icon="menu" @click="toggleUserDrawer" />
       </q-toolbar>
-      <MainTabs :hasTabs="false" :tabs="[]" />
+      <MainTabs :hasTabs="hasAppSectionTabs" :tabs="appSectionTabs" />
     </q-header>
     <AppSectionsDrawer v-model="isAppSectionDrawerOpen" />
     <UserDrawer v-model="isUserDrawerOpen" />
@@ -22,24 +22,20 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useMeta } from "quasar";
-import UserFooter from "components/UserFooter.vue";
-import MainTabs from "components/MainTabs.vue";
+import { useSectionDataStore } from "stores/sectionDataStore";
 import AppSectionsDrawer from "components/AppSectionsDrawer.vue";
 import UserDrawer from "components/UserDrawer.vue";
 import UserHeaderAvatar from "components/UserHeaderAvatar.vue";
+import MainTabs from "components/MainTabs.vue";
+import UserFooter from "components/UserFooter.vue";
 
 /**
- * Флаги состояния левой и правой панели меню.
+ * Флаги и переключатели состояния левой и правой панели меню.
  */
 const isAppSectionDrawerOpen = ref(false);
 const isUserDrawerOpen = ref(false);
-
-/**
- * Переключатели состояния левой и правой панели меню.
- * @returns {boolean}
- */
 const toggleAppSectionDrawer = () =>
   (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
 const toggleUserDrawer = () =>
@@ -49,23 +45,52 @@ const toggleUserDrawer = () =>
  * Константы.
  */
 const appName = process.env.appName; // Имя приложения
-const userSectionName = process.env.userSectionName; // Название пользовательского раздела
 
 /**
- * Цвет и цветовой класс раздела.
+ * Данные из хранилища sectionData.
  */
-const appSectionColor = "accent";
-const appSectionBgColor = "bg-" + appSectionColor;
+const appStore = useSectionDataStore();
+const appSectionName = ref(""); // Название раздела
+const appSectionColor = ref(""); // Цвет раздела
+const hasAppSectionTabs = ref(false); // Флаг наличия табов
+const appSectionTabs = ref([]); // Массив табов
+
+function getDataFromAppStore() {
+  appSectionName.value = process.env.userSectionName;
+  appSectionColor.value = "accent";
+  hasAppSectionTabs.value = false;
+  appSectionTabs.value = [];
+}
+
+/**
+ * Формирование классов для фона и текста,
+ * исходя из текущего цвета раздела.
+ */
+const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
+
+/**
+ * Слежение за изменением параметров раздела.
+ */
+watch(
+  () => appStore.appSectionData,
+  (newValue, oldValue) => {
+    getDataFromAppStore();
+  }
+);
+
+onBeforeMount(() => {
+  appStore.updateLayoutName("UserLayout");
+});
 
 onMounted(() => {
-  // console.info("UserLayout");
+  getDataFromAppStore();
 
   /**
    * Установка заголовка страницы.
    */
   useMeta(() => {
     return {
-      title: userSectionName + " | " + appName,
+      title: appSectionName.value + " | " + appName,
     };
   });
 });

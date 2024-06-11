@@ -16,6 +16,7 @@ export const useSectionDataStore = defineStore("sectionData", {
   state: () => ({
     defaultSectionData,
     appSectionData: defaultSectionData,
+    layoutName: null,
   }),
   getters: {
     hasAppSectionTabs(state) {
@@ -38,9 +39,13 @@ export const useSectionDataStore = defineStore("sectionData", {
       this.appSectionData = link;
       // console.log("this.appSectionData => ", this.appSectionData);
     },
-    resetAppSectionData() {
-      this.appSectionData = defaultSectionData;
+    updateLayoutName(layoutName) {
+      this.layoutName = layoutName;
+      console.log("this.layoutName => ", this.layoutName);
     },
+    // resetAppSectionData() {
+    //   this.appSectionData = defaultSectionData;
+    // },
   },
   persist: true,
 });

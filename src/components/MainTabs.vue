@@ -32,7 +32,7 @@
 <script setup>
 import { calculateHref } from "src/utils/custom";
 
-const props = defineProps({
+defineProps({
   hasTabs: { type: Boolean, required: true }, // Флаг наличия табов
   tabs: { type: Array, default: () => [] }, // Массив табов
 });
