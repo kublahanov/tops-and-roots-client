@@ -5,7 +5,7 @@
         <q-btn dense icon="menu" @click="toggleAppSectionDrawer" />
         <AppSectionHeaderAvatar></AppSectionHeaderAvatar>
         <q-toolbar-title class="q-mt-xs q-mx-sm q-px-sm text-center">
-          {{ appName }} - {{ appSectionName }}
+          {{ appSectionName }} - {{ appName }}
         </q-toolbar-title>
         <UserHeaderAvatar></UserHeaderAvatar>
         <q-btn dense icon="menu" @click="toggleUserDrawer" />
