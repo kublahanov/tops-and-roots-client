@@ -3,7 +3,7 @@
     size="md"
     font-size="2rem"
     color="white"
-    text-color="secondary"
+    text-color="accent"
     :icon="icon"
     class="q-mx-md"
   />
