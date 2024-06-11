@@ -74,10 +74,10 @@ const checkRoute = function () {
   switch (layoutName.value) {
     case "MainLayout":
       return isLinksSectionsMatching(path, calculatedHref.value);
-    case "UserLayout":
-      return path === calculatedHref.value;
-    case "GuestLayout":
-      return path === calculatedHref.value;
+    // case "UserLayout":
+    //   return path === calculatedHref.value;
+    // case "GuestLayout":
+    //   return path === calculatedHref.value;
     default:
       return path === calculatedHref.value;
   }

@@ -7,8 +7,8 @@
     <q-list>
       <MenuLink
         v-for="link in menuLinks"
-        color="accent"
         :key="link.title"
+        color="accent"
         v-bind="link"
       />
     </q-list>
