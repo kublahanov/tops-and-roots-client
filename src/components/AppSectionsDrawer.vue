@@ -1,3 +1,6 @@
+<!--
+Панель правого меню: выбор секции.
+-->
 <template>
   <q-drawer v-model="isOpen" side="left" behavior="mobile" elevated>
     <q-toolbar class="q-pl-md q-py-md">

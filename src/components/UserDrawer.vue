@@ -1,3 +1,6 @@
+<!--
+Панель левого меню: пользовательская.
+-->
 <template>
   <q-drawer v-model="isOpen" side="right" behavior="mobile" elevated>
     <q-toolbar class="q-pl-md q-py-md">
