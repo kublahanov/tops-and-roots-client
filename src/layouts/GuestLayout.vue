@@ -1,17 +1,16 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated :class="appSectionBgColor">
-      <q-toolbar>
-        <q-btn dense icon="menu" @click="toggleAppSectionDrawer" />
-        <AppSectionHeaderAvatar></AppSectionHeaderAvatar>
-        <q-toolbar-title class="q-mt-xs q-mx-sm q-px-sm text-center">
-          {{ appSectionName }} - {{ appName }}
-        </q-toolbar-title>
-        <UserHeaderAvatar></UserHeaderAvatar>
-        <q-btn dense icon="menu" @click="toggleUserDrawer" />
-      </q-toolbar>
-      <HelpSectionTab />
-    </q-header>
+    <MainHeader
+      :appSectionBgColor="appSectionBgColor"
+      :appName="appName"
+      :appSectionName="appSectionName"
+      :toggleAppSectionDrawer="toggleAppSectionDrawer"
+      :toggleUserDrawer="toggleUserDrawer"
+    >
+      <template #tabs>
+        <HelpSectionTab />
+      </template>
+    </MainHeader>
     <AppSectionsDrawer v-model="isAppSectionDrawerOpen" />
     <UserDrawer v-model="isUserDrawerOpen" />
     <q-page-container class="my-layout">
@@ -27,10 +26,9 @@ import { useMeta } from "quasar";
 import { useSectionDataStore } from "stores/sectionDataStore";
 import AppSectionsDrawer from "components/AppSectionsDrawer.vue";
 import UserDrawer from "components/UserDrawer.vue";
-import UserHeaderAvatar from "components/UserHeaderAvatar.vue";
 import HelpSectionTab from "components/HelpSectionTab.vue";
 import UserFooter from "components/UserFooter.vue";
-import AppSectionHeaderAvatar from "components/AppSectionHeaderAvatar.vue";
+import MainHeader from "components/MainHeader.vue";
 
 /**
  * Флаги и переключатели состояния левой и правой панели меню.
@@ -55,6 +53,7 @@ const appSectionName = ref(""); // Название раздела
 const appSectionColor = ref(""); // Цвет раздела
 const hasAppSectionTabs = ref(false); // Флаг наличия табов
 const appSectionTabs = ref([]); // Массив табов
+const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
 
 function getDataFromAppStore() {
   appSectionName.value = process.env.helpSectionName;
@@ -63,15 +62,6 @@ function getDataFromAppStore() {
   appSectionTabs.value = appStore.getAppSectionTabs;
 }
 
-/**
- * Формирование классов для фона и текста,
- * исходя из текущего цвета раздела.
- */
-const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
-
-/**
- * Слежение за изменением параметров раздела.
- */
 watch(
   () => appStore.appSectionData,
   (newValue, oldValue) => {
@@ -86,14 +76,11 @@ onBeforeMount(() => {
 onMounted(() => {
   getDataFromAppStore();
 
-  /**
-   * Установка заголовка страницы.
-   */
   useMeta(() => {
     return {
       title: appSectionName.value + " | " + appName,
     };
-  });
+  }); // Установка заголовка страницы
 });
 </script>
 
