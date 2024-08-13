@@ -1,3 +1,6 @@
+<!--
+Кнопка для перехода на страницу регистрации.
+-->
 <template>
   <q-btn
     v-if="props.isShowAlways || !isAuthenticated"

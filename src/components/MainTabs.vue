@@ -1,3 +1,7 @@
+<!--
+Табы для основных разделов.
+Динамически подгружаются из файлов меню.
+-->
 <template>
   <q-tabs
     v-if="hasTabs"
@@ -32,7 +36,7 @@
 <script setup>
 import { calculateHref } from "src/utils/custom";
 
-const props = defineProps({
+defineProps({
   hasTabs: { type: Boolean, required: true }, // Флаг наличия табов
   tabs: { type: Array, default: () => [] }, // Массив табов
 });

@@ -1,3 +1,6 @@
+<!--
+Основной вариант подвала.
+-->
 <template>
   <footer class="q-pa-lg">
     <q-toolbar class="justify-center my-layout">

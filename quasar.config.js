@@ -13,6 +13,7 @@ const path = require("path");
 const appName = "Вершки и корешки";
 const appVersion = "0.1";
 const userSectionName = "Пользователь";
+const helpSectionName = "О приложении";
 const hasSocialAuth = false;
 
 module.exports = configure(function (/* ctx */) {
@@ -78,6 +79,7 @@ module.exports = configure(function (/* ctx */) {
         appName,
         appVersion,
         userSectionName,
+        helpSectionName,
         hasSocialAuth,
       },
       // rawDefine: {},

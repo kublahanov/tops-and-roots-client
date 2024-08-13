@@ -1,3 +1,6 @@
+<!--
+Панель правого меню: выбор секции.
+-->
 <template>
   <q-drawer v-model="isOpen" side="left" behavior="mobile" elevated>
     <q-toolbar class="q-pl-md q-py-md">
@@ -12,7 +15,7 @@
         :disable="!isAuthenticated"
       />
       <q-separator inset spaced></q-separator>
-      <q-item :to="indexHref" active-class="active" :active="isIndexChecked()">
+      <q-item :to="indexHref" active-class="active2" :active="isIndexChecked()">
         <q-item-section avatar>
           <q-icon name="o_help" />
         </q-item-section>
@@ -61,7 +64,7 @@ const appName = process.env.appName; // Имя приложения
 </script>
 
 <style scoped lang="sass">
-.active
+.active2
   color: white
   background-color: v-bind(calculatedBgColor)
   cursor: default !important

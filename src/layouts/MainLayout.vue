@@ -1,17 +1,16 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated :class="appSectionBgColor">
-      <q-toolbar>
-        <q-btn dense icon="menu" @click="toggleAppSectionDrawer" />
-        <q-toolbar-title class="q-mt-xs q-mx-sm q-px-sm text-center">
-          {{ appName }} - {{ appSectionName }}
-        </q-toolbar-title>
-        <!--<q-space></q-space>-->
-        <UserHeaderAvatar></UserHeaderAvatar>
-        <q-btn dense icon="menu" @click="toggleUserDrawer" />
-      </q-toolbar>
-      <MainTabs :hasTabs="hasAppSectionTabs" :tabs="appSectionTabs" />
-    </q-header>
+    <MainHeader
+      :appSectionBgColor="appSectionBgColor"
+      :appName="appName"
+      :appSectionName="appSectionName"
+      :toggleAppSectionDrawer="toggleAppSectionDrawer"
+      :toggleUserDrawer="toggleUserDrawer"
+    >
+      <template #tabs>
+        <MainTabs :hasTabs="hasAppSectionTabs" :tabs="appSectionTabs" />
+      </template>
+    </MainHeader>
     <AppSectionsDrawer v-model="isAppSectionDrawerOpen" />
     <UserDrawer v-model="isUserDrawerOpen" />
     <q-page-container class="my-layout">
@@ -22,25 +21,20 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from "vue";
-import { useSectionDataStore } from "stores/sectionDataStore";
+import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useMeta } from "quasar";
+import { useSectionDataStore } from "stores/sectionDataStore";
 import AppSectionsDrawer from "components/AppSectionsDrawer.vue";
 import UserDrawer from "components/UserDrawer.vue";
-import MainFooter from "components/MainFooter.vue";
 import MainTabs from "components/MainTabs.vue";
-import UserHeaderAvatar from "components/UserHeaderAvatar.vue";
+import MainFooter from "components/MainFooter.vue";
+import MainHeader from "components/MainHeader.vue";
 
 /**
- * Флаги состояния левой и правой панели меню.
+ * Флаги и переключатели состояния левой и правой панели меню.
  */
 const isAppSectionDrawerOpen = ref(false);
 const isUserDrawerOpen = ref(false);
-
-/**
- * Переключатели состояния левой и правой панели меню.
- * @returns {boolean}
- */
 const toggleAppSectionDrawer = () =>
   (isAppSectionDrawerOpen.value = !isAppSectionDrawerOpen.value);
 const toggleUserDrawer = () =>
@@ -59,10 +53,8 @@ const appSectionName = ref(""); // Название раздела
 const appSectionColor = ref(""); // Цвет раздела
 const hasAppSectionTabs = ref(false); // Флаг наличия табов
 const appSectionTabs = ref([]); // Массив табов
+const appSectionBgColor = computed(() => "bg-" + appSectionColor.value); // Цвет фона
 
-/**
- * Установка названия и цвета раздела.
- */
 function getDataFromAppStore() {
   appSectionName.value = appStore.getAppSectionName;
   appSectionColor.value = appStore.getAppSectionColor;
@@ -70,15 +62,6 @@ function getDataFromAppStore() {
   appSectionTabs.value = appStore.getAppSectionTabs;
 }
 
-/**
- * Формирование классов для фона и текста,
- * исходя из текущего цвета раздела.
- */
-const appSectionBgColor = computed(() => "bg-" + appSectionColor.value);
-
-/**
- * Слежение за изменением параметров раздела.
- */
 watch(
   () => appStore.appSectionData,
   (newValue, oldValue) => {
@@ -86,19 +69,18 @@ watch(
   }
 );
 
-onMounted(() => {
-  // console.info("MainLayout");
+onBeforeMount(() => {
+  appStore.updateLayoutName("MainLayout");
+});
 
+onMounted(() => {
   getDataFromAppStore();
 
-  /**
-   * Установка заголовка страницы.
-   */
   useMeta(() => {
     return {
       title: appSectionName.value + " | " + appName,
     };
-  });
+  }); // Установка заголовка страницы
 });
 </script>
 

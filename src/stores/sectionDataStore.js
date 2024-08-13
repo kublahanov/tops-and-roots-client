@@ -2,11 +2,12 @@ import { defineStore } from "pinia";
 
 /**
  * Основные параметры секции по-умолчанию.
- * @type {{color: string, title: string}}
  */
 const defaultSectionData = {
   title: "Главная",
-  color: "secondary", // cadetblue, chocolate, cornflowerblue
+  color: "secondary",
+  tabs: [],
+  icon: "o_help",
 };
 
 /**
@@ -16,6 +17,7 @@ export const useSectionDataStore = defineStore("sectionData", {
   state: () => ({
     defaultSectionData,
     appSectionData: defaultSectionData,
+    layoutName: null,
   }),
   getters: {
     hasAppSectionTabs(state) {
@@ -32,14 +34,21 @@ export const useSectionDataStore = defineStore("sectionData", {
     getAppSectionTabs(state) {
       return state.appSectionData?.tabs || [];
     },
+    getLayoutName(state) {
+      return state.layoutName || [];
+    },
+    getAppSectionIcon(state) {
+      return state.appSectionData?.icon || [];
+    },
   },
   actions: {
     updateAppSectionData(link) {
       this.appSectionData = link;
-      // console.log("this.appSectionData => ", this.appSectionData);
+      console.log("this.appSectionData => ", this.appSectionData);
     },
-    resetAppSectionData() {
-      this.appSectionData = defaultSectionData;
+    updateLayoutName(layoutName) {
+      this.layoutName = layoutName;
+      console.log("this.layoutName => ", this.layoutName);
     },
   },
   persist: true,

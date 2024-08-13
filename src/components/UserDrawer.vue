@@ -1,3 +1,6 @@
+<!--
+Панель левого меню: пользовательская.
+-->
 <template>
   <q-drawer v-model="isOpen" side="right" behavior="mobile" elevated>
     <q-toolbar class="q-pl-md q-py-md">
@@ -7,8 +10,8 @@
     <q-list>
       <MenuLink
         v-for="link in menuLinks"
-        color="accent"
         :key="link.title"
+        color="accent"
         v-bind="link"
       />
     </q-list>

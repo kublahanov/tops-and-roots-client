@@ -167,6 +167,30 @@ const routes = [
     ],
   },
   {
+    path: "/auth-test", // Пользователь
+    component: () => import("layouts/AuthLayout.vue"),
+    children: [
+      {
+        path: "login",
+        component: () => import("pages/auth-test/LoginPage.vue"),
+        name: "user-login-test",
+        meta: { requiresGuest: true },
+      },
+      // {
+      //   path: "register",
+      //   component: () => import("pages/auth/RegisterPage.vue"),
+      //   name: "user-register",
+      //   meta: { requiresGuest: true },
+      // },
+      // {
+      //   path: "logout",
+      //   component: () => import("pages/user/LogoutPage.vue"),
+      //   name: "user-logout",
+      //   meta: { requiresAuth: true },
+      // },
+    ],
+  },
+  {
     path: "/:catchAll(.*)*", // 404 Not found
     component: () => import("pages/ErrorNotFound.vue"),
     name: "not-found",

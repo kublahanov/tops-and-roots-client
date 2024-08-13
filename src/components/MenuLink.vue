@@ -1,3 +1,6 @@
+<!--
+Основной вариант пункта (ссылки) для вертикальных меню.
+-->
 <template>
   <q-item
     :to="calculatedHref"
@@ -26,20 +29,19 @@
 </template>
 
 <script setup>
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-import { computed } from "vue";
 import { colors } from "quasar";
 import { calculateHref, isLinksSectionsMatching } from "src/utils/custom";
+import { useSectionDataStore } from "stores/sectionDataStore";
 
 const props = defineProps({
   title: { type: String, required: true }, // Название пункта меню
   linkName: { type: String, default: "" }, // Имя для именованного роута
   icon: { type: String, default: "" }, // Иконка
   color: { type: String, default: "" }, // Цвет раздела
-  disable: { type: Boolean, default: false }, // Цвет раздела
+  disable: { type: Boolean, default: false }, // Разрешён ли пункт
 });
-
-const router = useRouter();
 
 /**
  * Вычисляемый (исходя из именованного роута) путь.
@@ -53,21 +55,35 @@ const calculatedHref = computed(() => {
  */
 const calculatedBgColor = computed(() => colors.getPaletteColor(props.color));
 
+const appStore = useSectionDataStore();
+const layoutName = ref("");
+
+onMounted(() => {
+  layoutName.value = appStore.getLayoutName;
+});
+
+const router = useRouter();
+
 /**
  * Проверяем соответствие пункта меню - текущей ссылке,
  * чтобы определить активен ли он.
- * @returns {boolean}
  */
 const checkRoute = function () {
   const path = router.currentRoute.value.path;
 
   /**
-   * Костыль для пользовательского раздела -
-   * в нём проверяется полное соответствие ссылки пункту меню.
+   * Для разных разделов - проверка разная.
    */
-  return path.indexOf("/user/") !== -1
-    ? path === calculatedHref.value
-    : isLinksSectionsMatching(router.currentRoute.value.path, calculatedHref.value);
+  switch (layoutName.value) {
+    case "MainLayout":
+      return isLinksSectionsMatching(path, calculatedHref.value);
+    // case "UserLayout":
+    //   return path === calculatedHref.value;
+    // case "GuestLayout":
+    //   return path === calculatedHref.value;
+    default:
+      return path === calculatedHref.value;
+  }
 };
 </script>
 
