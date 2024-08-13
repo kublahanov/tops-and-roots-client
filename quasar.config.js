@@ -72,7 +72,7 @@ module.exports = configure(function (/* ctx */) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      publicPath: "/tops-and-roots/",
+      publicPath: "/tops-and-roots-client/",
       // analyze: true,
       env: {
         appName,
