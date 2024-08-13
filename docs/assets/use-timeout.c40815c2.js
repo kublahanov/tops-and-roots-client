@@ -1,0 +1,1 @@
+import{a2 as r,A as i,Y as s,g as m}from"./index.75f7d35a.js";function l(){let e=null;const n=m();function t(){e!==null&&(clearTimeout(e),e=null)}return r(t),i(t),{removeTimeout:t,registerTimeout(o,u){t(),s(n)===!1&&(e=setTimeout(()=>{e=null,o()},u))}}}export{l as u};
